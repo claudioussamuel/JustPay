@@ -8,6 +8,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        bowlby: 'var(--font-bowlby)',
+        dmMono: 'var(--font-dmMono)',
+        playWright: 'var(--font-playWright)',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
