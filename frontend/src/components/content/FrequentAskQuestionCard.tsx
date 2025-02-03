@@ -6,7 +6,7 @@ function FrequentAskQuestionCard({
   question, hovered}:{question:string; hovered:string}) {
 
   return (
-    <div className='question-card-container font-dmMono '>
+    <div className='question-card-container font-dmMono mb-20 '>
       <div className="card">
 
       <div className='card-front grid p-5'>

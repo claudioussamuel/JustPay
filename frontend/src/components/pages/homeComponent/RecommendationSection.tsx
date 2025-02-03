@@ -41,7 +41,7 @@ function RecommendationSection() {
 
 
             <div className=' animate-loop-scroll group-hover:paused'>
-              <div className='flex space-x-10 text-zinc-800  font-dmMono'>
+              <div className='flex space-x-10 text-zinc-800 rounded-md   font-dmMono'>
                  {recommend.map(({firstName,lastName,info,occupation,img},index)=>(
                     <div key={index} className='border py-10 p-5 border-black w-[500px]'>
                         <div>
