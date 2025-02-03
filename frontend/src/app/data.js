@@ -4,6 +4,7 @@ import { LuArrowDownRight } from "react-icons/lu";
 export const navLinks=[
     {name:'home',href:'/'},
     {name:'profile',href:'/profile'},
+    {name:'contacts',href:'/profile'},
     {name:'payment', href:'/payment'},
     {name:'Terms', href:'#'}
 ]
