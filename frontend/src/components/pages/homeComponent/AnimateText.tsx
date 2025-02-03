@@ -45,7 +45,6 @@ export function PayText() {
         <span style={{"--i":1} as React.CSSProperties}>p</span>
         <span style={{"--i":2} as React.CSSProperties}>p</span>
         <span style={{"--i":3} as React.CSSProperties}>p</span>
-        <Image style={{"--i":4} as React.CSSProperties} src="/images/" alt="money" width={100} height={100}/>
       </div>
 
       <div className='text' style={{ "--j": 1} as React.CSSProperties}>
@@ -53,6 +52,7 @@ export function PayText() {
         <span style={{"--i":1} as React.CSSProperties}>a</span>
         <span style={{"--i":2} as React.CSSProperties}>a</span>
         <span style={{"--i":3} as React.CSSProperties}>a</span>
+
       </div>
 
       <div className='text' style={{ "--j": 2} as React.CSSProperties}>
@@ -62,6 +62,12 @@ export function PayText() {
         <span style={{"--i":3} as React.CSSProperties}>y</span>
       </div>
 
+      <div className='text' style={{ "--j": 3} as React.CSSProperties}>
+      <Image style={{"--i":0} as React.CSSProperties} src="/images/sika.png" alt="money" width={100} height={100}/>
+        <Image style={{"--i":1} as React.CSSProperties} src="/images/sika.png" alt="money" width={100} height={100}/>
+        <Image style={{"--i":2} as React.CSSProperties} src="/images/sika.png" alt="money" width={100} height={100}/>
+        <Image style={{"--i":3} as React.CSSProperties} src="/images/sika.png" alt="money" width={100} height={100}/>
+      </div>
 
     </div>
   )
