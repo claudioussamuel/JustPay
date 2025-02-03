@@ -1,4 +1,9 @@
 import { LuArrowDownRight } from "react-icons/lu";
+import { HiClipboardList} from "react-icons/hi";
+import { HiUser } from "react-icons/hi";
+import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import { HiOutlineDesktopComputer } from "react-icons/hi";
+import { HiReceiptRefund } from "react-icons/hi";
 
 
 export const navLinks=[
@@ -86,4 +91,12 @@ export const exploreSection=[
     {firstName:'makafui', role:"ui/ux designer",connect:"#", image:'/images/moto.jpg', lastName:'richmond'}
   ]
   
+  
+  export const sidearContent=[
+    {name:'dashboard',href:"/dashboard",icon:<HiOutlineDesktopComputer/>},
+    {name:'payment',href:"/payment",icon:<HiOutlineCurrencyDollar/>},
+    {name:'history',href:"/history",icon:<HiReceiptRefund/>},
+    {name:'profile',href:"/profile",icon:<HiUser/>},
+    {name:'documents',href:"/documents",icon:<HiClipboardList/>},
+  ]
   
