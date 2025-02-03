@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 export function JustText() {
   return (
@@ -44,6 +45,7 @@ export function PayText() {
         <span style={{"--i":1} as React.CSSProperties}>p</span>
         <span style={{"--i":2} as React.CSSProperties}>p</span>
         <span style={{"--i":3} as React.CSSProperties}>p</span>
+        <Image style={{"--i":4} as React.CSSProperties} src="/images/" alt="money" width={100} height={100}/>
       </div>
 
       <div className='text' style={{ "--j": 1} as React.CSSProperties}>

@@ -8,10 +8,11 @@ import ThreeSteps from './ThreeSteps'
 import FrequentAskQuestion from './FrequentAskQuestion'
 import RecommendationSection from './RecommendationSection'
 import MeetTheTeam from './MeetTeam'
+import MoveUp from '@/components/content/MoveUp'
 
 function HomePage() {
   return (
-    <div className='h-auto'>
+    <div className='h-auto relative'>
        <Header/>
        <HeroSection/>
        <HugeText/>
@@ -20,6 +21,7 @@ function HomePage() {
        <FrequentAskQuestion/>
        <RecommendationSection/>
        <MeetTheTeam/>
+       <MoveUp/>
        <Footer/>
     </div>
   )
