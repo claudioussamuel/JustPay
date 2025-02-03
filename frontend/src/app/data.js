@@ -9,7 +9,7 @@ import { HiReceiptRefund } from "react-icons/hi";
 export const navLinks=[
     {name:'home',href:'/'},
     {name:'profile',href:'/profile'},
-    {name:'contacts',href:'/profile'},
+    {name:'contacts',href:'/contacts'},
     {name:'payment', href:'/payment'},
     {name:'Terms', href:'#'}
 ]
@@ -99,4 +99,39 @@ export const exploreSection=[
     {name:'profile',href:"/profile",icon:<HiUser/>},
     {name:'documents',href:"/documents",icon:<HiClipboardList/>},
   ]
+  
+
+  export const contactDevice=[
+    {title:'All Contact', number:108},
+    {title:'Activation Bizzard', number:17},
+    {title: 'Electric Arts', number:18},
+    {title:'Mascourt', number:10},
+    {title:'Sega', number:101}
+  ]
+
+  export const contactPsync=[
+    {title:'All Contact', number:108},
+    {title:'Activation Bizzard', number:17},
+    {title: 'Electric Arts', number:18},
+    {title:'Mascourt', number:10},
+    {title:'Sega', number:101}
+  ]
+
+  export const contactShared=[
+    {title:'All Contact', number:108},
+    {title:'Brands Namco', number:4},
+    {title: 'Coupon', number:18},
+  ]
+
+  export const contactNumbers = [
+    { firstName: 'Claud', lastName: 'Mensah', relationship: 'Friend', occupation: 'Developer' },
+    { firstName: 'Sophia', lastName: 'Smith', relationship: 'Colleague', occupation: 'Designer' },
+    { firstName: 'Liam', lastName: 'Johnson', relationship: 'Family', occupation: 'Engineer' },
+    { firstName: 'Emma', lastName: 'Davis', relationship: 'Friend', occupation: 'Doctor' },
+    { firstName: 'Oliver', lastName: 'Martinez', relationship: 'Neighbor', occupation: 'Teacher' },
+    { firstName: 'Mia', lastName: 'Brown', relationship: 'Colleague', occupation: 'Artist' },
+    { firstName: 'Ethan', lastName: 'Wilson', relationship: 'Family', occupation: 'Writer' },
+    { firstName: 'Ava', lastName: 'Moore', relationship: 'Friend', occupation: 'Entrepreneur' },
+    { firstName: 'James', lastName: 'Taylor', relationship: 'Friend', occupation: 'Photographer' },
+  ];
   
