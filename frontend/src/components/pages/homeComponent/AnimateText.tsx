@@ -64,9 +64,9 @@ export function PayText() {
 
       <div className='text' style={{ "--j": 3} as React.CSSProperties}>
       <Image style={{"--i":0} as React.CSSProperties} src="/images/sika.png" alt="money" width={100} height={100}/>
-        <Image style={{"--i":1} as React.CSSProperties} src="/images/sika.png" alt="money" width={100} height={100}/>
-        <Image style={{"--i":2} as React.CSSProperties} src="/images/sika.png" alt="money" width={100} height={100}/>
-        <Image style={{"--i":3} as React.CSSProperties} src="/images/sika.png" alt="money" width={100} height={100}/>
+        <Image style={{"--i":1} as React.CSSProperties} src="/images/etho.png" alt="money" width={100} height={100}/>
+        <Image style={{"--i":2} as React.CSSProperties} src="/images/cardano.png" alt="money" width={100} height={100}/>
+        <Image style={{"--i":3} as React.CSSProperties} src="/images/bitcoin.png" alt="money" width={100} height={100}/>
       </div>
 
     </div>
