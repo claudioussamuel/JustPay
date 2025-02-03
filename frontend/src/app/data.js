@@ -29,33 +29,27 @@ export const sociaLinks=[
   export const faqs = [
     {
      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-     hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-     touched:false
+     hovered:"Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo? consectetur adipisicing elit. Enim, explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
     },
     {
       question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
       hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
      },
      {
       question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
       hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
+     },
+     {
+      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
+      hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?"
      },
      {
       question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
       hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
      },
      {
       question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
       hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
-     },
-     {
-      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
      }
   ]
   
