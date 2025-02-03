@@ -11,9 +11,9 @@ function Header() {
     const pathname = usePathname();
 
   return (
-    <div className='border border-white border-b-0 border-l-0 border-r-0'>
+    <div className='bg-wineTexture  border border-zinc-800 border-b-0 border-l-0 border-r-0'>
 
-    <div className='flex items-center justify-between mt-1 border border-white border-l-0 text-white'>
+    <div className='flex items-center justify-between mt-1 border border-zinc-800 border-l-0 text-zinc-800'>
         <div>
             <Link href="/">
                   <h1 className='font-bowlby ml-10 text-4xl capitalize'>just<span className='font-playWright'>pay</span></h1>
@@ -23,9 +23,9 @@ function Header() {
         <div>
            <div className='flex  items-center text-[18px] font-dmMono capitalize'>
              {navLinks.map((items,index)=>(
-                <Link className={clsx(`py-5 px-10 border-l
-                 first:border-white ${index === navLinks.length-1 ? 'border-r':''}`,{
-                    'bg-brand-hue-color':pathname===items.href
+                <Link className={clsx(`py-5 px-10 border-l border-zinc-800
+                 first:border-zinc-800 ${index === navLinks.length-1 ? 'border-r':''}`,{
+                    'bg-softBlend uppercase':pathname===items.href
                  })} href={items.href} key={index}>
                     {items.name}
                 </Link>

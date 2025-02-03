@@ -4,11 +4,11 @@ import { Heading } from '@/components/shared/Heading'
 
 function ThreeSteps() {
   return (
-      <div className='border border-t-0 mx-10 py-20 border-b-0'>
-        <div className=' flex justify-center bg-wineTexture'>
-          <Heading className='text-6xl text-white pb-20'>Let&apos;s get you started</Heading>
+      <div className='border-zinc-800  border-t  border-b bg-wineTexture py-20'>
+        <div className=' flex justify-center '>
+          <Heading className='text-6xl text-zinc-800 pb-20'>Let&apos;s get you started</Heading>
         </div>
-        <div className='space-y-10 bg-wineTexture'>
+        <div className='space-y-10 '>
           <StepsCard items={{
           foreGround: '/images/number-one.png',
           className: '',

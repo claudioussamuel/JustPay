@@ -18,6 +18,30 @@
   --elastic: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
+.bg-wineTexture{
+  background: radial-gradient(
+    circle at center,
+    var(--r) 0.5px,
+    var(--w) 0.5px,
+    var(--w) 5px
+  )
+  50% 50% / 5px 5px repeat;
+  color: var(--w);
+  }
+  
+  
+  .bg-softBlend {
+  background: radial-gradient(
+      circle at center,
+      var(--w) 0.5px,
+      var(--p) 1px,
+      var(--b) 3px,
+      var(--y) 5px
+    )
+    50% 50% / 5px 5px repeat;
+  color: var(--w);
+  }
+  
 
 .button-cutout {
   position: relative;
@@ -209,3 +233,93 @@
   transform-origin: center center;
 }
 
+
+.container-frame{
+  display: flex;
+  transform-style: preserve-3d;
+  gap:10px;
+  transform: rotateY(30deg) rotateX(10deg);
+}
+.container-frame .text{
+  position: relative;
+  width: 150px;
+  height: 150px;
+  transform-style: preserve-3d;
+  transition: 2.5s ease-in-out;
+  transition-delay: calc(0.25s * var(--j));
+}
+
+.container-frame:hover .text
+{
+  transform: rotateX(-360deg);
+}
+
+.container-frame:hover .text:last-child
+{
+  transform: rotateX(630deg);
+}
+
+.container-frame .text::before
+{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #072F5F;
+  transform-origin: left;
+  transform: rotateY(90deg) translateX(-60px);
+}
+
+.container-frame .text span{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: linear-gradient(#1261A0, #58CCED);
+  font-size: 6em;
+  color: #fff;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(90deg * var(--i))) translateZ(60px);
+}
+
+.container-frame .text:last-child span
+{
+  background: linear-gradient(#072F5F, #3895D3);
+  color: #fff;
+}
+
+.container-frame .text:last-child::before
+{
+  background: #bbaa89;
+}
+
+/* .pay-content
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pay-content h1{
+  margin: 0;
+  padding: 0;
+  font-size: 10em;
+  color: rba(255,0,0,0.4);
+  text-shadow: 1px 2px 6px #2196f3, 1px 0 0 rgba(136, 136, 136, 0.7);
+  transform: rotate(-20deg) skew(20deg)
+}
+
+.pay-content h1::before
+{
+  content: attr(data-title);
+  position: absolute;
+  left: 0;
+  color: green;
+  transform: translate(50px, 0) skew(-39deg);
+  text-shadow: none;
+} */

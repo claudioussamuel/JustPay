@@ -15,6 +15,7 @@ export default {
       },
       colors: {
         'brand-light':'#1261A0',
+        'brand-beige':'#BBAA89',
         'brand-odd':'#58CCED',
         'brand-base-color':'#072F5F',
         'brand-hue-color':'#3895D3',
