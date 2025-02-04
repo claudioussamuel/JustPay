@@ -6,10 +6,17 @@ import { usePathname } from 'next/navigation';
 
 import {navLinks} from '@/app/data';
 import clsx from 'clsx';
+import { Button } from '../ui/button';
+import { usePrivy } from '@privy-io/react-auth';
+
+
 
 function Header() {
     const pathname = usePathname();
+    const {login, authenticated,ready, user,logout} = usePrivy()
+    const walletAddress = user?.wallet?.address;
 
+    const disabledLogin= !ready || (ready && authenticated)
   return (
     <div className='bg-wineTexture  border border-zinc-800 border-b-0 border-l-0 border-r-0'>
 
@@ -31,9 +38,32 @@ function Header() {
                 </Link>
              ))}
 
-             <div className='flex space-x-3 ml-5'>
-                <h1 className='lg:hidden'>connect</h1>
-                <h1 className='pr-5'>login</h1>
+             <div className='flex space-x-3 ml-5 gap-5 items-center'>
+
+               {authenticated &&(
+                  <div className='border border-zinc-800 border-r border-l-0 border-t-0 border-b-0 py-5 '>
+                        <h1>{walletAddress?.slice(0,10)}...</h1>
+                        </div>
+               )}
+
+
+               <div className='px-3 pr-10'>
+         {authenticated ? (
+              <Button 
+            onClick={logout} 
+            className='button-cutout text-[18px] text-zinc-800 bg-brand-beige hover:bg-brand-beige'>
+            logout
+        </Button>
+          ) : (
+        <Button 
+            onClick={login} 
+            className='button-cutout text-[18px] text-zinc-800 bg-brand-beige hover:bg-brand-beige'>
+            login
+        </Button>
+    )}
+         </div>
+
+
              </div>
            </div>
 
