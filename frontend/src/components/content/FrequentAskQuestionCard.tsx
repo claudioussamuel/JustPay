@@ -3,17 +3,27 @@ import React from 'react'
 import { GoArrowDownRight } from "react-icons/go";
 
 function FrequentAskQuestionCard({
-  question, hovered,touched}:{question:string; hovered:string,touched:boolean}) {
+  question, hovered}:{question:string; hovered:string}) {
 
   return (
-    <div className='max-w-96 h-[50vh]  p-5 font-dmMono text-[20px] text-brand-gray bg-brand-hue-color relative grid place-items-end'>
-        <div className={clsx('place-self-start',hovered && "bg-red",touched && "bg-white")}>
-          <p className='text-wrap'>{question}</p>
+    <div className='question-card-container font-dmMono mb-20 '>
+      <div className="card">
+
+      <div className='card-front grid p-5'>
+        <div className="place-self-start ">
+          <p className='text-wrap mt-3 flex '>{question}</p>
         </div>
 
-        <div>
+        <div className='place-self-end '>
         <GoArrowDownRight className='text-5xl'/>
         </div>
+      </div>
+
+      <div className='card-back'>
+          <p>{hovered}</p>
+      </div>
+
+      </div>
     </div>
   )
 }

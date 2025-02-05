@@ -63,7 +63,7 @@ function StepsCard({items}: Props) {
         )}
       >
 
-        <div className='space-y-3 md:w-1/2 text-white'>
+        <div className='space-y-3 md:w-1/2 text-zinc-800'>
             <Heading as="h2" size="lg" className='text-2xl'>
                 {items.header}
             </Heading>
@@ -72,8 +72,8 @@ function StepsCard({items}: Props) {
             <p>{items.body}</p>
             </div>
 
-            <ButtonLink href='#' className='bg-brand-light t px-5 py-8  h-5 font-dmMono text-2xl uppercase'>
-                <p className='text-white'>{items.btnText}</p>
+            <ButtonLink href='#' className='bg-brand-beige t px-5 py-8  h-5 font-dmMono text-2xl uppercase'>
+                <p className='text-zinc-800'>{items.btnText}</p>
             </ButtonLink>
         </div>
  

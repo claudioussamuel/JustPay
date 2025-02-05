@@ -5,10 +5,10 @@ import React from 'react'
 
 function RecommendationSection() {
   return (
-    <div className='border mx-10 border-t-0 border-b-0 h-auto py-20'>
+    <div className='border bg-wineTexture border-zinc-800   h-auto py-20'>
 
         <div className='flex justify-center text-center mb-20'>
-        <Heading className='max-w-4xl text-white text-5xl'>
+        <Heading className='max-w-4xl text-zinc-800 text-5xl'>
             Checkout our ratings
         </Heading>
         </div>
@@ -17,9 +17,9 @@ function RecommendationSection() {
         <div className='flex overflow-hidden space-x-10 group'>
 
             <div className=' animate-loop-scroll group-hover:paused'>
-              <div className='flex space-x-10 text-white  font-dmMono'>
+              <div className='flex space-x-10 text-zinc-800  font-dmMono'>
                  {recommend.map(({firstName,lastName,info,occupation,img},index)=>(
-                    <div key={index}  className=' border py-10 p-5 border-white w-[500px]'>
+                    <div key={index}  className=' border py-10 p-5 border-zinc-800 rounded-md w-[500px]'>
                         <div>
                             <Image src="/images/quotes.png" className='w-20  object-contain' alt="quotes" width={200} height={200}/>
                         </div>
@@ -41,7 +41,7 @@ function RecommendationSection() {
 
 
             <div className=' animate-loop-scroll group-hover:paused'>
-              <div className='flex space-x-10 text-zinc-800  font-dmMono'>
+              <div className='flex space-x-10 text-zinc-800 rounded-md   font-dmMono'>
                  {recommend.map(({firstName,lastName,info,occupation,img},index)=>(
                     <div key={index} className='border py-10 p-5 border-black w-[500px]'>
                         <div>

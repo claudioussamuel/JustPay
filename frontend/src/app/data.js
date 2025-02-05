@@ -1,9 +1,15 @@
 import { LuArrowDownRight } from "react-icons/lu";
+import { HiClipboardList} from "react-icons/hi";
+import { HiUser } from "react-icons/hi";
+import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import { HiOutlineDesktopComputer } from "react-icons/hi";
+import { HiReceiptRefund } from "react-icons/hi";
 
 
 export const navLinks=[
     {name:'home',href:'/'},
     {name:'profile',href:'/profile'},
+    {name:'contacts',href:'/contacts'},
     {name:'payment', href:'/payment'},
     {name:'Terms', href:'#'}
 ]
@@ -29,33 +35,27 @@ export const sociaLinks=[
   export const faqs = [
     {
      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-     hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-     touched:false
+     hovered:"Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo? consectetur adipisicing elit. Enim, explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
     },
     {
       question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
       hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
      },
      {
       question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
       hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
+     },
+     {
+      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
+      hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?"
      },
      {
       question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
       hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
      },
      {
       question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
       hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
-     },
-     {
-      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      touched:false
      }
   ]
   
@@ -91,4 +91,47 @@ export const exploreSection=[
     {firstName:'makafui', role:"ui/ux designer",connect:"#", image:'/images/moto.jpg', lastName:'richmond'}
   ]
   
+  
+  export const sidearContent=[
+    {name:'dashboard',href:"/dashboard",icon:<HiOutlineDesktopComputer/>},
+    {name:'payment',href:"/payment",icon:<HiOutlineCurrencyDollar/>},
+    {name:'history',href:"/history",icon:<HiReceiptRefund/>},
+    {name:'profile',href:"/profile",icon:<HiUser/>},
+    {name:'documents',href:"/documents",icon:<HiClipboardList/>},
+  ]
+  
+
+  export const contactDevice=[
+    {title:'All Contact', number:108},
+    {title:'Activation Bizzard', number:17},
+    {title: 'Electric Arts', number:18},
+    {title:'Mascourt', number:10},
+    {title:'Sega', number:101}
+  ]
+
+  export const contactPsync=[
+    {title:'All Contact', number:108},
+    {title:'Activation Bizzard', number:17},
+    {title: 'Electric Arts', number:18},
+    {title:'Mascourt', number:10},
+    {title:'Sega', number:101}
+  ]
+
+  export const contactShared=[
+    {title:'All Contact', number:108},
+    {title:'Brands Namco', number:4},
+    {title: 'Coupon', number:18},
+  ]
+
+  export const contactNumbers = [
+    { firstName: 'Claud', lastName: 'Mensah', relationship: 'Friend', occupation: 'Developer' },
+    { firstName: 'Sophia', lastName: 'Smith', relationship: 'Colleague', occupation: 'Designer' },
+    { firstName: 'Liam', lastName: 'Johnson', relationship: 'Family', occupation: 'Engineer' },
+    { firstName: 'Emma', lastName: 'Davis', relationship: 'Friend', occupation: 'Doctor' },
+    { firstName: 'Oliver', lastName: 'Martinez', relationship: 'Neighbor', occupation: 'Teacher' },
+    { firstName: 'Mia', lastName: 'Brown', relationship: 'Colleague', occupation: 'Artist' },
+    { firstName: 'Ethan', lastName: 'Wilson', relationship: 'Family', occupation: 'Writer' },
+    { firstName: 'Ava', lastName: 'Moore', relationship: 'Friend', occupation: 'Entrepreneur' },
+    { firstName: 'James', lastName: 'Taylor', relationship: 'Friend', occupation: 'Photographer' },
+  ];
   
