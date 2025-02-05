@@ -1,10 +1,9 @@
-
 import React from 'react'
 
-function ProfileComponent() {
+function index() {
   return (
-    <div>ProfileComponent</div>
+    <div>index</div>
   )
 }
 
-export default ProfileComponent
+export default index
