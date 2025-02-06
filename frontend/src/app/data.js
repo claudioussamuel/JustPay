@@ -135,3 +135,66 @@ export const exploreSection=[
     { firstName: 'James', lastName: 'Taylor', relationship: 'Friend', occupation: 'Photographer' },
   ];
   
+
+  export const eventsData = [
+    {
+      date: "2025-02-06",
+      title: "Tech Conference",
+      time: "10:00 AM",
+      description: "An amazing tech event.",
+      images: {
+        images: [
+          "/images/cardano.png",
+          "/images/cardano.png",
+          "/images/cardano.png",
+          "/images/cardano.png",
+        ],
+      },
+    },
+    {
+      date: "2025-03-10",
+      title: "Design Meetup",
+      time: "2:00 PM",
+      description: "A meetup for designers.",
+      images: {
+        images: [
+          "/images/cardano.png",
+          "/images/cardano.png",
+          "/images/cardano.png",
+          "/images/cardano.png",
+        ],
+      },
+    },
+
+    {
+      date: "2025-03-10",
+      title: "Design Meetup",
+      time: "2:00 PM",
+      description: "A meetup for designers.",
+      images: {
+        images: [
+          "/images/cardano.png",
+          "/images/cardano.png",
+          "/images/cardano.png",
+          "/images/cardano.png",
+        ],
+      },
+    },
+
+    {
+      date: "2025-03-10",
+      title: "Design Meetup",
+      time: "2:00 PM",
+      description: "A meetup for designers.",
+      images: {
+        images: [
+          "/images/cardano.png",
+          "/images/cardano.png",
+          "/images/cardano.png",
+          "/images/cardano.png",
+        ],
+      },
+    },
+
+  ];
+  
