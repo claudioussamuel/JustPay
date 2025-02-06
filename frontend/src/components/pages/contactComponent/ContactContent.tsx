@@ -5,12 +5,15 @@ import { IoSearchCircleOutline } from 'react-icons/io5'
 import ContactData from './ContactData'
 import { IoSendOutline } from "react-icons/io5";
 import { GiReceiveMoney } from 'react-icons/gi'
+import ContactInscription from '@/components/content/ContactInscription'
+import { Calendar } from 'lucide-react'
+import EventContact from './EventContact'
 
 
 
 function ContactContent() {
   return (
-    <div className='flex w-full h-auto font-dmMono  '>
+    <div className='flex w-full h-auto font-dmMono bg-wineTexture  '>
         <div className='flex-[20%] border-r border-black bg-wineTexture gap-5'>
             <div className='grid grid-cols-1 text-zinc-800'>
                 <div>
@@ -90,10 +93,10 @@ function ContactContent() {
         </div>
 
         <div className='flex-[60%]'>
-            <div className='flex flex-row'>
-            <div className='flex-[50%] border h-52 border-red-500'>
+            <div className='flex flex-row gap-5'>
+            <div className='flex-[50%] bg-softBlend border h-auto'>
 
-                <div className='p-5 border border-red-500 m-5 rounded-md'>
+                <div className='p-5 border bg-brand-beige m-5 rounded-md'>
                    <div className='flex gap-5'>
 
                    <div className="w-20 h-20 p-3 rounded-full font-dmMono bg-gradient-to-r text-nowrap from-pink-500 via-purple-500 to-indigo-500 flex justify-center items-center">
@@ -123,10 +126,30 @@ function ContactContent() {
                         <GiReceiveMoney/>
                       </div>
                    </div>
+
+                </div>
+
+                <div className='p-5 space-y-3'>
+                   <ContactInscription title='phone number' description='+233-548672'/>
+                   <ContactInscription title='gmail' description='claudious@gmail.com'/>
+                   <ContactInscription title='work' description='Blockchain Developer'/>
+                   <ContactInscription title='X ' description='@codeClaus'/>
+                   <ContactInscription title='Birthday' description='2nd March'/>
                 </div>
 
             </div>
-            <div className='flex-[50%] border h-52 border-black'></div>
+
+
+            <div className='flex-[50%] border h-auto border-black'>
+                <div className='m-3'>
+                <div className='flex flex-row items-center justify-between text-zinc-800 mb-5'>
+                    <h1 className='text-[18px]'>Schedule events</h1>
+                    <Calendar/>
+                </div>
+                <EventContact/>
+            </div>
+
+            </div>
             </div>
 
         </div>
