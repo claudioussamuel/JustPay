@@ -33,6 +33,7 @@ export default {
   			'brand-light': '#1261A0',
   			'brand-beige': '#BBAA89',
   			'brand-odd': '#58CCED',
+			'brand-gray':'#fffdf9',
   			'brand-base-color': '#072F5F',
   			'brand-hue-color': '#3895D3',
   			background: 'hsl(var(--background))',
