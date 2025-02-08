@@ -8,13 +8,18 @@ import {navLinks} from '@/app/data';
 import clsx from 'clsx';
 import { Button } from '../ui/button';
 import { usePrivy } from '@privy-io/react-auth';
-
-
+import {useFundWallet} from '@privy-io/react-auth';
+import {useWallets} from '@privy-io/react-auth';
+import { base } from 'viem/chains';
 
 function Header() {
     const pathname = usePathname();
-    const {login, authenticated,ready, user,logout} = usePrivy()
+    const {login, authenticated,ready, user,logout,} = usePrivy()
     const walletAddress = user?.wallet?.address;
+    
+    const { wallets} = useWallets();
+    const {fundWallet} = useFundWallet();
+ 
 
     const disabledLogin= !ready || (ready && authenticated)
   return (
@@ -46,7 +51,32 @@ function Header() {
                         </div>
                )}
 
+<Button 
+            onClick={()=> fundWallet(wallets[0].address)} 
+            className='button-cutout text-[18px] text-zinc-800 bg-brand-beige hover:bg-brand-beige'>
+            Fund Wallet
+        </Button>
 
+
+<Button 
+
+            onClick={async () => {
+              const wallet = wallets[0]; // Replace this with your desired wallet
+              const provider = await wallet.getEthereumProvider();
+            //  await wallet.switchChain(base.id)
+
+              const transactionRequest = {
+                to: '0xTheRecipientAddress',
+                value: 100000,
+              };
+              const transactionHash = await provider.request({
+                method: 'eth_sendTransaction',
+                params: [transactionRequest],
+              });
+            }} 
+            className='button-cutout text-[18px] text-zinc-800 bg-brand-beige hover:bg-brand-beige'>
+            Send
+        </Button>
                <div className='px-3 pr-10'>
          {authenticated ? (
               <Button 
