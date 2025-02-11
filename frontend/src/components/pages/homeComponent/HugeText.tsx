@@ -23,7 +23,7 @@ function HugeText() {
             <h1 className=' text-center uppercase font-playWright px-10 '>across</h1>
            </div>
   
-           <div className='border-r border-text-zinc-800  flex-grow'>
+           <div className='border-r border-black  flex-grow'>
             <h1 className='pl-10 font-dmMono uppercase font-bold'>the</h1>
            </div>
   
