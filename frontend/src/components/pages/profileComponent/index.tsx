@@ -28,6 +28,7 @@ import {useWallets} from '@privy-io/react-auth';
 import { base, sepolia } from 'viem/chains';
 import { createWalletClient, getContract } from 'viem';
 import { custom } from 'viem';
+import { pinata } from '@/lib/pinanta';
 
 import { contractAbi, contractAddress } from "@/lib/integrations/viem/abi";
 
@@ -102,11 +103,15 @@ function ProfileContent() {
     };
 
 
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0]; // Get the selected file
         if (file) {
-            const imageURL = URL.createObjectURL(file); // Generate URL for the image
-    
+             // Generate URL for the image
+            const response = await pinata.upload.file(file);
+           
+            const ipfsHash = response.IpfsHash;
+            // const imageURL = URL.createObjectURL(file);
+            const imageURL = `https://ipfs.io/ipfs/${ipfsHash}`;
             // Update the user state with the new profile picture URL
             setUser((prevUser) => ({
                 ...prevUser, 
@@ -127,6 +132,7 @@ function ProfileContent() {
                         className='rounded-2xl w-[70%] object-cover h-[30vh]' 
                         width={350} 
                         height={100}
+                        unoptimized
                     />
                 </label>
                 <input type="file" id="profile-pic" className="hidden" onChange={handleImageUpload} />
