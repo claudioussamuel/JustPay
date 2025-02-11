@@ -22,10 +22,27 @@ import {
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { usePrivy } from '@privy-io/react-auth';
+import {useFundWallet} from '@privy-io/react-auth';
+import {useWallets} from '@privy-io/react-auth';
+import { base, sepolia } from 'viem/chains';
+import { createWalletClient, getContract } from 'viem';
+import { custom } from 'viem';
+
+import { contractAbi, contractAddress } from "@/lib/integrations/viem/abi";
 
 function ProfileContent() {
+
+    const {login, authenticated,ready, user,logout,} = usePrivy()
+    const walletAddress = user?.wallet?.address;
+    
+    const { wallets} = useWallets();
+    const {fundWallet} = useFundWallet();
+
+
+
     // User State
-    const [user, setUser] = useState({
+    const [users, setUser] = useState({
         firstName: "Felicia",
         lastName: "Asaglo",
         email: "feliaciafegs@gmail.com",
@@ -37,7 +54,7 @@ function ProfileContent() {
         profilePic: "/images/v4.jpg"
     });
 
-    const [tempUser, setTempUser] = useState({ ...user });
+    const [tempUser, setTempUser] = useState({ ...users });
     const [newProfilePic, setNewProfilePic] = useState(null);
 
     // Handle input change
@@ -45,9 +62,43 @@ function ProfileContent() {
         setTempUser({ ...tempUser, [e.target.name]: e.target.value });
     };
 
+    async function addUserDataToTheBlocChain(/**Add them here */){
+    //         string firstName;
+    //         string lastName;
+    //         string gender;
+    //         string dateOfBirth;
+    //         string homeTown;
+    //         string gmail;
+    //         string telephone;
+    //         string country;
+    //         string imageUrl;
+    //         bool hasName;
+    //         string xHandle;
+    //         string facebookHandle;
+    //         string igHandle;
+        const wallet = wallets[0];
+        const provider = await wallet.getEthereumProvider();
+
+        const client = createWalletClient({
+            chain: sepolia,
+            transport: custom(provider),
+            account:`${walletAddress}` as `0x${string}`
+          });
+
+          /**Uncomment This one*/
+          const contract = getContract({
+            address: contractAddress,
+            abi:contractAbi,
+            client,
+          });
+
+           await contract.write.addName([ "","","","","","","","","","","",""/**Add the parameters here too */])
+    }
+
     // Handle save changes
-    const handleSave = () => {
+    const handleSave = async ()  => {
         setUser(tempUser);
+       await addUserDataToTheBlocChain();
     };
 
 
@@ -71,7 +122,7 @@ function ProfileContent() {
             <div className='flex justify-center items-center py-5'>
                 <label htmlFor="profile-pic" className='cursor-pointer'>
                     <Image 
-                        src={newProfilePic || user.profilePic} 
+                        src={newProfilePic || users.profilePic} 
                         alt="profile" 
                         className='rounded-2xl w-[70%] object-cover h-[30vh]' 
                         width={350} 
@@ -81,19 +132,19 @@ function ProfileContent() {
                 <input type="file" id="profile-pic" className="hidden" onChange={handleImageUpload} />
             </div>
 
-            <h3 className='text-center text-5xl font-bowlby'>{user.firstName} {user.lastName}</h3>
+            <h3 className='text-center text-5xl font-bowlby'>{users.firstName} {users.lastName}</h3>
             <div className='grid place-content-center space-y-3 mt-2 mb-5'>
                 <div className='flex gap-5 items-center'>
                     <GrLocationPin className='text-2xl'/>
-                    <h1>{user.address}</h1>
+                    <h1>{users.address}</h1>
                 </div>
                 <div className='flex gap-5 items-center'>
                     <CgMailOpen className='text-2xl'/>
-                    <h1>{user.email}</h1>
+                    <h1>{users.email}</h1>
                 </div>
                 <div className='flex gap-5 items-center'>
                     <BsTelephone className='text-2xl'/>
-                    <h1>{user.phone}</h1>
+                    <h1>{users.phone}</h1>
                 </div>
             </div>
           </div>
@@ -104,19 +155,19 @@ function ProfileContent() {
             <div className='text-2xl mt-5 space-y-5'>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><MdOutlinePersonOutline/><h3>First Name</h3></div>
-                    <h3>{user.firstName}</h3>
+                    <h3>{users.firstName}</h3>
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><MdPersonAddAlt/><h3>Last Name</h3></div>
-                    <h3>{user.lastName}</h3>
+                    <h3>{users.lastName}</h3>
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><SlCalender/><h3>Date of Birth</h3></div>
-                    <h3>{user.dob}</h3>
+                    <h3>{users.dob}</h3>
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><BsGenderAmbiguous/><h3>Gender</h3></div>
-                    <h3>{user.gender}</h3>
+                    <h3>{users.gender}</h3>
                 </div>
             </div>
 
