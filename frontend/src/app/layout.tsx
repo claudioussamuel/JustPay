@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
 import { Providers } from "@/components/Provider";
+import { Toaster } from "@/components/ui/toaster";
 
 
 const bowlby = localFont({
@@ -36,7 +37,8 @@ export default function RootLayout({
         className={`${bowlby.variable} ${dmMono.variable} ${playWright.variable} antialiased`}
       >
         <Providers>
-        {children}
+          <main>{children}</main>
+          <Toaster/>
         </Providers>
       </body>
     </html>
