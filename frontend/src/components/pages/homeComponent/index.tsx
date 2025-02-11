@@ -17,7 +17,7 @@ function HomePage() {
        <HeroSection/>
        <HugeText/>
        <Explore/>
-       <ThreeSteps/>
+       <ThreeSteps/>1
        <FrequentAskQuestion/>
        <RecommendationSection/>
        <MeetTheTeam/>
