@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { GrLocationPin } from "react-icons/gr";
 import { CgMailOpen } from "react-icons/cg";
 import { BsTelephone } from "react-icons/bs";
@@ -30,7 +30,9 @@ import { createWalletClient, getContract } from 'viem';
 import { custom } from 'viem';
 import { pinata } from '@/lib/pinanta';
 
+
 import { contractAbi, contractAddress } from "@/lib/integrations/viem/abi";
+import { readContractData } from '@/lib/integrations/viem/contract';
 
 function ProfileContent() {
 
@@ -39,22 +41,69 @@ function ProfileContent() {
     
     const { wallets} = useWallets();
     const {fundWallet} = useFundWallet();
-
+ 
 
 
     // User State
     const [users, setUser] = useState({
-        firstName: "Felicia",
-        lastName: "Asaglo",
-        email: "feliaciafegs@gmail.com",
-        phone: "+2332486235500",
-        city: "Accra",
-        gender: "Female",
-        dob: "21st June 2003",
-        address: "Prestia Hunivali",
+        firstName: "...",
+        lastName: "....",
+        email: "...",
+        phone: "...",
+        city: "...",
+        gender: "...", 
+        dob: "...",
+        address: "...",
         profilePic: "/images/v4.jpg"
     });
 
+    // Add useEffect to fetch contract data
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (walletAddress) {
+                const data = await readContractData(`${walletAddress}` as `0x${string}`);
+                if (data) {
+                    const [
+                        firstName, 
+                        lastName, 
+                        gender, 
+                        dateOfBirth, 
+                        homeTown, 
+                        gmail, 
+                        telephone, 
+                        country, 
+                        imageUrl,
+                        xHandle,
+                        facebookHandle,
+                        igHandle,
+                        hasName
+                    ] = data;
+
+                    setUser(prev => ({
+                        ...prev,
+                        firstName: firstName || "",
+                        lastName: lastName || "",
+                        email: gmail || "",
+                        phone: telephone || "",
+                        city: homeTown || "",
+                        gender: gender || "",
+                        dob: dateOfBirth || "",
+                        address: country || "",
+                        profilePic: imageUrl || "/images/v4.jpg"
+                    }));
+                }
+            }
+        };
+
+        fetchUserData();
+    }, [walletAddress]);
+
+    // Add this after the first useEffect
+    useEffect(() => {
+        setTempUser({ ...users });
+    }, [users]);
+
+    // Update tempUser initialization to match users
     const [tempUser, setTempUser] = useState({ ...users });
     const [newProfilePic, setNewProfilePic] = useState(null);
 
@@ -64,19 +113,7 @@ function ProfileContent() {
     };
 
     async function addUserDataToTheBlocChain(/**Add them here */){
-    //         string firstName;
-    //         string lastName;
-    //         string gender;
-    //         string dateOfBirth;
-    //         string homeTown;
-    //         string gmail;
-    //         string telephone;
-    //         string country;
-    //         string imageUrl;
-    //         bool hasName;
-    //         string xHandle;
-    //         string facebookHandle;
-    //         string igHandle;
+   
         const wallet = wallets[0];
         const provider = await wallet.getEthereumProvider();
 
@@ -93,7 +130,36 @@ function ProfileContent() {
             client,
           });
 
-           await contract.write.addName([ "","","","","","","","","","","",""/**Add the parameters here too */])
+    //         string firstName;
+    //         string lastName;
+    //         string gender;
+    //         string dateOfBirth;
+    //         string homeTown;
+    //         string gmail;
+    //         string telephone;
+    //         string country;
+    //         string imageUrl;
+    //         string xHandle;
+    //         string facebookHandle;
+    //         string igHandle;
+
+               const parameters = [
+                   tempUser.firstName,
+                   tempUser.lastName,
+                   tempUser.gender,
+                   tempUser.dob,
+                   tempUser.city,
+                   tempUser.email,
+                   tempUser.phone,
+                   tempUser.address,
+                   tempUser.profilePic,
+                   tempUser.profilePic,  // xHandle        
+                   tempUser.address, // facebookHandle
+                   tempUser.gender, // should        
+               ];
+
+               await contract.write.addName(parameters);
+           
     }
 
     // Handle save changes
@@ -113,6 +179,7 @@ function ProfileContent() {
             // const imageURL = URL.createObjectURL(file);
             const imageURL = `https://ipfs.io/ipfs/${ipfsHash}`;
             // Update the user state with the new profile picture URL
+            console.log(`Kenny ${imageURL}`)
             setUser((prevUser) => ({
                 ...prevUser, 
                 profilePic: imageURL

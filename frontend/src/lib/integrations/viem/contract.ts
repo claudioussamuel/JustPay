@@ -1,7 +1,7 @@
 import { getContract } from "viem";
 import { contractAbi, contractAddress } from "./abi";
 import { client } from "./client";
-
+ 
 export async function readContractData(userAddress: `0x${string}`): Promise<[string, string, string, string, string, string, string, string, string, string, string, string, boolean] | null> {
     try {
         const contract = getContract({

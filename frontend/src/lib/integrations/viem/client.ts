@@ -2,7 +2,7 @@ import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia } from "viem/chains";
 
-const INFURA_RPC=`https://sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_APP_ID}`;
+const INFURA_RPC=`https://eth-sepolia.g.alchemy.com/v2/sPXZhOwIXDK0gF8WyVPdZsJVTSUuVSIs`;
 
 const PRIVATE_KEY = process.env.NEXT_PUBLIC_INFURA_PRIVATE_KEY
   ? process.env.NEXT_PUBLIC_INFURA_PRIVATE_KEY.startsWith("0x")
@@ -17,7 +17,7 @@ export const client = createPublicClient({
     chain: sepolia,
     transport: http(INFURA_RPC),
 })
-
+ 
 
 
 export const account = PRIVATE_KEY ? privateKeyToAccount(PRIVATE_KEY) : null
