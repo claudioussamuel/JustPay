@@ -1,3 +1,5 @@
+"use client"
+
 import { contactDevice, contactNumbers, contactPsync, contactShared } from '@/app/data'
 import React from 'react'
 import { BiPlus } from 'react-icons/bi'
@@ -8,10 +10,46 @@ import { GiReceiveMoney } from 'react-icons/gi'
 import ContactInscription from '@/components/content/ContactInscription'
 import { Calendar } from 'lucide-react'
 import EventContact from './EventContact'
-
+import { Button } from '@/components/ui/button'
+import { useWallets } from '@privy-io/react-auth'
+import { base } from 'viem/chains'
+import { parseEther } from 'viem'
+import { useToast } from '@/hooks/use-toast'
+import { ToastAction } from '@radix-ui/react-toast'
 
 
 function ContactContent() {
+    const {wallets} = useWallets();
+    const {toast} = useToast()
+
+    const handleSendTransaction = async()=>{
+        try {
+            const wallet = wallets[0];
+            if(!wallet){
+                console.error('No wallet connected')
+                return;
+            }
+
+            const provider = await wallet.getEthereumProvider();
+            await wallet.switchChain(base.id);
+            const transactionRequest = {
+                to: '0xgee',
+                value: parseEther('0.0001')
+            };
+
+            const transactionHash = await provider.request({
+                method: 'eth_sendTransaction',
+                params: [transactionRequest]
+            })
+        } catch (error) {
+            toast({
+                variant:'destructive',
+                title: "Something went wrong!!!",
+                description: "Transaction Failed",
+                action: <ToastAction altText={'Try again'}>"Try again"</ToastAction>
+            })
+        }
+    }
   return (
     <div className='flex w-full h-auto font-dmMono bg-wineTexture  '>
         <div className='flex-[20%] border-r border-black bg-wineTexture gap-5'>
@@ -117,10 +155,13 @@ function ContactContent() {
                    </div>
                    
                    <div className='mt-5 flex flex-row gap-5 justify-around text-white'>
-                      <div className='flex items-center gap-3 bg-brand-hue-color w-full justify-center py-2'>
+
+                      <Button
+                        onClick={handleSendTransaction}
+                       className='hover:bg-none flex items-center gap-3 bg-brand-hue-color w-full justify-center py-2'>
                         <IoSendOutline/>
                         send
-                        </div>
+                        </Button>
 
                       <div className='flex items-center gap-3 bg-green-400 w-full justify-center py-2'>receive
                         <GiReceiveMoney/>

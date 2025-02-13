@@ -22,44 +22,124 @@ import {
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { usePrivy } from '@privy-io/react-auth';
+import {useFundWallet} from '@privy-io/react-auth';
+import {useWallets} from '@privy-io/react-auth';
+import { sepolia } from 'viem/chains';
+import { createWalletClient, getContract } from 'viem';
+import { custom } from 'viem';
+import { pinata } from '@/lib/pinata';
+
+import { contractAbi, contractAddress } from "@/lib/integrations/viem/abi";
 
 function ProfileContent() {
-    // User State
-    const [user, setUser] = useState({
+
+    const {login, authenticated,ready, user,logout,} = usePrivy()
+    const walletAddress = user?.wallet?.address;
+    
+    const { wallets} = useWallets();
+    const {fundWallet} = useFundWallet();
+
+
+    const [users, setUser] = useState({
         firstName: "Felicia",
         lastName: "Asaglo",
-        email: "feliaciafegs@gmail.com",
+        gmail: "feliaciafegs@gmail.com",
         phone: "+2332486235500",
+        homeTown:"Prestia",
         city: "Accra",
         gender: "Female",
-        dob: "21st June 2003",
+        dateOfBirth: "21st June 2003",
         address: "Prestia Hunivali",
-        profilePic: "/images/v4.jpg"
+        xHandle:"@geesman",
+        facebookHandle:"@akatas3m",
+        imageUrl: "/images/v4.jpg",
     });
 
-    const [tempUser, setTempUser] = useState({ ...user });
+    const [tempUser, setTempUser] = useState({ ...users });
     const [newProfilePic, setNewProfilePic] = useState(null);
 
-    // Handle input change
+ 
     const handleChange = (e:any) => {
         setTempUser({ ...tempUser, [e.target.name]: e.target.value });
     };
 
+    async function addUserDataToTheBlocChain(userData: any) {
+        try {
+          if (!wallets || wallets.length === 0) {
+            console.error("No wallet connected");
+            return;
+          }
+      
+          const wallet = wallets[0];
+          if (!wallet) {
+            console.error("Wallet is undefined");
+            return;
+          }
+      
+    
+          const provider = await wallet.getEthereumProvider();
+          if (!provider) {
+            console.error("Provider is undefined");
+            return;
+          }
+      
+          const currentChainId = await provider.request({ method: "eth_chainId" });
+
+          if (currentChainId !== `0x${sepolia.id.toString(16)}`) {
+            await wallet.switchChain(sepolia.id);
+          }
+
+
+          const client = createWalletClient({
+            chain: sepolia,
+            transport: custom(provider),
+            account: walletAddress as `0x${string}`,
+          });
+      
+          const contract = getContract({
+            address: contractAddress,
+            abi: contractAbi,
+            client,
+          });
+      
+          await contract.write.addName([
+            userData.firstName,
+            userData.lastName,
+            userData.gender,
+            userData.dateOfBirth,
+            userData.city,
+            userData.gmail,
+            userData.homeTown,
+            userData.phone,
+            userData.address,
+            userData.xHandle,
+            userData.facebookHandle,
+            userData.imageUrl
+          ]);
+      
+          console.log("User data added to the blockchain");
+        } catch (error) {
+          console.error("Failed to update blockchain:", error);
+        }
+      }
     // Handle save changes
-    const handleSave = () => {
+    const handleSave = async () => {
         setUser(tempUser);
+       await addUserDataToTheBlocChain(tempUser);
     };
 
 
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0]; // Get the selected file
+    const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0]; 
         if (file) {
-            const imageURL = URL.createObjectURL(file); // Generate URL for the image
-    
-            // Update the user state with the new profile picture URL
+            const response = await pinata.upload.file(file);
+           
+            const ipfsHash = response.IpfsHash;
+            const imageURL = `https://ipfs.io/ipfs/${ipfsHash}`;
             setUser((prevUser) => ({
                 ...prevUser, 
-                profilePic: imageURL
+                imageUrl: imageURL
             }));
         }
     };
@@ -71,29 +151,30 @@ function ProfileContent() {
             <div className='flex justify-center items-center py-5'>
                 <label htmlFor="profile-pic" className='cursor-pointer'>
                     <Image 
-                        src={newProfilePic || user.profilePic} 
+                        src={newProfilePic || users.imageUrl} 
                         alt="profile" 
                         className='rounded-2xl w-[70%] object-cover h-[30vh]' 
                         width={350} 
                         height={100}
+                        unoptimized
                     />
                 </label>
                 <input type="file" id="profile-pic" className="hidden" onChange={handleImageUpload} />
             </div>
 
-            <h3 className='text-center text-5xl font-bowlby'>{user.firstName} {user.lastName}</h3>
+            <h3 className='text-center text-5xl font-bowlby'>{users.firstName} {users.lastName}</h3>
             <div className='grid place-content-center space-y-3 mt-2 mb-5'>
                 <div className='flex gap-5 items-center'>
                     <GrLocationPin className='text-2xl'/>
-                    <h1>{user.address}</h1>
+                    <h1>{users.address}</h1>
                 </div>
                 <div className='flex gap-5 items-center'>
                     <CgMailOpen className='text-2xl'/>
-                    <h1>{user.email}</h1>
+                    <h1>{users.gmail}</h1>
                 </div>
                 <div className='flex gap-5 items-center'>
                     <BsTelephone className='text-2xl'/>
-                    <h1>{user.phone}</h1>
+                    <h1>{users.phone}</h1>
                 </div>
             </div>
           </div>
@@ -104,19 +185,19 @@ function ProfileContent() {
             <div className='text-2xl mt-5 space-y-5'>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><MdOutlinePersonOutline/><h3>First Name</h3></div>
-                    <h3>{user.firstName}</h3>
+                    <h3>{users.firstName}</h3>
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><MdPersonAddAlt/><h3>Last Name</h3></div>
-                    <h3>{user.lastName}</h3>
+                    <h3>{users.lastName}</h3>
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><SlCalender/><h3>Date of Birth</h3></div>
-                    <h3>{user.dob}</h3>
+                    <h3>{users.dateOfBirth}</h3>
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><BsGenderAmbiguous/><h3>Gender</h3></div>
-                    <h3>{user.gender}</h3>
+                    <h3>{users.gender}</h3>
                 </div>
             </div>
 
@@ -144,7 +225,7 @@ function ProfileContent() {
 
                         <div className='mb-3'>
                         <Label>Date of Birth</Label>
-                        <Input className="pb-3" name="dob" value={tempUser.dob} onChange={handleChange} />
+                        <Input className="pb-3" name="dob" value={tempUser.dateOfBirth} onChange={handleChange} />
                         </div>
 
                         <div className='mb-3'>

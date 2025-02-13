@@ -10,9 +10,8 @@ type Props = {
 };
 
 function ContactDescriptionEvents({ date, title, description, images: { images }, time }: Props) {
-  const displayedImages = images.slice(0, 3); // Show only first 3 images
-  const extraImagesCount = images.length > 3 ? images.length - 3 : 0; // Calculate extra images
-
+  const displayedImages = images.slice(0, 3);
+  const extraImagesCount = images.length > 3 ? images.length - 3 : 0; 
   return (
     <div className="text-zinc-800">
       <h1 className="mb-1 text-[13px]">{date}</h1>
@@ -23,7 +22,7 @@ function ContactDescriptionEvents({ date, title, description, images: { images }
         {/* Image Display Section */}
         <div className='flex items-center justify-between'>
 
-        <div className="flex items-center mt-3 ">
+        <div className="flex items-center mt-3 -space-x-3">
           {displayedImages.map((img, index) => (
             <div key={index} className="relative w-10 h-10">
               <Image
@@ -35,7 +34,7 @@ function ContactDescriptionEvents({ date, title, description, images: { images }
             </div>
           ))}
 
-          {/* Show "+X" for extra images */}
+         
           {extraImagesCount > 0 && (
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-300 text-sm font-semibold">
               +{extraImagesCount}
