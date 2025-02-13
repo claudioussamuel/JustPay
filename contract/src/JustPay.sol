@@ -190,9 +190,6 @@ contract JustPay is ReentrancyGuard {
         string memory message,
         string memory stableCoinName
     ) external nonReentrant moreThanZero(amount) {
-        // Check balance
-        uint256 erc20balance = IERC20(token).balanceOf(address(this));
-
         addHistory(msg.sender, to, amount, message, stableCoinName);
         // Transfer tokens using SafeERC20
         IERC20(token).safeTransferFrom(msg.sender, to, amount);
