@@ -44,6 +44,8 @@ contract JustPay is ReentrancyGuard {
     error JustPay__TokenNotAllowed(address token);
     error JustPay__TransferFailed();
     error JustPay__NoSuchRequest();
+    error JustPay__NotOwner();
+    error JustPay__InsufficientBalance();
     ///////////////////
     // Types
     ///////////////////
@@ -98,6 +100,17 @@ contract JustPay is ReentrancyGuard {
     mapping(address => SendReceive[]) private s_history;
 
     ///////////////////
+    // Events
+    ///////////////////
+    event TransferSent(
+        address indexed from,
+        address indexed to,
+        uint256 amount,
+        address indexed token,
+        string stableCoinName
+    );
+
+    ///////////////////
     // Modifiers
     ///////////////////
     modifier moreThanZero(uint256 amount) {
@@ -114,32 +127,10 @@ contract JustPay is ReentrancyGuard {
         _;
     }
 
-    // modifier isAllowedToken(address token) {
-    //     if (s_priceFeeds[token] == address(0)) {
-    //         revert JustPay__TokenNotAllowed(token);
-    //     }
-    //     _;
-    // }
-
     constructor() {
         s_owner = msg.sender;
     }
 
-    //Add a name to wallet address
-
-    // string firstName;
-    //         string lastName;
-    //         string gender;
-    //         string dateOfBirth;
-    //         string homeTown;
-    //         string gmail;
-    //         string telephone;
-    //         string country;
-    //         string imageUrl;
-    //         bool hasName;
-    //          string xHandle;
-    //        string facebookHandle;
-    //        string igHandle;
     function addName(
         string memory _firstName,
         string memory _lastName,
@@ -192,13 +183,29 @@ contract JustPay is ReentrancyGuard {
         s_requests[user].push(newRequest);
     }
 
-    //  function transferERC20(IERC20 token, address to, uint256 amount) public {
-    //     require(msg.sender == owner, "Only owner can withdraw funds");
-    //     uint256 erc20balance = token.balanceOf(address(this));
-    //     require(amount <= erc20balance, "balance is low");
-    //     token.transfer(to, amount);
-    //     emit TransferSent(msg.sender, to, amount);
-    // }
+    function transferERC20(
+        address token,
+        address to,
+        uint256 amount,
+        string memory message,
+        string memory stableCoinName
+    ) external nonReentrant moreThanZero(amount) {
+        // Check balance
+        uint256 erc20balance = IERC20(token).balanceOf(address(this));
+
+        addHistory(msg.sender, to, amount, message, stableCoinName);
+        // Transfer tokens using SafeERC20
+        IERC20(token).safeTransferFrom(msg.sender, to, amount);
+
+        // Emit event
+        emit TransferSent(
+            msg.sender,
+            to,
+            amount,
+            address(token),
+            stableCoinName
+        );
+    }
 
     //Pay a Request
 
@@ -309,6 +316,13 @@ contract JustPay is ReentrancyGuard {
 
     function getMyName(address _user) public view returns (UserInfo memory) {
         return s_names[_user];
+    }
+
+    function getERC20Balance(
+        address token,
+        address account
+    ) public view returns (uint256) {
+        return IERC20(token).balanceOf(account);
     }
 }
 
