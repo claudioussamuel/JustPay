@@ -4,6 +4,7 @@ import localFont from 'next/font/local'
 import "./globals.css";
 import { Providers } from "@/components/Provider";
 import { Toaster } from "@/components/ui/toaster";
+import { AppProvider } from "./context/AppContext";
 
 
 const bowlby = localFont({
@@ -37,7 +38,11 @@ export default function RootLayout({
         className={`${bowlby.variable} ${dmMono.variable} ${playWright.variable} antialiased`}
       >
         <Providers>
-          <main>{children}</main>
+
+          <AppProvider>
+            {children}
+            </AppProvider>
+            
           <Toaster/>
         </Providers>
       </body>
