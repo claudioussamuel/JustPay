@@ -44,6 +44,8 @@ contract JustPay is ReentrancyGuard {
     error JustPay__TokenNotAllowed(address token);
     error JustPay__TransferFailed();
     error JustPay__NoSuchRequest();
+    error JustPay__NotOwner();
+    error JustPay__InsufficientBalance();
     ///////////////////
     // Types
     ///////////////////
@@ -69,8 +71,19 @@ contract JustPay is ReentrancyGuard {
         string stableCoinName;
     }
 
-    struct UserName {
-        string name;
+    struct UserInfo {
+        string firstName;
+        string lastName;
+        string gender;
+        string dateOfBirth;
+        string homeTown;
+        string gmail;
+        string telephone;
+        string country;
+        string imageUrl;
+        string xHandle;
+        string facebookHandle;
+        string igHandle;
         bool hasName;
     }
 
@@ -79,12 +92,23 @@ contract JustPay is ReentrancyGuard {
     ///////////////////
 
     address public s_owner;
-    /// @dev Mapping of  address to userName Struct
-    mapping(address => UserName) private s_names;
+    /// @dev Mapping of  address to UserInfo Struct
+    mapping(address => UserInfo) private s_names;
     /// @dev Mapping of  address to request array
     mapping(address => Request[]) private s_requests;
     /// @dev Mapping of address to history
     mapping(address => SendReceive[]) private s_history;
+
+    ///////////////////
+    // Events
+    ///////////////////
+    event TransferSent(
+        address indexed from,
+        address indexed to,
+        uint256 amount,
+        address indexed token,
+        string stableCoinName
+    );
 
     ///////////////////
     // Modifiers
@@ -103,23 +127,38 @@ contract JustPay is ReentrancyGuard {
         _;
     }
 
-    // modifier isAllowedToken(address token) {
-    //     if (s_priceFeeds[token] == address(0)) {
-    //         revert JustPay__TokenNotAllowed(token);
-    //     }
-    //     _;
-    // }
-
     constructor() {
         s_owner = msg.sender;
     }
 
-    //Add a name to wallet address
-
-    function addName(string memory _name) public {
-        UserName storage newUserName = s_names[msg.sender];
-        newUserName.name = _name;
-        newUserName.hasName = true;
+    function addName(
+        string memory _firstName,
+        string memory _lastName,
+        string memory _gender,
+        string memory _dateOfBirth,
+        string memory _homeTown,
+        string memory _gmail,
+        string memory _telephone,
+        string memory _country,
+        string memory _imageUrl,
+        string memory _xHandle,
+        string memory _facebookHandle,
+        string memory _igHandle
+    ) public {
+        UserInfo storage newUserInfo = s_names[msg.sender];
+        newUserInfo.firstName = _firstName;
+        newUserInfo.lastName = _lastName;
+        newUserInfo.gender = _gender;
+        newUserInfo.dateOfBirth = _dateOfBirth;
+        newUserInfo.homeTown = _homeTown;
+        newUserInfo.gmail = _gmail;
+        newUserInfo.telephone = _telephone;
+        newUserInfo.country = _country;
+        newUserInfo.imageUrl = _imageUrl;
+        newUserInfo.xHandle = _xHandle;
+        newUserInfo.facebookHandle = _facebookHandle;
+        newUserInfo.igHandle = _igHandle;
+        newUserInfo.hasName = true;
     }
 
     //Create a Request
@@ -139,18 +178,31 @@ contract JustPay is ReentrancyGuard {
         newRequest.stableCoinName = _tokenName;
 
         if (s_names[msg.sender].hasName) {
-            newRequest.name = s_names[msg.sender].name;
+            newRequest.name = s_names[msg.sender].firstName;
         }
         s_requests[user].push(newRequest);
     }
 
-    //  function transferERC20(IERC20 token, address to, uint256 amount) public {
-    //     require(msg.sender == owner, "Only owner can withdraw funds");
-    //     uint256 erc20balance = token.balanceOf(address(this));
-    //     require(amount <= erc20balance, "balance is low");
-    //     token.transfer(to, amount);
-    //     emit TransferSent(msg.sender, to, amount);
-    // }
+    function transferERC20(
+        address token,
+        address to,
+        uint256 amount,
+        string memory message,
+        string memory stableCoinName
+    ) external nonReentrant moreThanZero(amount) {
+        addHistory(msg.sender, to, amount, message, stableCoinName);
+        // Transfer tokens using SafeERC20
+        IERC20(token).safeTransferFrom(msg.sender, to, amount);
+
+        // Emit event
+        emit TransferSent(
+            msg.sender,
+            to,
+            amount,
+            address(token),
+            stableCoinName
+        );
+    }
 
     //Pay a Request
 
@@ -205,7 +257,7 @@ contract JustPay is ReentrancyGuard {
         newSend.otherPartyAddress = receiver;
         newSend.stableCoinName = _stableCoinName;
         if (s_names[receiver].hasName) {
-            newSend.otherPartyName = s_names[receiver].name;
+            newSend.otherPartyName = s_names[receiver].firstName;
         }
         s_history[sender].push(newSend);
 
@@ -216,7 +268,7 @@ contract JustPay is ReentrancyGuard {
         newReceive.otherPartyAddress = sender;
         newReceive.stableCoinName = _stableCoinName;
         if (s_names[sender].hasName) {
-            newReceive.otherPartyName = s_names[sender].name;
+            newReceive.otherPartyName = s_names[sender].firstName;
         }
         s_history[receiver].push(newReceive);
     }
@@ -259,8 +311,15 @@ contract JustPay is ReentrancyGuard {
         return s_history[_user];
     }
 
-    function getMyName(address _user) public view returns (UserName memory) {
+    function getMyName(address _user) public view returns (UserInfo memory) {
         return s_names[_user];
+    }
+
+    function getERC20Balance(
+        address token,
+        address account
+    ) public view returns (uint256) {
+        return IERC20(token).balanceOf(account);
     }
 }
 

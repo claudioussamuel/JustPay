@@ -54,3 +54,42 @@ export async function readContractData(userAddress: `0x${string}`): Promise<[str
         return null;
     }
 }
+
+
+export async function readERC20Balance(tokenAddress: `0x${string}`,userAddress: `0x${string}`): Promise<bigint | null> {
+    const {toast} = useToast();
+    try {
+        const contract = getContract({
+            address: contractAddress,
+            abi: contractAbi,
+            client,
+        });
+
+        const data = await contract.read.getERC20Balance([tokenAddress,userAddress]);
+
+        console.log("Read ERC20 Balance", data);
+
+        if (typeof data === "bigint"
+             && data !== null 
+           
+            ) {
+          
+            return data;
+        } else {
+            toast({
+                variant: 'destructive',
+                title:'Unexpected data format',
+                description: 'Unexpected data format sent !!!'
+            })
+            return null;
+        }
+    } catch (error) {
+        toast({
+            variant: 'destructive',
+            title:'Error occured',
+            description: 'Error reading contract !!!'
+        })
+        console.error("Error reading contract:", error);
+        return null;
+    }
+}

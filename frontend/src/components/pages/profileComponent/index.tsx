@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { GrLocationPin } from "react-icons/gr";
 import { CgMailOpen } from "react-icons/cg";
 import { BsTelephone } from "react-icons/bs";
@@ -25,12 +25,14 @@ import { Input } from '@/components/ui/input';
 import { usePrivy } from '@privy-io/react-auth';
 import {useFundWallet} from '@privy-io/react-auth';
 import {useWallets} from '@privy-io/react-auth';
-import { sepolia } from 'viem/chains';
+import { base, sepolia } from 'viem/chains';
 import { createWalletClient, getContract } from 'viem';
 import { custom } from 'viem';
-import { pinata } from '@/lib/pinata';
+import { pinata } from '@/lib/pinanta';
+
 
 import { contractAbi, contractAddress } from "@/lib/integrations/viem/abi";
+import { readContractData } from '@/lib/integrations/viem/contract';
 
 function ProfileContent() {
 
@@ -39,23 +41,69 @@ function ProfileContent() {
     
     const { wallets} = useWallets();
     const {fundWallet} = useFundWallet();
+ 
 
 
+    // User State
     const [users, setUser] = useState({
-        firstName: "Felicia",
-        lastName: "Asaglo",
-        gmail: "feliaciafegs@gmail.com",
-        phone: "+2332486235500",
-        homeTown:"Prestia",
-        city: "Accra",
-        gender: "Female",
-        dateOfBirth: "21st June 2003",
-        address: "Prestia Hunivali",
-        xHandle:"@geesman",
-        facebookHandle:"@akatas3m",
-        imageUrl: "/images/v4.jpg",
+        firstName: "...",
+        lastName: "....",
+        email: "...",
+        phone: "...",
+        city: "...",
+        gender: "...", 
+        dob: "...",
+        address: "...",
+        profilePic: "/images/v4.jpg"
     });
 
+    // Add useEffect to fetch contract data
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (walletAddress) {
+                const data = await readContractData(`${walletAddress}` as `0x${string}`);
+                if (data) {
+                    const [
+                        firstName, 
+                        lastName, 
+                        gender, 
+                        dateOfBirth, 
+                        homeTown, 
+                        gmail, 
+                        telephone, 
+                        country, 
+                        imageUrl,
+                        xHandle,
+                        facebookHandle,
+                        igHandle,
+                        hasName
+                    ] = data;
+
+                    setUser(prev => ({
+                        ...prev,
+                        firstName: firstName || "",
+                        lastName: lastName || "",
+                        email: gmail || "",
+                        phone: telephone || "",
+                        city: homeTown || "",
+                        gender: gender || "",
+                        dob: dateOfBirth || "",
+                        address: country || "",
+                        profilePic: imageUrl || "/images/v4.jpg"
+                    }));
+                }
+            }
+        };
+
+        fetchUserData();
+    }, [walletAddress]);
+
+    // Add this after the first useEffect
+    useEffect(() => {
+        setTempUser({ ...users });
+    }, [users]);
+
+    // Update tempUser initialization to match users
     const [tempUser, setTempUser] = useState({ ...users });
     const [newProfilePic, setNewProfilePic] = useState(null);
 
@@ -63,6 +111,106 @@ function ProfileContent() {
     const handleChange = (e:any) => {
         setTempUser({ ...tempUser, [e.target.name]: e.target.value });
     };
+
+    // async function addUserDataToTheBlocChain(/**Add them here */){
+   
+    //     const wallet = wallets[0];
+    //     const provider = await wallet.getEthereumProvider();
+
+    //     const client = createWalletClient({
+    //         chain: sepolia,
+    //         transport: custom(provider),
+    //         account:`${walletAddress}` as `0x${string}`
+    //       });
+
+    //       /**Uncomment This one*/
+    //       const contract = getContract({
+    //         address: contractAddress,
+    //         abi:contractAbi,
+    //         client,
+    //       });
+
+    // //         string firstName;
+    // //         string lastName;
+    // //         string gender;
+    // //         string dateOfBirth;
+    // //         string homeTown;
+    // //         string gmail;
+    // //         string telephone;
+    // //         string country;
+    // //         string imageUrl;
+    // //         string xHandle;
+    // //         string facebookHandle;
+    // //         string igHandle;
+
+    //            const parameters = [
+    //                tempUser.firstName,
+    //                tempUser.lastName,
+    //                tempUser.gender,
+    //                tempUser.dob,
+    //                tempUser.city,
+    //                tempUser.email,
+    //                tempUser.phone,
+    //                tempUser.address,
+    //                tempUser.profilePic,
+    //                tempUser.profilePic,  // xHandle        
+    //                tempUser.address, // facebookHandle
+    //                tempUser.gender, // should        
+    //            ];
+
+    //            await contract.write.addName(parameters);
+           
+    // }
+
+    // async function addUserDataToTheBlocChain(/**Add them here */){
+   
+    //     const wallet = wallets[0];
+    //     const provider = await wallet.getEthereumProvider();
+
+    //     const client = createWalletClient({
+    //         chain: sepolia,
+    //         transport: custom(provider),
+    //         account:`${walletAddress}` as `0x${string}`
+    //       });
+
+    //       /**Uncomment This one*/
+    //       const contract = getContract({
+    //         address: contractAddress,
+    //         abi:contractAbi,
+    //         client,
+    //       });
+
+    // //         string firstName;
+    // //         string lastName;
+    // //         string gender;
+    // //         string dateOfBirth;
+    // //         string homeTown;
+    // //         string gmail;
+    // //         string telephone;
+    // //         string country;
+    // //         string imageUrl;
+    // //         string xHandle;
+    // //         string facebookHandle;
+    // //         string igHandle;
+
+    //            const parameters = [
+    //                tempUser.firstName,
+    //                tempUser.lastName,
+    //                tempUser.gender,
+    //                tempUser.dob,
+    //                tempUser.city,
+    //                tempUser.email,
+    //                tempUser.phone,
+    //                tempUser.address,
+    //                tempUser.profilePic,
+    //                tempUser.profilePic,  // xHandle        
+    //                tempUser.address, // facebookHandle
+    //                tempUser.gender, // should        
+    //            ];
+
+    //            await contract.write.addName(parameters);
+           
+    // }
 
     async function addUserDataToTheBlocChain(userData: any) {
         try {
@@ -124,19 +272,23 @@ function ProfileContent() {
         }
       }
     // Handle save changes
-    const handleSave = async () => {
+    const handleSave = async ()  => {
         setUser(tempUser);
-       await addUserDataToTheBlocChain(tempUser);
+       await addUserDataToTheBlocChain(users);
     };
 
 
     const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0]; 
+        const file = event.target.files?.[0]; // Get the selected file
         if (file) {
+             // Generate URL for the image
             const response = await pinata.upload.file(file);
            
             const ipfsHash = response.IpfsHash;
+            // const imageURL = URL.createObjectURL(file);
             const imageURL = `https://ipfs.io/ipfs/${ipfsHash}`;
+            // Update the user state with the new profile picture URL
+            console.log(`Kenny ${imageURL}`)
             setUser((prevUser) => ({
                 ...prevUser, 
                 imageUrl: imageURL
@@ -151,7 +303,7 @@ function ProfileContent() {
             <div className='flex justify-center items-center py-5'>
                 <label htmlFor="profile-pic" className='cursor-pointer'>
                     <Image 
-                        src={newProfilePic || users.imageUrl} 
+                        src={newProfilePic || users.profilePic} 
                         alt="profile" 
                         className='rounded-2xl w-[70%] object-cover h-[30vh]' 
                         width={350} 
@@ -170,7 +322,7 @@ function ProfileContent() {
                 </div>
                 <div className='flex gap-5 items-center'>
                     <CgMailOpen className='text-2xl'/>
-                    <h1>{users.gmail}</h1>
+                    <h1>{users.email}</h1>
                 </div>
                 <div className='flex gap-5 items-center'>
                     <BsTelephone className='text-2xl'/>
@@ -193,7 +345,7 @@ function ProfileContent() {
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><SlCalender/><h3>Date of Birth</h3></div>
-                    <h3>{users.dateOfBirth}</h3>
+                    <h3>{users.dob}</h3>
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex gap-5 items-center'><BsGenderAmbiguous/><h3>Gender</h3></div>
@@ -225,7 +377,7 @@ function ProfileContent() {
 
                         <div className='mb-3'>
                         <Label>Date of Birth</Label>
-                        <Input className="pb-3" name="dob" value={tempUser.dateOfBirth} onChange={handleChange} />
+                        <Input className="pb-3" name="dob" value={tempUser.dob} onChange={handleChange} />
                         </div>
 
                         <div className='mb-3'>
