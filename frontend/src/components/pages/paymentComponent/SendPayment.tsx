@@ -25,19 +25,22 @@ function SendPayment() {
           <CiSearch className=''/>
 
           <Input 
-          type="text" 
-          value={receipientAddress}
-          onChange={(e)=> setRecipientAddress(e.target.value)}
-          className='w-full
-          placeholder:text-[20px]
-          placeholder:text-zinc-800
-          placeholder:font-dmMono
-          outline-none
-          placeholder:items-center
-          bg-transparent
-          font-dmMono
-          ' 
-          placeholder='place in recepient address' />
+         type="text" 
+        value={receipientAddress}
+       onChange={(e) => setRecipientAddress(e.target.value)}
+      className="
+         w-full
+        placeholder:text-[20px]
+         placeholder:font-dmMono
+      text-zinc-800
+      bg-transparent
+         font-dmMono
+       border-0 outline-none
+     focus:ring-0 focus:outline-none
+  " 
+  placeholder="Place in recipient address"
+/>
+
         </div>
 
       <div className='mt-5'>
