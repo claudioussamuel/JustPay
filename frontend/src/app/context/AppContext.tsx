@@ -41,6 +41,7 @@ export const AppProvider: React.FC<{children: React.ReactNode}>=({children})=>{
                 setRecipientAddress,
                 amount,
                 setAmount,
+                
                 description,
                 setDescription,
                 resetPayment,
