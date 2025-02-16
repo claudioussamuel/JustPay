@@ -190,9 +190,11 @@ contract JustPay is ReentrancyGuard {
         string memory message,
         string memory stableCoinName
     ) external nonReentrant moreThanZero(amount) {
+        IERC20(token).approve(to, amount);
         addHistory(msg.sender, to, amount, message, stableCoinName);
+
         // Transfer tokens using SafeERC20
-        IERC20(token).safeTransferFrom(msg.sender, to, amount);
+        IERC20(token).transferFrom(msg.sender, to, amount);
 
         // Emit event
         emit TransferSent(
@@ -222,7 +224,12 @@ contract JustPay is ReentrancyGuard {
         Request[] storage myRequests = s_requests[msg.sender];
         Request storage payableRequest = myRequests[_request];
 
-        IERC20(payableRequest.stableCoin).safeTransferFrom(
+        IERC20(payableRequest.stableCoin).approve(
+            payableRequest.requestor,
+            payableRequest.amount
+        );
+
+        IERC20(payableRequest.stableCoin).transferFrom(
             msg.sender,
             payableRequest.requestor,
             payableRequest.amount
