@@ -1,9 +1,14 @@
 
 import Payment from '@/components/pages/paymentComponent'
+import ProtectedRoute from '@/hooks/ProtectedRoute'
 import React from 'react'
 
-function page() {
-  return <Payment/>
+function Page() {
+  return (
+    <ProtectedRoute>
+      <Payment/>
+    </ProtectedRoute>
+  )
 }
 
-export default page
+export default Page
