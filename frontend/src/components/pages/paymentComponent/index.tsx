@@ -1,13 +1,10 @@
-import React from 'react'
-import PaymentContent from './PaymentContent'
-import PaymentBanner from './PaymentBanner'
+import PaymentCard from './PaymentCard'
 
 
 function Payment() {
   return (
     <div className='h-dvh'>
-        <PaymentBanner/>
-        <PaymentContent/>
+        <PaymentCard/>
     </div>
   )
 }
