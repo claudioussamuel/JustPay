@@ -5,6 +5,7 @@ import "./globals.css";
 import { Providers } from "@/components/Provider";
 import { Toaster } from "@/components/ui/toaster";
 import { AppProvider } from "./context/AppContext";
+import { AuthProvider } from "./context/AuthContext";
 
 
 const bowlby = localFont({
@@ -38,10 +39,11 @@ export default function RootLayout({
         className={`${bowlby.variable} ${dmMono.variable} ${playWright.variable} antialiased`}
       >
         <Providers>
-
+         <AuthProvider>
           <AppProvider>
             {children}
             </AppProvider>
+         </AuthProvider>
             
           <Toaster/>
         </Providers>
