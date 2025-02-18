@@ -1,14 +1,12 @@
-import ContactComponent from '@/components/pages/contactComponent'
+import Groups from '@/components/pages/groupComponent'
 import ProtectedRoute from '@/hooks/ProtectedRoute'
 import React from 'react'
-
 
 function Page() {
   return (
     <ProtectedRoute>
-      <ContactComponent/>
+        <Groups/>
     </ProtectedRoute>
-
   )
 }
 

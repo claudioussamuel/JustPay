@@ -1,14 +1,12 @@
-import ContactComponent from '@/components/pages/contactComponent'
+import Dashboard from '@/components/pages/dashboardComponent'
 import ProtectedRoute from '@/hooks/ProtectedRoute'
 import React from 'react'
 
-
 function Page() {
-  return (
+  return(
     <ProtectedRoute>
-      <ContactComponent/>
+        <Dashboard/>
     </ProtectedRoute>
-
   )
 }
 

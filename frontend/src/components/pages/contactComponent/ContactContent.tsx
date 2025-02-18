@@ -16,40 +16,13 @@ import { base } from 'viem/chains'
 import { parseEther } from 'viem'
 import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@radix-ui/react-toast'
+import Link from 'next/link'
 
 
 function ContactContent() {
     const {wallets} = useWallets();
     const {toast} = useToast()
 
-    const handleSendTransaction = async()=>{
-        try {
-            const wallet = wallets[0];
-            if(!wallet){
-                console.error('No wallet connected')
-                return;
-            }
-
-            const provider = await wallet.getEthereumProvider();
-            await wallet.switchChain(base.id);
-            const transactionRequest = {
-                to: '0xgee',
-                value: parseEther('0.0001')
-            };
-
-            const transactionHash = await provider.request({
-                method: 'eth_sendTransaction',
-                params: [transactionRequest]
-            })
-        } catch (error) {
-            toast({
-                variant:'destructive',
-                title: "Something went wrong!!!",
-                description: "Transaction Failed",
-                action: <ToastAction altText={'Try again'}>"Try again"</ToastAction>
-            })
-        }
-    }
   return (
     <div className='flex w-full h-auto font-dmMono bg-wineTexture  '>
         <div className='flex-[20%] border-r border-black bg-wineTexture gap-5'>
@@ -156,12 +129,13 @@ function ContactContent() {
                    
                    <div className='mt-5 flex flex-row gap-5 justify-around text-white'>
 
+                     <Link href="/payment">
                       <Button
-                        onClick={handleSendTransaction}
                        className='hover:bg-none flex items-center gap-3 bg-brand-hue-color w-full justify-center py-2'>
                         <IoSendOutline/>
                         send
                         </Button>
+                        </Link>
 
                       <div className='flex items-center gap-3 bg-green-400 w-full justify-center py-2'>receive
                         <GiReceiveMoney/>

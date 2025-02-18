@@ -4,14 +4,15 @@ import { HiUser } from "react-icons/hi";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { HiReceiptRefund } from "react-icons/hi";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 
 export const navLinks=[
     {name:'home',href:'/'},
+    {name:'dashboard', href:'/dashboard'},
     {name:'profile',href:'/profile'},
     {name:'contacts',href:'/contacts'},
     {name:'payment', href:'/payment'},
-    {name:'Terms', href:'#'}
 ]
 
 export const sociaLinks=[
@@ -95,8 +96,9 @@ export const exploreSection=[
   export const sidearContent=[
     {name:'dashboard',href:"/dashboard",icon:<HiOutlineDesktopComputer/>},
     {name:'payment',href:"/payment",icon:<HiOutlineCurrencyDollar/>},
-    {name:'history',href:"/history",icon:<HiReceiptRefund/>},
     {name:'profile',href:"/profile",icon:<HiUser/>},
+    {name:'history',href:"/history",icon:<HiReceiptRefund/>},
+    {name:'groups',href:"/groups",icon:<FaPeopleGroup/>},
     {name:'documents',href:"/documents",icon:<HiClipboardList/>},
   ]
   
@@ -198,3 +200,27 @@ export const exploreSection=[
 
   ];
   
+
+
+  export const eventGroup = [
+    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com' ,date:'21st june 003'},
+    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+  ];
+  
+
+  export const recentGroup = [
+    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com',date:'21st june 003' },
+    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+  ];
+
+
+  export const contactGroup = [
+    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com',date:'21st june 003' },
+    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com' ,date:'21st june 003'},
+    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+  ];

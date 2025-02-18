@@ -1,8 +1,14 @@
 import ProfileComponent from '@/components/pages/profileComponent'
+import ProtectedRoute from '@/hooks/ProtectedRoute'
 import React from 'react'
 
 function Page() {
-  return <ProfileComponent/>
+  return (
+    <ProtectedRoute>
+      <ProfileComponent/>
+    </ProtectedRoute>
+  ) 
+  
 }
 
 export default Page

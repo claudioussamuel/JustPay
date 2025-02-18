@@ -12,7 +12,7 @@ import MoveUp from '@/components/content/MoveUp'
 
 function HomePage() {
   return (
-    <div className='h-auto relative'>
+    <div className='h-aut>o relative'>
        <Header/>
        <HeroSection/>
        <HugeText/>
