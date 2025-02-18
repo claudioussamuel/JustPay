@@ -5,6 +5,16 @@ import { contractAbi, contractAddress } from "./abi";
 import { client } from "./client";
 import { useToast } from "@/hooks/use-toast";
 
+interface SendReceive {
+    action: string;
+    amount: bigint;
+    message: string;
+    otherPartyAddress: string;
+    otherPartyName: string;
+    stableCoinName: string;
+    time:bigint;
+}
+
 export async function readContractData(userAddress: `0x${string}`): Promise<[string, string, string, string, string, string, string, string, string, string, string, string, boolean] | null> {
     const {toast} = useToast();
     try {
@@ -53,7 +63,7 @@ export async function readContractData(userAddress: `0x${string}`): Promise<[str
         console.error("Error reading contract:", error);
         return null;
     }
-}
+} 
 
 
 export async function readERC20Balance(tokenAddress: `0x${string}`,userAddress: `0x${string}`): Promise<bigint | null> {
@@ -93,3 +103,36 @@ export async function readERC20Balance(tokenAddress: `0x${string}`,userAddress: 
         return null;
     }
 }
+
+export async function readHistoryData(userAddress: `0x${string}`): Promise<SendReceive[] | null> {
+    try {
+        const contract = getContract({
+            address: contractAddress,
+            abi: contractAbi,
+            client,
+        });
+
+        const data = await contract.read.getMyHistory([userAddress]);
+
+        console.log("History Data:", data);
+
+        if (Array.isArray(data)) {
+            return data as SendReceive[];
+        } else {
+            
+            return null;
+        }
+    } catch (error) {
+        
+        console.error("Error reading history:", error);
+        return null;
+    }
+}
+
+// const history = await readHistoryData(userAddress);
+// if (history) {
+//     // Process the history data
+//     history.forEach(transaction => {
+//         console.log(transaction.action, transaction.amount, transaction.message);
+//     });
+// }

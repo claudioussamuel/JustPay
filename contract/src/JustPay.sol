@@ -71,6 +71,7 @@ contract JustPay is ReentrancyGuard {
         address otherPartyAddress;
         string otherPartyName;
         string stableCoinName;
+        uint256 time;
     }
 
     struct UserInfo {
@@ -239,6 +240,7 @@ contract JustPay is ReentrancyGuard {
         if (s_names[receiver].hasName) {
             newSend.otherPartyName = s_names[receiver].firstName;
         }
+        newSend.time = block.timestamp;
         s_history[sender].push(newSend);
 
         SendReceive memory newReceive;
@@ -250,6 +252,7 @@ contract JustPay is ReentrancyGuard {
         if (s_names[sender].hasName) {
             newReceive.otherPartyName = s_names[sender].firstName;
         }
+        newReceive.time = block.timestamp;
         s_history[receiver].push(newReceive);
     }
 

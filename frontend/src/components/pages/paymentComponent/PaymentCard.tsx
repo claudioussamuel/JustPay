@@ -9,7 +9,7 @@ import { usePrivy, useWallets } from '@privy-io/react-auth';
 import { sepolia } from 'viem/chains';
 import { createWalletClient, custom, getContract } from 'viem';
 import { useToast } from '@/hooks/use-toast';
-import { contractAbi, contractAddress } from '@/lib/integrations/viem/abi';
+import { contractAbi, contractAddress,stableCoinAbi,stableCoinAddress } from '@/lib/integrations/viem/abi';
 
 
 
@@ -90,6 +90,67 @@ function PaymentCard() {
         description:`Failed to update blockchain ${error}`,
       })
     }
+  }
+
+  async function approveUsToSpend() {
+    try {
+      if(!wallets || wallets.length === 0){
+        toast({
+          variant:'destructive',
+          description:'No wallet Connected'
+        })
+        return;
+      }
+      if(!receipientAddress || !amount || !description){
+        toast({
+          variant:'destructive',
+          description:'Please fill all the fields'
+        })
+        return;
+      }
+
+      const wallet = wallets[0]
+
+      if(!wallet){
+        toast({
+          variant:'destructive',
+          description:'Wallet is undefined'
+        })
+        return;
+      }
+
+      const provider = await wallet.getEthereumProvider();
+      if(!provider){
+         toast({
+          variant:"destructive",
+          description:"Provider is undefined"
+         })
+        return
+      }
+    const client = createWalletClient({
+      chain: sepolia,
+      transport: custom(provider),
+      account: walletAddress as `0x${string}`,
+    });
+
+    const contract = getContract({
+      address: stableCoinAddress,
+      abi: stableCoinAbi,
+      client
+    });
+
+    await contract.write.approve([
+      "0x" as `0x${string}`,
+      BigInt(1000000000000000000000000000000000000000000000000000000000000000),
+    
+    ])
+
+  } catch (error){
+    toast({
+      variant:'destructive',
+      description:`Failed to update blockchain ${error}`,
+    })
+  }
   }
 
 
