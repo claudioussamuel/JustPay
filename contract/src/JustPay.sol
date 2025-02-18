@@ -46,6 +46,8 @@ contract JustPay is ReentrancyGuard {
     error JustPay__NoSuchRequest();
     error JustPay__NotOwner();
     error JustPay__InsufficientBalance();
+    error JustPay__InsufficientAllowance();
+    error JustPay__ApproveFailed();
     ///////////////////
     // Types
     ///////////////////
@@ -183,29 +185,6 @@ contract JustPay is ReentrancyGuard {
         s_requests[user].push(newRequest);
     }
 
-    function transferERC20(
-        address token,
-        address to,
-        uint256 amount,
-        string memory message,
-        string memory stableCoinName
-    ) external nonReentrant moreThanZero(amount) {
-        IERC20(token).approve(to, amount);
-        addHistory(msg.sender, to, amount, message, stableCoinName);
-
-        // Transfer tokens using SafeERC20
-        IERC20(token).transferFrom(msg.sender, to, amount);
-
-        // Emit event
-        emit TransferSent(
-            msg.sender,
-            to,
-            amount,
-            address(token),
-            stableCoinName
-        );
-    }
-
     //Pay a Request
 
     function payRequest(
@@ -224,13 +203,7 @@ contract JustPay is ReentrancyGuard {
         Request[] storage myRequests = s_requests[msg.sender];
         Request storage payableRequest = myRequests[_request];
 
-        IERC20(payableRequest.stableCoin).approve(
-            payableRequest.requestor,
-            payableRequest.amount
-        );
-
-        IERC20(payableRequest.stableCoin).transferFrom(
-            msg.sender,
+        IERC20(payableRequest.stableCoin).transfer(
             payableRequest.requestor,
             payableRequest.amount
         );
@@ -323,10 +296,56 @@ contract JustPay is ReentrancyGuard {
     }
 
     function getERC20Balance(
-        address token,
+        IERC20 token,
         address account
     ) public view returns (uint256) {
-        return IERC20(token).balanceOf(account);
+        return (token).balanceOf(account);
+    }
+
+    /**
+     * @notice Sends ERC20 tokens from one user to another
+     * @param to The recipient address
+     * @param token The ERC20 token contract address
+     * @param amount The amount of tokens to send
+     * @param message Optional message for the transaction
+     * @param tokenName The name of the token (for display purposes)
+     */
+    function sendToken(
+        address to,
+        IERC20 token,
+        uint256 amount,
+        string memory message,
+        string memory tokenName
+    ) external nonReentrant {
+        // Record transaction first (state modification)
+        addHistory(msg.sender, to, amount, message, tokenName);
+        // Check balances
+        // Perform transfer
+        // uint256 balanceBefore = token.balanceOf(address(this));
+        // require(
+        //     token.transferFrom(msg.sender, address(this), amount),
+        //     "TRANSFER_FAILED"
+        // );
+        // uint256 balanceAfter = token.balanceOf(address(this));
+        // require(
+        //     balanceAfter - balanceBefore == amount,
+        //     "INVALID_TRANSFER_AMOUNT"
+        // );
+        (token).approve(address(this), amount);
+        require(
+            (token).allowance(msg.sender, address(this)) >= amount,
+            "APPROVE_FAILED"
+        );
+
+        (token).safeTransferFrom(msg.sender, to, amount);
+
+        // Emit event last
+        emit TransferSent(msg.sender, to, amount, address(token), tokenName);
+    }
+
+    function transferERC20(IERC20 token, address to, uint256 amount) public {
+        (token).balanceOf(address(this));
+        (token).transfer(to, amount);
     }
 }
 
