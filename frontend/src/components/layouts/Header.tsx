@@ -10,7 +10,7 @@ import { Button } from '../ui/button';
 import { usePrivy } from '@privy-io/react-auth';
 import {useFundWallet} from '@privy-io/react-auth';
 import {useWallets} from '@privy-io/react-auth';
-import { base } from 'viem/chains';
+
 
 function Header() {
     const pathname = usePathname();
