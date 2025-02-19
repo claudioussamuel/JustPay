@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input'
 
 function SendPayment() {
   return (
-    <div>
+    <div className='h-[100vh]'>
         <h3 className="font-dmMono capitalize text-3xl text-zinc-800">Send payment To</h3>
         <p className='text-[18px] font-dmMono text-zinc-800'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, illum!</p>
 

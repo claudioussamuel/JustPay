@@ -5,7 +5,7 @@ import { IoMdWallet } from "react-icons/io";
 
 function Payment() {
   return (
-    <div className="h-dvh">
+    <div className="h-auto">
          <div className=' bg-softBlend flex justify-between items-center p-5 rounded-2xl mb-10'>
             <div className='flex flex-col font-dmMono text-[20px]'>
              <h2>Total Balance</h2>
