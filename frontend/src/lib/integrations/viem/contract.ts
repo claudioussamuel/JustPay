@@ -1,7 +1,7 @@
 "use client"
 
 import { getContract } from "viem";
-import { contractAbi, contractAddress } from "./abi";
+import { contractAbi, contractAddress, stableCoinAbi, stableCoinAddress } from "./abi";
 import { client } from "./client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -126,6 +126,54 @@ export async function readHistoryData(userAddress: `0x${string}`): Promise<SendR
         
         console.error("Error reading history:", error);
         return null;
+    }
+}
+
+export async function approve(spender: `0x${string}`, amount: bigint): Promise<boolean | null> {
+    try {
+        const contract = getContract({
+            address: stableCoinAddress,
+            abi: stableCoinAbi,
+            client,
+        });
+
+        const tx = await contract.write.approve([spender, amount]);
+        console.log("Approve Transaction:", tx);
+        return true; // Assuming the transaction is successful
+    } catch (error) {
+        console.error("Error approving tokens:", error);
+        return null;
+    }
+}
+
+export async function allowance(owner: `0x${string}`, spender: `0x${string}`): Promise<bigint | null> {
+    try {
+        const contract = getContract({
+            address: stableCoinAddress,
+            abi: stableCoinAbi,
+            client,
+        });
+
+        const data = await contract.read.allowance([owner, spender]);
+
+        console.log(`${data} clauouidb `)
+        if (typeof data === "bigint"
+            && data !== null 
+          
+           ) {
+         
+           return data;
+       } else {
+           // toast({
+           //     variant: 'destructive',
+           //     title:'Unexpected data format',
+           //     description: 'Unexpected data format sent !!!'
+           // })
+           return null;
+       }
+    } catch (error) {
+        console.error("Error fetching allowance:", error);
+        return BigInt(0);
     }
 }
 

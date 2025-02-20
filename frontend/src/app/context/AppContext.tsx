@@ -8,6 +8,8 @@ interface AppContextType {
     isEditingAmount:boolean;
     setIsEditingDescription:(editing:boolean)=>void;
     setIsEditingAmount:(editing:boolean)=>void;
+    setSendersAddress: (address: string)=>void;
+    sendersAddress: string;
     isEditingDescription:boolean;
     setRecipientAddress: (address: string)=>void;
     amount: string;
@@ -21,6 +23,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{children: React.ReactNode}>=({children})=>{
     const [receipientAddress, setRecipientAddress] = useState('');
+    const [sendersAddress, setSendersAddress] = useState('');
     const [amount, setAmount] = useState('0.00');
     const [description, setDescription] = useState('');
     const [isEditingAmount, setIsEditingAmount] = useState(false)
@@ -30,7 +33,8 @@ export const AppProvider: React.FC<{children: React.ReactNode}>=({children})=>{
     const resetPayment=()=>{
         setRecipientAddress('')
         setAmount('0.00');
-        setDescription('')
+        setDescription('');
+        setSendersAddress('');
     };
 
 
@@ -41,14 +45,15 @@ export const AppProvider: React.FC<{children: React.ReactNode}>=({children})=>{
                 setRecipientAddress,
                 amount,
                 setAmount,
-                
+                setSendersAddress,
                 description,
                 setDescription,
                 resetPayment,
                 isEditingAmount,
                 isEditingDescription,
                 setIsEditingAmount,
-                setIsEditingDescription
+                setIsEditingDescription,
+                sendersAddress
             }}
         >
             {children}
