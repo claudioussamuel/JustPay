@@ -1,7 +1,7 @@
 "use client"
 
 import { contactDevice, contactNumbers, contactPsync, contactShared } from '@/app/data'
-import React from 'react'
+import React, { useState } from 'react'
 import { BiPlus } from 'react-icons/bi'
 import { IoSearchCircleOutline } from 'react-icons/io5'
 import ContactData from './ContactData'
@@ -20,12 +20,44 @@ import Link from 'next/link'
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Label } from '@radix-ui/react-label'
 import { Input } from '@/components/ui/input'
+import { useUserContext } from '@/app/context/UserContext'
 
 
 
 function ContactContent() {
+    const {addUser} = useUserContext();
+
+    const [newUser, setNewUser] = useState({
+        firstName: "",
+        lastName: "",
+        xHandle: "",
+        facebookHandle: "",
+        igHandle: "",
+        address: "",
+        occupation: "",
+      });
+
+
     const {wallets} = useWallets();
     const {toast} = useToast()
+
+    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+        const {id,value} = e.target;
+        setNewUser((prev)=>({...prev, [id]:value}))
+    }
+
+    const handleSave=()=>{
+        addUser(newUser);
+        setNewUser({
+            firstName: "",
+            lastName: "",
+            xHandle: "",
+            facebookHandle: "",
+            igHandle: "",
+            address: "",
+            occupation: "",
+          });
+    }
 
   return (
     <div className='flex w-full h-auto font-dmMono bg-wineTexture  '>
@@ -96,28 +128,40 @@ function ContactContent() {
             <Label htmlFor="firstName" className="text-right">
               FirstName
             </Label>
-            <Input id="firstName" value="Richison" className="col-span-3" />
+            <Input id="firstName" 
+            value={newUser.firstName} 
+            onChange={handleInputChange}
+            className="col-span-3" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="lastName" className="text-right">
               LastName
             </Label>
-            <Input id="lastName" value="ORoi" className="col-span-3" />
+            <Input id="lastName" 
+            value={newUser.lastName} 
+            onChange={handleInputChange}
+            className="col-span-3" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="x" className="text-right">
               X
             </Label>
-            <Input id="x" value="@peduarte" className="col-span-3" />
+            <Input id="X" 
+            value={newUser.xHandle} 
+            onChange={handleInputChange}
+            className="col-span-3" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="facebookHandle" className="text-right">
               FaceBook
             </Label>
-            <Input id="facebookHandle" value="@peduarte" className="col-span-3" />
+            <Input id="facebookHandle" 
+            value={newUser.facebookHandle} 
+            onChange={handleInputChange}
+            className="col-span-3" />
           </div>
 
 
@@ -125,7 +169,10 @@ function ContactContent() {
             <Label htmlFor="igHandle" className="text-right">
               Instagram
             </Label>
-            <Input id="igHandle" value="@code_till_death" className="col-span-3" />
+            <Input id="igHandle" 
+            value={newUser.igHandle} 
+            onChange={handleInputChange}
+            className="col-span-3" />
           </div>
 
 
@@ -133,19 +180,25 @@ function ContactContent() {
             <Label htmlFor="address" className="text-right">
               Address
             </Label>
-            <Input id="address" value="guantamalla" className="col-span-3" />
+            <Input id="address"
+             value={newUser.address}
+             onChange={handleInputChange}
+              className="col-span-3" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="work" className="text-right">
               Occupation
             </Label>
-            <Input id="work" value="guantamalla" className="col-span-3" />
+            <Input id="work"
+             value={newUser.occupation}
+             onChange={handleInputChange}
+              className="col-span-3" />
           </div>
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button type="submit" className='bg-softBlend'>Save changes</Button>
+            <Button type="submit" onClick={handleSave} className='bg-softBlend'>Save changes</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>
