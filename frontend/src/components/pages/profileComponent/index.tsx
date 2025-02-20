@@ -44,7 +44,6 @@ function ProfileContent() {
  
 
 
-    // User State
     const [users, setUser] = useState({
         firstName: "...",
         lastName: "....",
@@ -54,7 +53,10 @@ function ProfileContent() {
         gender: "...", 
         dob: "...",
         address: "...",
-        profilePic: "/images/v4.jpg"
+        profilePic: "/images/v4.jpg",
+        xHandle:"...",
+        igHandle:"...",
+        facebookHandle:"..."
     });
 
     // Add useEffect to fetch contract data
@@ -89,7 +91,11 @@ function ProfileContent() {
                         gender: gender || "",
                         dob: dateOfBirth || "",
                         address: country || "",
-                        profilePic: imageUrl || "/images/v4.jpg"
+                        profilePic: imageUrl || "/images/v4.jpg",
+                        xHandle:xHandle || "",
+                        facebookHandle: facebookHandle || "",
+                        igHandle: igHandle || "",
+                        hasName: hasName || false
                     }));
                 }
             }
@@ -112,105 +118,6 @@ function ProfileContent() {
         setTempUser({ ...tempUser, [e.target.name]: e.target.value });
     };
 
-    // async function addUserDataToTheBlocChain(/**Add them here */){
-   
-    //     const wallet = wallets[0];
-    //     const provider = await wallet.getEthereumProvider();
-
-    //     const client = createWalletClient({
-    //         chain: sepolia,
-    //         transport: custom(provider),
-    //         account:`${walletAddress}` as `0x${string}`
-    //       });
-
-    //       /**Uncomment This one*/
-    //       const contract = getContract({
-    //         address: contractAddress,
-    //         abi:contractAbi,
-    //         client,
-    //       });
-
-    // //         string firstName;
-    // //         string lastName;
-    // //         string gender;
-    // //         string dateOfBirth;
-    // //         string homeTown;
-    // //         string gmail;
-    // //         string telephone;
-    // //         string country;
-    // //         string imageUrl;
-    // //         string xHandle;
-    // //         string facebookHandle;
-    // //         string igHandle;
-
-    //            const parameters = [
-    //                tempUser.firstName,
-    //                tempUser.lastName,
-    //                tempUser.gender,
-    //                tempUser.dob,
-    //                tempUser.city,
-    //                tempUser.email,
-    //                tempUser.phone,
-    //                tempUser.address,
-    //                tempUser.profilePic,
-    //                tempUser.profilePic,  // xHandle        
-    //                tempUser.address, // facebookHandle
-    //                tempUser.gender, // should        
-    //            ];
-
-    //            await contract.write.addName(parameters);
-           
-    // }
-
-    // async function addUserDataToTheBlocChain(/**Add them here */){
-   
-    //     const wallet = wallets[0];
-    //     const provider = await wallet.getEthereumProvider();
-
-    //     const client = createWalletClient({
-    //         chain: sepolia,
-    //         transport: custom(provider),
-    //         account:`${walletAddress}` as `0x${string}`
-    //       });
-
-    //       /**Uncomment This one*/
-    //       const contract = getContract({
-    //         address: contractAddress,
-    //         abi:contractAbi,
-    //         client,
-    //       });
-
-    // //         string firstName;
-    // //         string lastName;
-    // //         string gender;
-    // //         string dateOfBirth;
-    // //         string homeTown;
-    // //         string gmail;
-    // //         string telephone;
-    // //         string country;
-    // //         string imageUrl;
-    // //         string xHandle;
-    // //         string facebookHandle;
-    // //         string igHandle;
-
-    //            const parameters = [
-    //                tempUser.firstName,
-    //                tempUser.lastName,
-    //                tempUser.gender,
-    //                tempUser.dob,
-    //                tempUser.city,
-    //                tempUser.email,
-    //                tempUser.phone,
-    //                tempUser.address,
-    //                tempUser.profilePic,
-    //                tempUser.profilePic,  // xHandle        
-    //                tempUser.address, // facebookHandle
-    //                tempUser.gender, // should        
-    //            ];
-
-    //            await contract.write.addName(parameters);
-           
-    // }
 
     async function addUserDataToTheBlocChain(userData: any) {
         try {
@@ -263,7 +170,8 @@ function ProfileContent() {
             userData.address,
             userData.xHandle,
             userData.facebookHandle,
-            userData.imageUrl
+            userData.imageUrl,
+            userData.igHandle
           ]);
       
           console.log("User data added to the blockchain");
@@ -384,6 +292,27 @@ function ProfileContent() {
                         <Label>Gender</Label>
                         <Input className="pb-3" name="gender" value={tempUser.gender} onChange={handleChange} />
                         </div>
+
+                        <div className='mb-3'>
+                        <Label>X</Label>
+                        <Input className="pb-3" name="gender" value={tempUser.xHandle} onChange={handleChange} />
+                        </div>
+
+                        <div className='mb-3'>
+                        <Label>Facebook</Label>
+                        <Input className="pb-3" name="gender" value={tempUser.facebookHandle} onChange={handleChange} />
+                        </div>
+
+                        <div className='mb-3'>
+                        <Label>Instagram</Label>
+                        <Input className="pb-3" name="gender" value={tempUser.igHandle} onChange={handleChange} />
+                        </div>
+
+                        <div className='mb-3'>
+                        <Label>Address</Label>
+                        <Input className="pb-3" name="gender" value={tempUser.address} onChange={handleChange} />
+                        </div>
+
                     </div>
 
                     <SheetFooter className='mt-3'>
@@ -411,8 +340,8 @@ function ProfileContent() {
                  </div>
 
                  <div className='flex justify-between mb-2'>
-                    <h1>Felecia</h1>
-                    <h1>Azaglo</h1>
+                    <h1>{users.firstName}</h1>
+                    <h1>{users.lastName}</h1>
                  </div>
 
                  <div className='flex justify-between'>
@@ -420,8 +349,8 @@ function ProfileContent() {
                     <h1>Phone</h1>
                  </div>
                  <div className='flex justify-between'>
-                    <h1>felecia@gmail.com</h1>
-                    <h1>(+233-02486000243)</h1>
+                    <h1>{users.email}</h1>
+                    <h1>{users.phone}</h1>
                  </div>
             </div>
         </div>
@@ -435,22 +364,22 @@ function ProfileContent() {
 
             <div className='max-w-2xl mt-2 font-dmMono'>
                  <div className='flex justify-between'>
-                    <h1>Country</h1>
-                    <h1>City</h1>
+                    <h1>X</h1>
+                    <h1>Facebook</h1>
                  </div>
 
                  <div className='flex justify-between mb-2'>
-                    <h1>Ghana</h1>
-                    <h1>Accra</h1>
+                    <h1>{users.xHandle}</h1>
+                    <h1>{users.facebookHandle}</h1>
                  </div>
 
                  <div className='flex justify-between'>
-                    <h1>Postal Code</h1>
-                    <h1>TAX ID</h1>
+                    <h1>Instagram</h1>
+                    <h1>Address</h1>
                  </div>
                  <div className='flex justify-between'>
-                    <h1>ERT 62574</h1>
-                    <h1>As56417869</h1>
+                    <h1>{users.igHandle}</h1>
+                    <h1>{users.address}</h1>
                  </div>
             </div>
         </div>
