@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react'
 import { BsStarFill } from 'react-icons/bs';
 
@@ -6,11 +7,12 @@ type ItemProps={
     lastName:string;
     occupation:string;
     relationship:string;
+    className?:string;
 }
 
-function ContactData({ data }: { data: ItemProps }) {
+function ContactData({ data,className }: { data: ItemProps, className?:string }) {
   return (
-    <div className="flex mb-3 items-center gap-5 text-zinc-800">
+    <div className={clsx("flex mb-3 items-center gap-5 text-zinc-800",className)}>
       {/* Profile Icon */}
       <div className="w-10 h-10 p-3 rounded-full font-dmMono bg-gradient-to-r text-nowrap from-pink-500 via-purple-500 to-indigo-500 flex justify-center items-center">
         <h1 className="text-[18px] text-white flex justify-center items-center text-nowrap">
@@ -18,12 +20,12 @@ function ContactData({ data }: { data: ItemProps }) {
         </h1>
       </div>
 
-      {/* Name, Relationship, and Occupation */}
+
       <div className="flex flex-col">
         <div className="flex gap-3 items-center">
           {/* Name */}
           <div className="text-2xl font-semibold text-nowrap">
-            <h1 className='text-nowrap text-[20px]'>{data.firstName} {data.lastName}</h1>
+            <h1 className={clsx('text-nowrap text-[20px]',className)}>{data.firstName} {data.lastName}</h1>
           </div>
           
           {/* Relationship Badge */}
@@ -32,9 +34,8 @@ function ContactData({ data }: { data: ItemProps }) {
           </div>
         </div>
 
-        {/* Occupation */}
         <div>
-          <h3 className="text-sm text-zinc-600">{data.occupation}</h3>
+          <h3 className={clsx("text-sm",className)}>{data.occupation}</h3>
         </div>
       </div>
 

@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${bowlby.variable} ${dmMono.variable} ${playWright.variable} antialiased`}
+        className={`${bowlby.variable} ${dmMono.variable} ${playWright.variable} antialiased bg-wineTexture`}
       >
         <Providers>
           <HistoryProvider>
