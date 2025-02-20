@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { AppProvider } from "./context/AppContext";
 import { AuthProvider } from "./context/AuthContext";
 import { HistoryProvider } from "./context/HistoryContext";
+import { UserProvider } from "./context/UserContext";
 
 
 const bowlby = localFont({
@@ -40,6 +41,7 @@ export default function RootLayout({
         className={`${bowlby.variable} ${dmMono.variable} ${playWright.variable} antialiased bg-wineTexture`}
       >
         <Providers>
+          <UserProvider>
           <HistoryProvider>
          <AuthProvider>
           <AppProvider>
@@ -48,6 +50,7 @@ export default function RootLayout({
          </AuthProvider>
           <Toaster/>
           </HistoryProvider>
+          </UserProvider>
         </Providers>
       </body>
     </html>
