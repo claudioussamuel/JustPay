@@ -17,6 +17,10 @@ import { parseEther } from 'viem'
 import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@radix-ui/react-toast'
 import Link from 'next/link'
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { Label } from '@radix-ui/react-label'
+import { Input } from '@/components/ui/input'
+
 
 
 function ContactContent() {
@@ -76,11 +80,76 @@ function ContactContent() {
                 </div>
 
                 <div className='place-content-end mt-20 mx-3 mb-5'>
-                    <div className='flex gap-5 bg-softBlend py-3 rounded-2xl'>
-                    <BiPlus className='text-3xl'/>
-                    <button>Add new contact</button>
-                    </div>
+                    <Sheet>
+                    <SheetTrigger asChild>
+                        <Button className='bg-softBlend'>Add new contact</Button>  
+                    </SheetTrigger>
+                    <SheetContent className='text-zinc-800'>
+        <SheetHeader>
+          <SheetTitle>Add Users</SheetTitle>
+          <SheetDescription>
+            Click save when you're done.
+          </SheetDescription>
+        </SheetHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="firstName" className="text-right">
+              FirstName
+            </Label>
+            <Input id="firstName" value="Richison" className="col-span-3" />
+          </div>
 
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="lastName" className="text-right">
+              LastName
+            </Label>
+            <Input id="lastName" value="ORoi" className="col-span-3" />
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="x" className="text-right">
+              X
+            </Label>
+            <Input id="x" value="@peduarte" className="col-span-3" />
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="facebookHandle" className="text-right">
+              FaceBook
+            </Label>
+            <Input id="facebookHandle" value="@peduarte" className="col-span-3" />
+          </div>
+
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="igHandle" className="text-right">
+              Instagram
+            </Label>
+            <Input id="igHandle" value="@code_till_death" className="col-span-3" />
+          </div>
+
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="address" className="text-right">
+              Address
+            </Label>
+            <Input id="address" value="guantamalla" className="col-span-3" />
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="work" className="text-right">
+              Occupation
+            </Label>
+            <Input id="work" value="guantamalla" className="col-span-3" />
+          </div>
+        </div>
+        <SheetFooter>
+          <SheetClose asChild>
+            <Button type="submit" className='bg-softBlend'>Save changes</Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+                    </Sheet>
                 </div>
 
             </div>
@@ -168,6 +237,8 @@ function ContactContent() {
             </div>
 
         </div>
+
+
     </div>
   )
 }

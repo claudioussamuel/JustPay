@@ -261,17 +261,17 @@ function ProfileContent() {
                 </div>
             </div>
 
-            {/* Edit Modal */}
+          
             <Sheet>
                 <SheetTrigger asChild>
-                    <Button className='mt-5 flex items-center gap-2'><CiEdit/> Edit</Button>
+                    <Button className='mt-5 bg-black flex items-center gap-2'><CiEdit/> Edit</Button>
                 </SheetTrigger>
                 <SheetContent>
                     <SheetHeader>
                         <SheetTitle>Edit Profile</SheetTitle>
                         <SheetDescription>Modify your profile details below.</SheetDescription>
                     </SheetHeader>
-                    <div className="space-y-2">
+                    <div className="space-y-2 text-zinc-800">
                         <div className='mb-3'>
                         <Label>First Name</Label>
                         <Input className="pb-3" name="firstName" value={tempUser.firstName} onChange={handleChange} />
@@ -317,7 +317,7 @@ function ProfileContent() {
 
                     <SheetFooter className='mt-3'>
                         <SheetClose asChild>
-                            <Button onClick={handleSave}>Save</Button>
+                            <Button className='bg-black' onClick={handleSave}>Save</Button>
                         </SheetClose>
                     </SheetFooter>
                 </SheetContent>

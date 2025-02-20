@@ -99,7 +99,7 @@ export const exploreSection=[
     {name:'profile',href:"/profile",icon:<HiUser/>},
     {name:'history',href:"/history",icon:<HiReceiptRefund/>},
     {name:'groups',href:"/groups",icon:<FaPeopleGroup/>},
-    {name:'documents',href:"/documents",icon:<HiClipboardList/>},
+    {name:'contacts',href:"/contacts",icon:<HiClipboardList/>},
   ]
   
 
