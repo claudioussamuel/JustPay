@@ -29,11 +29,11 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /**
- * @title OrderBookExchange
+ * @title Just Pay
  * @author Opoku Claudious Samuel Mensah
  *
- * @dev OrderBookExchange is a contract for a decentralized exchange
- *  that allows users to exchange stable coins for fiat currency.
+ * @dev Just Pay is a contract for a decentralized p2p
+ *  that allows users to exchange stable coins.
  */
 
 contract JustPay is ReentrancyGuard {
@@ -197,10 +197,6 @@ contract JustPay is ReentrancyGuard {
         nonReentrant
         moreThanZero(s_requests[msg.sender][_request].amount)
     {
-        // require(
-        //     0 < ,
-        //     "Cant send less than zero token"
-        // );
         Request[] storage myRequests = s_requests[msg.sender];
         Request storage payableRequest = myRequests[_request];
 
@@ -208,9 +204,6 @@ contract JustPay is ReentrancyGuard {
             payableRequest.requestor,
             payableRequest.amount
         );
-        //require(msg.value == (toPay), "Pay Correct Amount");
-
-        // payable(payableRequest.requestor).transfer(msg.value);
 
         addHistory(
             msg.sender,
@@ -222,6 +215,22 @@ contract JustPay is ReentrancyGuard {
 
         myRequests[_request] = myRequests[myRequests.length - 1];
         myRequests.pop();
+    }
+
+    function sendToken(
+        address to,
+        IERC20 token,
+        uint256 amount,
+        string memory message,
+        string memory tokenName
+    ) external nonReentrant {
+        // Record transaction first (state modification)
+        addHistory(msg.sender, to, amount, message, tokenName);
+
+        (token).safeTransferFrom(msg.sender, to, amount);
+
+        // Emit event last
+        emit TransferSent(msg.sender, to, amount, address(token), tokenName);
     }
 
     function addHistory(
@@ -313,43 +322,6 @@ contract JustPay is ReentrancyGuard {
      * @param message Optional message for the transaction
      * @param tokenName The name of the token (for display purposes)
      */
-    function sendToken(
-        address to,
-        IERC20 token,
-        uint256 amount,
-        string memory message,
-        string memory tokenName
-    ) external nonReentrant {
-        // Record transaction first (state modification)
-        addHistory(msg.sender, to, amount, message, tokenName);
-        // Check balances
-        // Perform transfer
-        // uint256 balanceBefore = token.balanceOf(address(this));
-        // require(
-        //     token.transferFrom(msg.sender, address(this), amount),
-        //     "TRANSFER_FAILED"
-        // );
-        // uint256 balanceAfter = token.balanceOf(address(this));
-        // require(
-        //     balanceAfter - balanceBefore == amount,
-        //     "INVALID_TRANSFER_AMOUNT"
-        // );
-        (token).approve(address(this), amount);
-        require(
-            (token).allowance(msg.sender, address(this)) >= amount,
-            "APPROVE_FAILED"
-        );
-
-        (token).safeTransferFrom(msg.sender, to, amount);
-
-        // Emit event last
-        emit TransferSent(msg.sender, to, amount, address(token), tokenName);
-    }
-
-    function transferERC20(IERC20 token, address to, uint256 amount) public {
-        (token).balanceOf(address(this));
-        (token).transfer(to, amount);
-    }
 }
 
 // Order Creation (Function to lock your Stable coin (USDT,USDC))
