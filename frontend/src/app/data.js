@@ -244,8 +244,47 @@ export const exploreSection=[
   ]
   
   
-  export const addNewContacts=[
-    { firstName: 'Claud', occupation:'Junior Public health officer, assoaciatee @samosure',lastName: 'Mensah',  gmail: '@kuvi@gmail.com',date:'21st june 003' },
-    { firstName: 'Sophia',occupation:'Junior Public health officer, assoaciatee @samosure', lastName: 'Smith',  gmail: '@roseNtuman@gmail.com',date:'21st june 003' },
-    { firstName: 'Sophia',occupation:'Junior Public health officer, assoaciatee @samosure', lastName: 'Smith',  gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+  export const addNewContacts = [
+    {
+      "firstName": "Claud",
+      "occupation": "Junior Public Health Officer, Associate @Samosure",
+      "lastName": "Mensah",
+      "gmail": "claud.mensah@gmail.com",
+      "date": "21st June 2003"
+    },
+    {
+      "firstName": "Sophia",
+      "occupation": "Data Analyst, Freelancer @Upwork",
+      "lastName": "Smith",
+      "gmail": "sophia.smith@gmail.com",
+      "date": "15th August 1995"
+    },
+    {
+      "firstName": "Michael",
+      "occupation": "Software Engineer, Google",
+      "lastName": "Johnson",
+      "gmail": "michael.johnson@gmail.com",
+      "date": "10th December 1988"
+    },
+    {
+      "firstName": "Alice",
+      "occupation": "Graphic Designer, Adobe",
+      "lastName": "Brown",
+      "gmail": "alice.brown@gmail.com",
+      "date": "5th March 1992"
+    },
+    {
+      "firstName": "Emma",
+      "occupation": "Teacher, Greenfield High School",
+      "lastName": "Davis",
+      "gmail": "emma.davis@gmail.com",
+      "date": "30th September 1985"
+    },
+    {
+      "firstName": "John",
+      "occupation": "Nurse, City General Hospital",
+      "lastName": "Doe",
+      "gmail": "john.doe@gmail.com",
+      "date": "12th April 1990"
+    }
   ]
