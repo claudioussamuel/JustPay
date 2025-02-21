@@ -1,6 +1,6 @@
 "use client"
 
-import { contactDevice, contactNumbers, contactPsync, contactShared } from '@/app/data'
+import { addNewContacts, contactDevice, contactNumbers, contactPsync, contactShared } from '@/app/data'
 import React, { useState } from 'react'
 import { BiPlus } from 'react-icons/bi'
 import { IoSearchCircleOutline } from 'react-icons/io5'
@@ -22,11 +22,16 @@ import { Label } from '@radix-ui/react-label'
 import { Input } from '@/components/ui/input'
 import { useUserContext } from '@/app/context/UserContext'
 import ContainerAddContent from './ContainerAddContent'
+import ItemPageSelector from '@/components/content/ItemPageSelector'
+import { usePaginationContext } from '@/app/context/PaginationContext'
+import { ContainerAddContentProps } from '../../../../types/global.types'
+import ContactList from './ContactList'
 
 
 
 function ContactContent() {
     const {addUser} = useUserContext();
+
 
     const [newUser, setNewUser] = useState({
         firstName: "",
@@ -124,12 +129,13 @@ function ContactContent() {
          Add new numbers to contact list
           </SheetDescription>
         </SheetHeader>
+          <ItemPageSelector/>
           <div>
-            <ContainerAddContent/>
+            <ContainerAddContent addNewContacts={addNewContacts}/>
           </div>
 
-      </SheetContent>
-                    </Sheet>
+              </SheetContent>
+         </Sheet>
                 </div>
 
             </div>
@@ -144,11 +150,8 @@ function ContactContent() {
                 </div>
             </div>
 
-
             <div>
-                {contactNumbers.map((data,index)=>(
-                <ContactData data={data} key={index}/>
-                ))}
+                <ContactList/>
             </div>
         </div>
 
@@ -165,7 +168,7 @@ function ContactContent() {
                     </h1>
                     </div>
                     <div>
-                        <h1 className='text-2xl'>Claud Mensah</h1>
+                        <h1 className='text-2xl'>Cdisplalaud Mensah</h1>
                         <div>
                             <p>Developer</p>
                         </div>
@@ -214,6 +217,7 @@ function ContactContent() {
             </div>
 
             </div>
+                    
             </div>
 
         </div>
