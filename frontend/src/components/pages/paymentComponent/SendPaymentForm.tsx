@@ -8,10 +8,10 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiFillDollarCircle } from 'react-icons/ai';
 import { CiWallet } from 'react-icons/ci';
-import { createWalletClient, custom, getContract } from 'viem';
+import { createWalletClient, custom, encodeFunctionData, getContract } from 'viem';
 import { sepolia } from 'viem/chains';
 import { usePrivy } from '@privy-io/react-auth';
-import {useFundWallet} from '@privy-io/react-auth';
+import { useSmartWallets } from "@privy-io/react-auth/smart-wallets";
 import {useWallets} from '@privy-io/react-auth';
 
 function truncateAddress(address: string): string {
@@ -25,7 +25,7 @@ function SendPaymentForm() {
   const { user,} = usePrivy()
   const walletAddress = user?.wallet?.address;
   const { wallets} = useWallets();
-  
+  const { client } = useSmartWallets();
 
 
   const {
@@ -67,30 +67,54 @@ function SendPaymentForm() {
         await wallet.switchChain(sepolia.id);
       }
 
+      if (!client) {
+        console.error("No smart account client found");
+        return;
+      }
 
-      const client = createWalletClient({
-        chain: sepolia,
-        transport: custom(provider),
-        account: walletAddress as `0x${string}`,
-      });
+
+
+        const tx = await client.sendTransaction({
+          chain:sepolia,
+          to: contractAddress,
+          value: BigInt(0),
+          data:encodeFunctionData({
+            abi:contractAbi,
+            functionName:"sendToken",
+            args: [
+              receipientAddress,
+              stableCoinAddress, 
+              BigInt(Number(amount)*1e18),
+              description,
+              "Dai"
+            ]
+          })
+        })
+     
+
+      // const client = createWalletClient({
+      //   chain: sepolia,
+      //   transport: custom(provider),
+      //   account: walletAddress as `0x${string}`,
+      // });
 
 
      
     
   
-      const contract = getContract({
-        address: contractAddress,
-        abi: contractAbi,
-        client,
-      });
+      // const contract = getContract({
+      //   address: contractAddress,
+      //   abi: contractAbi,
+      //   client,
+      // });
   
-      await contract.write.sendToken([
-        receipientAddress,
-        stableCoinAddress, 
-        BigInt(Number(amount)*1e18),
-        description,
-        "Dai"
-      ]);
+      // await contract.write.sendToken([
+      //   receipientAddress,
+      //   stableCoinAddress, 
+      //   BigInt(Number(amount)*1e18),
+      //   description,
+      //   "Dai"
+      // ]);
   
       console.log("User data added to the blockchain");
 
