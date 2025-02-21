@@ -17,7 +17,7 @@ function ContactDescriptionEvents({ date, title, description, images: { images }
       <h1 className="mb-1 text-[13px]">{date}</h1>
       <div className="border rounded-2xl p-5 bg-softBlend">
         <h3 className="font-semibold">{title}</h3>
-        <p className="text-sm text-gray-600">{description}</p>
+        <p className="text-sm ">{description}</p>
 
         {/* Image Display Section */}
         <div className='flex items-center justify-between'>
@@ -44,7 +44,7 @@ function ContactDescriptionEvents({ date, title, description, images: { images }
 
 
         {time && (
-          <div className="mt-2 text-gray-700 text-sm">
+          <div className="mt-2  text-sm">
             <h1>{time}</h1>
           </div>
         )}
