@@ -1,6 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 
+import CardanoImage from '../../../../public/images/cardano.png';
+import BtcImage from '../../../../public/images/bitcoin.png';
+import EthImage from '../../../../public/images/etho.png';
+import UsdtImage from '../../../../public/images/sika.png';
+
+
 export function JustText() {
   return (
     <div className='container-frame font-bowlby uppercase'>
@@ -63,10 +69,10 @@ export function PayText() {
       </div>
 
       <div className='text' style={{ "--j": 3} as React.CSSProperties}>
-      <Image style={{"--i":0} as React.CSSProperties} src="/images/sika.png" alt="money" width={100} height={100}/>
-        <Image style={{"--i":1} as React.CSSProperties} src="/images/etho.png" alt="money" width={100} height={100}/>
-        <Image style={{"--i":2} as React.CSSProperties} src="/images/cardano.png" alt="money" width={100} height={100}/>
-        <Image style={{"--i":3} as React.CSSProperties} src="/images/bitcoin.png" alt="money" width={100} height={100}/>
+      <Image style={{"--i":0} as React.CSSProperties} src={CardanoImage} alt="ge" width={100} height={100}/>
+        <Image style={{"--i":1} as React.CSSProperties} src={BtcImage} alt="money" width={100} height={100}/>
+        <Image style={{"--i":2} as React.CSSProperties} src={UsdtImage} alt="money" width={100} height={100}/>
+        <Image style={{"--i":3} as React.CSSProperties} src={EthImage} alt="money" width={100} height={100}/>
       </div>
 
     </div>

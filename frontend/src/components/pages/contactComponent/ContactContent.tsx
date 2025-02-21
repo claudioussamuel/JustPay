@@ -25,6 +25,7 @@ import ContainerAddContent from './ContainerAddContent'
 import ItemPageSelector from '@/components/content/ItemPageSelector'
 import { usePaginationContext } from '@/app/context/PaginationContext'
 import { ContainerAddContentProps } from '../../../../types/global.types'
+import ContactList from './ContactList'
 
 
 
@@ -149,11 +150,8 @@ function ContactContent() {
                 </div>
             </div>
 
-
             <div>
-                {contactNumbers.map((data,index)=>(
-                <ContactData data={data} key={index}/>
-                ))}
+                <ContactList/>
             </div>
         </div>
 
@@ -170,7 +168,7 @@ function ContactContent() {
                     </h1>
                     </div>
                     <div>
-                        <h1 className='text-2xl'>Claud Mensah</h1>
+                        <h1 className='text-2xl'>Cdisplalaud Mensah</h1>
                         <div>
                             <p>Developer</p>
                         </div>
@@ -219,6 +217,7 @@ function ContactContent() {
             </div>
 
             </div>
+                    
             </div>
 
         </div>

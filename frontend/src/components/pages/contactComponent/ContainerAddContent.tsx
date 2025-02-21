@@ -3,11 +3,22 @@ import { usePaginationContext } from "@/app/context/PaginationContext";
 import { ContactAddedType, ContainerAddContentProps } from "../../../../types/global.types";
 import { Button } from "@/components/ui/button";
 import AddToContactList from "@/components/content/AddToContactList";
+import UnavailableData from "@/components/unavailable/UnavailableData";
 
 function ContainerAddContent({ addNewContacts }:ContainerAddContentProps) {
   const { currentPage, itemsPerPage, setCurrentPage } = usePaginationContext();
 
-
+  if(addNewContacts.length ===0){
+    return(
+      <div>
+        <UnavailableData 
+        title="Contact list is empty" 
+        description="Add contact to see your data please!!!"
+         image="/images/contact-book.png"
+         />
+      </div>
+    )
+  }
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = addNewContacts.slice(startIndex, endIndex);
