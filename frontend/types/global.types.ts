@@ -18,3 +18,10 @@ export interface UserContextType{
     users: User[];
     addUser:(user: User) =>void;
 }
+
+export interface ContactAddedType{
+    firstName:string;
+    lastName:string;
+    gmail:string;
+    occupation:string;
+}

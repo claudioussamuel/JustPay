@@ -244,3 +244,8 @@ export const exploreSection=[
   ]
   
   
+  export const addNewContacts=[
+    { firstName: 'Claud', occupation:'Junior Public health officer, assoaciatee @samosure',lastName: 'Mensah',  gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    { firstName: 'Sophia',occupation:'Junior Public health officer, assoaciatee @samosure', lastName: 'Smith',  gmail: '@roseNtuman@gmail.com',date:'21st june 003' },
+    { firstName: 'Sophia',occupation:'Junior Public health officer, assoaciatee @samosure', lastName: 'Smith',  gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+  ]

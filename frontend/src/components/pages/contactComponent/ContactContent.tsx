@@ -21,6 +21,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 import { Label } from '@radix-ui/react-label'
 import { Input } from '@/components/ui/input'
 import { useUserContext } from '@/app/context/UserContext'
+import ContainerAddContent from './ContainerAddContent'
 
 
 
@@ -118,89 +119,15 @@ function ContactContent() {
                     </SheetTrigger>
                     <SheetContent className='text-zinc-800'>
         <SheetHeader>
-          <SheetTitle>Add Users</SheetTitle>
+          <SheetTitle>Friend zone</SheetTitle>
           <SheetDescription>
-            Click save when you're done.
+         Add new numbers to contact list
           </SheetDescription>
         </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="firstName" className="text-right">
-              FirstName
-            </Label>
-            <Input id="firstName" 
-            value={newUser.firstName} 
-            onChange={handleInputChange}
-            className="col-span-3" />
+          <div>
+            <ContainerAddContent/>
           </div>
 
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="lastName" className="text-right">
-              LastName
-            </Label>
-            <Input id="lastName" 
-            value={newUser.lastName} 
-            onChange={handleInputChange}
-            className="col-span-3" />
-          </div>
-
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="x" className="text-right">
-              X
-            </Label>
-            <Input id="X" 
-            value={newUser.xHandle} 
-            onChange={handleInputChange}
-            className="col-span-3" />
-          </div>
-
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="facebookHandle" className="text-right">
-              FaceBook
-            </Label>
-            <Input id="facebookHandle" 
-            value={newUser.facebookHandle} 
-            onChange={handleInputChange}
-            className="col-span-3" />
-          </div>
-
-
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="igHandle" className="text-right">
-              Instagram
-            </Label>
-            <Input id="igHandle" 
-            value={newUser.igHandle} 
-            onChange={handleInputChange}
-            className="col-span-3" />
-          </div>
-
-
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="address" className="text-right">
-              Address
-            </Label>
-            <Input id="address"
-             value={newUser.address}
-             onChange={handleInputChange}
-              className="col-span-3" />
-          </div>
-
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="work" className="text-right">
-              Occupation
-            </Label>
-            <Input id="work"
-             value={newUser.occupation}
-             onChange={handleInputChange}
-              className="col-span-3" />
-          </div>
-        </div>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit" onClick={handleSave} className='bg-softBlend'>Save changes</Button>
-          </SheetClose>
-        </SheetFooter>
       </SheetContent>
                     </Sheet>
                 </div>
