@@ -6,6 +6,11 @@ import { FaRegMessage } from "react-icons/fa6";
 import { MdAlternateEmail } from "react-icons/md";
 import { PiPathFill } from "react-icons/pi";
 import { Button } from "@/components/ui/button";
+import {  createWalletClient, custom, getContract } from 'viem';
+import { sepolia } from 'viem/chains';
+import { contractAbi, contractAddress, stableCoinAddress } from '@/lib/integrations/viem/abi';
+import { usePrivy, useWallets } from '@privy-io/react-auth'; 
+import { useRouter } from 'next/navigation';
 
 type GroupTypes = {
   data: {
@@ -22,7 +27,136 @@ function truncateAddress(address: string): string {
   if (!address) return '';
   return `${address.slice(0, 6)}...${address.slice(-4)}`; 
 }
-function GroupCard({ data }: GroupTypes) {
+function GroupCard({ data, index }: GroupTypes & { index: number }) {
+  const router = useRouter();
+
+  const { user,} = usePrivy()
+  const walletAddress = user?.wallet?.address;
+  const { wallets} = useWallets();
+
+
+  async function payRequest() {
+    
+    try {
+      if (!wallets || wallets.length === 0) {
+        console.error("No wallet connected");
+        return;
+      }
+  
+      const wallet = wallets[0];
+      if (!wallet) {
+        console.error("Wallet is undefined");
+        return;
+      }
+  
+
+      const provider = await wallet.getEthereumProvider();
+      if (!provider) {
+        console.error("Provider is undefined");
+        return;
+      }
+  
+          const currentChainId = await provider.request({ method: "eth_chainId" });
+
+          if (currentChainId !== `0x${sepolia.id.toString(16)}`) {
+            await wallet.switchChain(sepolia.id);
+          }
+
+
+        
+
+          const client = createWalletClient({
+            chain: sepolia,
+            transport: custom(provider),
+            account: walletAddress as `0x${string}`,
+          });
+
+
+     
+    
+  
+      const contract = getContract({
+        address: contractAddress,
+        abi: contractAbi,
+        client,
+      });
+  
+      await contract.write.payRequest([
+       BigInt(index)
+      ]);
+  
+      console.log("User data added to the blockchain");
+
+
+      router.push('/history');
+
+    } catch (error) {
+      console.error("Failed to update blockchain:", error);
+    } finally{
+
+     
+    }
+  
+
+  }
+
+  async function rejectRequest() {
+    
+    try {
+      if (!wallets || wallets.length === 0) {
+        console.error("No wallet connected");
+        return;
+      }
+  
+      const wallet = wallets[0];
+      if (!wallet) {
+        console.error("Wallet is undefined");
+        return;
+      }
+  
+
+      const provider = await wallet.getEthereumProvider();
+      if (!provider) {
+        console.error("Provider is undefined");
+        return;
+      }
+  
+          const currentChainId = await provider.request({ method: "eth_chainId" });
+
+          if (currentChainId !== `0x${sepolia.id.toString(16)}`) {
+            await wallet.switchChain(sepolia.id);
+          }
+
+
+        
+
+          const client = createWalletClient({
+            chain: sepolia,
+            transport: custom(provider),
+            account: walletAddress as `0x${string}`,
+          });
+
+
+     
+    
+  
+      const contract = getContract({
+        address: contractAddress,
+        abi: contractAbi,
+        client,
+      });
+  
+      await contract.write.rejectRequest([
+        BigInt(index)
+       ]);
+       router.push('/history');
+      console.log("User data added to the blockchain");
+    } catch (error) {
+      console.error("Failed to update blockchain:", error);
+    }finally{
+     
+    }
+  }
   const [showToggle, setShowToggle] = useState(false);
 
   const toggleAction = () => {
@@ -78,13 +212,15 @@ function GroupCard({ data }: GroupTypes) {
 
       {showToggle && (
         <div className="absolute top-12 right-3 bg-white border border-gray-200 rounded-lg shadow-lg p-3 space-y-2 z-50 animate-fade-in">
-          <Button
+          <Button 
+          onClick={payRequest}
             variant="default"
             className="w-full text-green-700 transition-colors duration-200"
           >
             Approved
           </Button>
           <Button
+          onClick={rejectRequest}
             variant="default"
             className="w-full text-red-700 transition-colors duration-200"
           >

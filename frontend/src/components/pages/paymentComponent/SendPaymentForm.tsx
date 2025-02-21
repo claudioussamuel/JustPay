@@ -12,6 +12,7 @@ import { createWalletClient, custom, getContract } from 'viem';
 import { sepolia } from 'viem/chains';
 import { usePrivy } from '@privy-io/react-auth';
 import {useWallets} from '@privy-io/react-auth';
+import { useRouter } from 'next/navigation';
 
 function truncateAddress(address: string): string {
     if (!address) return '';
@@ -19,7 +20,7 @@ function truncateAddress(address: string): string {
 }
 
 function SendPaymentForm() {
-  const [navigate, setNavigate] = useState(false);
+  const router = useRouter();
 
   const { user,} = usePrivy()
   const walletAddress = user?.wallet?.address;
@@ -85,8 +86,6 @@ function SendPaymentForm() {
   
       console.log("User data added to the blockchain");
 
-      // Set navigate state to true after successful transaction
-      setNavigate(true);
 
       // Resetting the state after successful transaction
       setAmount('0'); // Reset amount to zero
@@ -95,10 +94,13 @@ function SendPaymentForm() {
       setIsEditingDescription(false); // Optionally reset editing state
       setRecipientAddress(""); // Reset recipient address to empty string
 
-        
+      // Navigate to history page after successful payment
+      router.push('/history');
 
     } catch (error) {
       console.error("Failed to update blockchain:", error);
+    } finally {
+     
     }
   }
 
@@ -169,11 +171,7 @@ function SendPaymentForm() {
          
         </div>
 
-        {navigate && (
-          <Link className='text-blue-500 underline' href="/history">
-            Go to History Page
-          </Link>
-        )}
+       
       </div>
     </div>
   );

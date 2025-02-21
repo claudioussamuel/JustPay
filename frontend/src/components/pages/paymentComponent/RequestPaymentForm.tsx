@@ -12,13 +12,14 @@ import {  createWalletClient, custom, getContract } from 'viem';
 import { sepolia } from 'viem/chains';
 import { contractAbi, contractAddress, stableCoinAddress } from '@/lib/integrations/viem/abi';
 import { usePrivy, useWallets } from '@privy-io/react-auth'; 
+import { useRouter } from 'next/navigation';
 
 function truncateAddress(address: string): string {
   if (!address) return '';
   return `${address.slice(0, 6)}...${address.slice(-4)}`; 
 }
 function RequestPaymentForm() {
-
+  const router = useRouter();
   const { user,} = usePrivy()
   const walletAddress = user?.wallet?.address;
   const { wallets} = useWallets();
@@ -92,8 +93,8 @@ function RequestPaymentForm() {
   
       console.log("User data added to the blockchain");
 
-      // Set navigate state to true after successful transaction
-      // setNavigate(true);
+      // Navigate to payment page after successful transaction
+      router.push('/payment');
 
       // Resetting the state after successful transaction
       setAmount('0'); // Reset amount to zero

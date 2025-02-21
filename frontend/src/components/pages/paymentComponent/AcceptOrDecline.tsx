@@ -36,7 +36,7 @@ function AcceptOrDecline() {
     <div className='grid place-content-center'>
         <div className='space-y-5 grid grid-cols-3 gap-10'>
             {requests.map((item, index) => (
-                <GroupCard key={index} data={item} />
+                <GroupCard index={index} key={index} data={item} />
             ))}
         </div>
     </div>
