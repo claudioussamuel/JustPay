@@ -11,12 +11,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import clsx from "clsx";
 
-function ItemPageSelector() {
+function ItemPageSelector({className}:{className?:string}) {
   const { itemsPerPage, setItemsPerPage, setCurrentPage } = usePaginationContext();
 
   return (
-    <div className="flex items-center gap-3">
+    <div className={clsx("flex items-center gap-3 py-5",className)}>
       <label htmlFor="itemsPerPage">Items per page:</label>
       <Select
         value={itemsPerPage.toString()}
