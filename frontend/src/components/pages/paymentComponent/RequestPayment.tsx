@@ -3,8 +3,11 @@ import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import React from 'react'
 import { CiSearch } from 'react-icons/ci'
+import { useAppContext } from '@/app/context/AppContext';
 
 function RequestPayment() {
+
+  const { receipientAddress, setRecipientAddress } = useAppContext();
   return (
     <div className='h-[100vh]'>
         <h3 className="font-dmMono capitalize text-3xl text-zinc-800">Request payment from</h3>
@@ -25,7 +28,10 @@ function RequestPayment() {
           bg-transparent
           font-dmMono
           ' 
-          placeholder='place in sender address' />
+          placeholder='place in sender address'
+          
+          value={receipientAddress}
+          onChange={(e) => setRecipientAddress(e.target.value)} />
         </div>
 
       <div className='mt-5'>

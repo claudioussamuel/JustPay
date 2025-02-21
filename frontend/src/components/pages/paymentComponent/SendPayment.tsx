@@ -6,16 +6,13 @@ import { Button } from '@/components/ui/button'
 import Bounded from '@/components/shared/Bounded'
 import { CiSearch } from 'react-icons/ci'
 import { Input } from '@/components/ui/input'
-
-
-import { usePrivy } from '@privy-io/react-auth';
-import {useFundWallet} from '@privy-io/react-auth';
+import { usePrivy } from '@privy-io/react-auth'; 
 import {useWallets} from '@privy-io/react-auth';
 import { allowance } from '@/lib/integrations/viem/contract'
 import { contractAddress, stableCoinAbi, stableCoinAddress } from '@/lib/integrations/viem/abi'
 import { useAppContext } from '@/app/context/AppContext';
 import { sepolia } from 'viem/chains'
-import { createWalletClient, custom, getContract } from 'viem'
+import { createWalletClient, custom,getContract } from 'viem'
 
 
 function SendPayment() {
@@ -24,7 +21,12 @@ function SendPayment() {
   const [amount, setAmount] = useState<bigint | null>(null);
   const { receipientAddress, setRecipientAddress } = useAppContext();
   const { wallets} = useWallets();
+  const [loading, setLoading] = useState(false); 
+  const [txs, setTxs] = useState(""); 
+
+
   async function approveTokenTransfer() {
+    setLoading(true);
     try {
       if (!wallets || wallets.length === 0) {
         console.error("No wallet connected");
@@ -56,24 +58,23 @@ function SendPayment() {
         transport: custom(provider),
         account: walletAddress as `0x${string}`,
       });
-
-
-     
-    
-  
       const contract = getContract({
         address: stableCoinAddress,
         abi: stableCoinAbi,
         client,
       });
   
-      await contract.write.approve([
+      const tsxx =    await contract.write.approve([
         contractAddress,BigInt(1000000000000000000000000000000000000000000)
       ]);
   
+      setTxs(tsxx)
+
       console.log("User data added to the blockchain");
     } catch (error) {
       console.error("Failed to update blockchain:", error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -82,16 +83,14 @@ function SendPayment() {
         if(walletAddress){
             const history = await allowance(`${walletAddress}` as `0x${string}`,contractAddress);
             if (history) {
-                setAmount(history);
-                console.log(`${history} Mr. Claudious is the goat`)
+                setAmount(history);     
             }
-
-          
+            console.log(`${history} Mr. Claudious is the goat `) 
         }
     };
  
     fetchUserData();
-},[walletAddress])
+},[walletAddress,txs])
   return (
     <div className='h-[100vh]'>
         <h3 className="font-dmMono capitalize text-3xl text-zinc-800">Send payment To</h3>
@@ -123,7 +122,13 @@ function SendPayment() {
 
       <div className='mt-5'>
       {amount ?<div></div> : (
-        <Button className='px-10 mx-4 py-5 text-2xl bg-softBlend' onClick={approveTokenTransfer}>Approve</Button>
+        <Button 
+          className='px-10 mx-4 py-5 text-2xl bg-softBlend' 
+          onClick={approveTokenTransfer}
+          disabled={loading}
+        >
+          {loading ? 'Approving...' : 'Approve'}
+        </Button>
       )}
       
       <Link href="/payment/sendPayment" className='font-dmMono capitalize '>

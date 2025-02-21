@@ -11,7 +11,15 @@ interface SendReceive {
     message: string;
     otherPartyAddress: string;
     otherPartyName: string;
-    stableCoinName: string;
+    time:bigint;
+}
+
+interface Request {
+    requestor:string;
+    amount:bigint;
+    message:string;
+    name:string;
+    stableCoin:string;
     time:bigint;
 }
 
@@ -174,6 +182,29 @@ export async function allowance(owner: `0x${string}`, spender: `0x${string}`): P
     } catch (error) {
         console.error("Error fetching allowance:", error);
         return BigInt(0);
+    }
+}
+
+export async function readMyRequests(userAddress: `0x${string}`): Promise<Request[] | null> {
+    try {
+        const contract = getContract({
+            address: contractAddress,
+            abi: contractAbi,
+            client,
+        });
+
+        const data = await contract.read.getMyRequests([userAddress]);
+
+        console.log("My Requests Data:", data);
+
+        if (Array.isArray(data)) {
+            return data as Request[];
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error("Error reading my requests:", error);
+        return null;
     }
 }
 

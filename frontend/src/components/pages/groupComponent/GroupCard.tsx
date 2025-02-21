@@ -9,15 +9,19 @@ import { Button } from "@/components/ui/button";
 
 type GroupTypes = {
   data: {
-    firstName: string;
-    lastName: string;
-    gmail: string;
-    number: string;
-    date: string;
-    pathner: string;
+    requestor:string;
+    amount:bigint;
+    message:string;
+    name:string;
+    stableCoin:string;
+    time:bigint;
   };
 };
-
+ 
+function truncateAddress(address: string): string {
+  if (!address) return '';
+  return `${address.slice(0, 6)}...${address.slice(-4)}`; 
+}
 function GroupCard({ data }: GroupTypes) {
   const [showToggle, setShowToggle] = useState(false);
 
@@ -26,7 +30,7 @@ function GroupCard({ data }: GroupTypes) {
   };
 
   // Generate avatar fallback from initials
-  const avatarFallback = `${data.firstName[0]}${data.lastName[0]}`;
+  const avatarFallback = `${data.name[0]}`;
 
   return (
     <div className="w-80 border rounded-lg p-3 border-zinc-800 font-dmMono bg-softBlend relative hover:shadow-lg transition-shadow duration-300">
@@ -39,9 +43,9 @@ function GroupCard({ data }: GroupTypes) {
           </Avatar>
           <div>
             <h1 className="text-lg font-semibold">
-              {data.firstName} {data.lastName}
+              {truncateAddress(data.requestor)} 
             </h1>
-            <p className="text-sm ">{data.date}</p>
+            <p className="text-sm ">{(Number(data.amount)/1e18).toFixed(2)} USD</p>
           </div>
         </div>
         <PiDotsThreeOutlineFill
@@ -57,17 +61,17 @@ function GroupCard({ data }: GroupTypes) {
       <div className="pt-3 space-y-3">
         <div className="flex items-center gap-2">
           <FaRegMessage className="text-white" />
-          <h3 className="text-sm">{data.number}</h3>
+          <h3 className="text-sm">{data.message}</h3>
         </div>
 
         <div className="flex items-center gap-2">
           <MdAlternateEmail className="text-white" />
-          <h3 className="text-sm">{data.gmail}</h3>
+          <h3 className="text-sm">{data.name}</h3>
         </div>
 
         <div className="flex items-center gap-2">
           <PiPathFill className="text-white" />
-          <h3 className="text-sm">{data.pathner}</h3>
+          <h3 className="text-sm">{  new Date(Number(data.time) * 1000).toLocaleString()  }</h3>
         </div>
       </div>
 
@@ -75,13 +79,13 @@ function GroupCard({ data }: GroupTypes) {
       {showToggle && (
         <div className="absolute top-12 right-3 bg-white border border-gray-200 rounded-lg shadow-lg p-3 space-y-2 z-50 animate-fade-in">
           <Button
-            variant="outline"
+            variant="default"
             className="w-full text-green-700 transition-colors duration-200"
           >
             Approved
           </Button>
           <Button
-            variant="outline"
+            variant="default"
             className="w-full text-red-700 transition-colors duration-200"
           >
             Decline

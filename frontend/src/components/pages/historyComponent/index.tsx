@@ -67,12 +67,12 @@ function History() {
                       deliveryType: transaction.action.toLowerCase(),
                       time: new Date(Number(transaction.time) * 1000).toLocaleString(),
                       address: transaction.otherPartyName || transaction.otherPartyAddress,
-                      amount: transaction.amount.toString(),
+                      amount: (Number(transaction.amount)/1e18).toString(),
                       work: transaction.message,
                       href: "#",
                       stats: true,
-                      from: transaction.otherPartyAddress,
-                      to: transaction.otherPartyAddress,
+                      from:   transaction.action.toLowerCase() === 'send' ? `${walletAddress}` : transaction.otherPartyAddress,
+                      to: transaction.action.toLowerCase() === 'send' ? transaction.otherPartyAddress : `${walletAddress}`  ,
                     }}
                   />
                 ))}

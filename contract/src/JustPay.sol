@@ -61,7 +61,7 @@ contract JustPay is ReentrancyGuard {
         string message;
         string name;
         address stableCoin;
-        string stableCoinName;
+        uint256 time;
     }
 
     struct SendReceive {
@@ -70,7 +70,6 @@ contract JustPay is ReentrancyGuard {
         string message;
         address otherPartyAddress;
         string otherPartyName;
-        string stableCoinName;
         uint256 time;
     }
 
@@ -79,10 +78,6 @@ contract JustPay is ReentrancyGuard {
         string lastName;
         string gender;
         string dateOfBirth;
-        string homeTown;
-        string gmail;
-        string telephone;
-        string country;
         string imageUrl;
         string xHandle;
         string facebookHandle;
@@ -109,8 +104,7 @@ contract JustPay is ReentrancyGuard {
         address indexed from,
         address indexed to,
         uint256 amount,
-        address indexed token,
-        string stableCoinName
+        address indexed token
     );
 
     ///////////////////
@@ -139,10 +133,6 @@ contract JustPay is ReentrancyGuard {
         string memory _lastName,
         string memory _gender,
         string memory _dateOfBirth,
-        string memory _homeTown,
-        string memory _gmail,
-        string memory _telephone,
-        string memory _country,
         string memory _imageUrl,
         string memory _xHandle,
         string memory _facebookHandle,
@@ -153,10 +143,6 @@ contract JustPay is ReentrancyGuard {
         newUserInfo.lastName = _lastName;
         newUserInfo.gender = _gender;
         newUserInfo.dateOfBirth = _dateOfBirth;
-        newUserInfo.homeTown = _homeTown;
-        newUserInfo.gmail = _gmail;
-        newUserInfo.telephone = _telephone;
-        newUserInfo.country = _country;
         newUserInfo.imageUrl = _imageUrl;
         newUserInfo.xHandle = _xHandle;
         newUserInfo.facebookHandle = _facebookHandle;
@@ -170,15 +156,14 @@ contract JustPay is ReentrancyGuard {
         address user,
         uint256 _amount,
         string memory _message,
-        address _stableCoin,
-        string memory _tokenName
+        address _stableCoin
     ) public {
         Request memory newRequest;
         newRequest.requestor = msg.sender;
         newRequest.amount = _amount;
         newRequest.message = _message;
         newRequest.stableCoin = _stableCoin;
-        newRequest.stableCoinName = _tokenName;
+        newRequest.time = block.timestamp;
 
         if (s_names[msg.sender].hasName) {
             newRequest.name = s_names[msg.sender].firstName;
@@ -200,7 +185,8 @@ contract JustPay is ReentrancyGuard {
         Request[] storage myRequests = s_requests[msg.sender];
         Request storage payableRequest = myRequests[_request];
 
-        IERC20(payableRequest.stableCoin).transfer(
+        IERC20(payableRequest.stableCoin).safeTransferFrom(
+            msg.sender,
             payableRequest.requestor,
             payableRequest.amount
         );
@@ -209,10 +195,23 @@ contract JustPay is ReentrancyGuard {
             msg.sender,
             payableRequest.requestor,
             payableRequest.amount,
-            payableRequest.message,
-            payableRequest.stableCoinName
+            payableRequest.message
         );
 
+        myRequests[_request] = myRequests[myRequests.length - 1];
+        myRequests.pop();
+    }
+
+    function rejectRequest(
+        uint256 _request
+    )
+        public
+        payable
+        noSuchRequest(_request)
+        nonReentrant
+        moreThanZero(s_requests[msg.sender][_request].amount)
+    {
+        Request[] storage myRequests = s_requests[msg.sender];
         myRequests[_request] = myRequests[myRequests.length - 1];
         myRequests.pop();
     }
@@ -221,31 +220,28 @@ contract JustPay is ReentrancyGuard {
         address to,
         IERC20 token,
         uint256 amount,
-        string memory message,
-        string memory tokenName
+        string memory message
     ) external nonReentrant {
         // Record transaction first (state modification)
-        addHistory(msg.sender, to, amount, message, tokenName);
+        addHistory(msg.sender, to, amount, message);
 
         (token).safeTransferFrom(msg.sender, to, amount);
 
         // Emit event last
-        emit TransferSent(msg.sender, to, amount, address(token), tokenName);
+        emit TransferSent(msg.sender, to, amount, address(token));
     }
 
     function addHistory(
         address sender,
         address receiver,
         uint256 _amount,
-        string memory _message,
-        string memory _stableCoinName
+        string memory _message
     ) private {
         SendReceive memory newSend;
         newSend.action = "Send";
         newSend.amount = _amount;
         newSend.message = _message;
         newSend.otherPartyAddress = receiver;
-        newSend.stableCoinName = _stableCoinName;
         if (s_names[receiver].hasName) {
             newSend.otherPartyName = s_names[receiver].firstName;
         }
@@ -257,7 +253,6 @@ contract JustPay is ReentrancyGuard {
         newReceive.amount = _amount;
         newReceive.message = _message;
         newReceive.otherPartyAddress = sender;
-        newReceive.stableCoinName = _stableCoinName;
         if (s_names[sender].hasName) {
             newReceive.otherPartyName = s_names[sender].firstName;
         }
@@ -267,33 +262,33 @@ contract JustPay is ReentrancyGuard {
 
     //Get all requests sent to a User
 
-    function getMyRequests(
-        address _user
-    )
-        public
-        view
-        returns (
-            address[] memory,
-            uint256[] memory,
-            string[] memory,
-            string[] memory
-        )
-    {
-        address[] memory addrs = new address[](s_requests[_user].length);
-        uint256[] memory amnt = new uint256[](s_requests[_user].length);
-        string[] memory msge = new string[](s_requests[_user].length);
-        string[] memory nme = new string[](s_requests[_user].length);
+    // function getMyRequests(
+    //     address _user
+    // )
+    //     public
+    //     view
+    //     returns (
+    //         address[] memory,
+    //         uint256[] memory,
+    //         string[] memory,
+    //         string[] memory
+    //     )
+    // {
+    //     address[] memory addrs = new address[](s_requests[_user].length);
+    //     uint256[] memory amnt = new uint256[](s_requests[_user].length);
+    //     string[] memory msge = new string[](s_requests[_user].length);
+    //     string[] memory nme = new string[](s_requests[_user].length);
 
-        for (uint i = 0; i < s_requests[_user].length; i++) {
-            Request storage myRequests = s_requests[_user][i];
-            addrs[i] = myRequests.requestor;
-            amnt[i] = myRequests.amount;
-            msge[i] = myRequests.message;
-            nme[i] = myRequests.name;
-        }
+    //     for (uint i = 0; i < s_requests[_user].length; i++) {
+    //         Request storage myRequests = s_requests[_user][i];
+    //         addrs[i] = myRequests.requestor;
+    //         amnt[i] = myRequests.amount;
+    //         msge[i] = myRequests.message;
+    //         nme[i] = myRequests.name;
+    //     }
 
-        return (addrs, amnt, msge, nme);
-    }
+    //     return (addrs, amnt, msge, nme);
+    // }
 
     //Get all historic transactions user has been apart of
 
@@ -301,6 +296,12 @@ contract JustPay is ReentrancyGuard {
         address _user
     ) public view returns (SendReceive[] memory) {
         return s_history[_user];
+    }
+
+    function getMyRequests(
+        address _user
+    ) public view returns (Request[] memory) {
+        return s_requests[_user];
     }
 
     function getMyName(address _user) public view returns (UserInfo memory) {

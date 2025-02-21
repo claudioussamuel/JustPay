@@ -5,7 +5,7 @@ export interface SendReceive {
     message: string;
     otherPartyAddress: string;
     otherPartyName: string;
-    stableCoinName: string;
+   
     time:bigint;
 }
 
