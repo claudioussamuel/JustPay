@@ -25,3 +25,7 @@ export interface ContactAddedType{
     gmail:string;
     occupation:string;
 }
+
+export interface ContainerAddContentProps {
+    addNewContacts: ContactAddedType[];
+}
