@@ -2,9 +2,8 @@
 
 import { addNewContacts, contactDevice, contactNumbers, contactPsync, contactShared } from '@/app/data'
 import React, { useState } from 'react'
-import { BiPlus } from 'react-icons/bi'
 import { IoSearchCircleOutline } from 'react-icons/io5'
-import ContactData from './ContactData'
+
 import { IoSendOutline } from "react-icons/io5";
 import { GiReceiveMoney } from 'react-icons/gi'
 import ContactInscription from '@/components/content/ContactInscription'
@@ -12,59 +11,21 @@ import { Calendar } from 'lucide-react'
 import EventContact from './EventContact'
 import { Button } from '@/components/ui/button'
 import { useWallets } from '@privy-io/react-auth'
-import { base } from 'viem/chains'
-import { parseEther } from 'viem'
+
 import { useToast } from '@/hooks/use-toast'
-import { ToastAction } from '@radix-ui/react-toast'
+
 import Link from 'next/link'
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { Label } from '@radix-ui/react-label'
-import { Input } from '@/components/ui/input'
+import { Sheet,  SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+
 import { useUserContext } from '@/app/context/UserContext'
 import ContainerAddContent from './ContainerAddContent'
 import ItemPageSelector from '@/components/content/ItemPageSelector'
-import { usePaginationContext } from '@/app/context/PaginationContext'
-import { ContainerAddContentProps } from '../../../../types/global.types'
 import ContactList from './ContactList'
 
 
 
 function ContactContent() {
-    const {addUser} = useUserContext();
-
-
-    const [newUser, setNewUser] = useState({
-        firstName: "",
-        lastName: "",
-        xHandle: "",
-        facebookHandle: "",
-        igHandle: "",
-        address: "",
-        occupation: "",
-      });
-
-
-    const {wallets} = useWallets();
-    const {toast} = useToast()
-
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-        const {id,value} = e.target;
-        setNewUser((prev)=>({...prev, [id]:value}))
-    }
-
-    const handleSave=()=>{
-        addUser(newUser);
-        setNewUser({
-            firstName: "",
-            lastName: "",
-            xHandle: "",
-            facebookHandle: "",
-            igHandle: "",
-            address: "",
-            occupation: "",
-          });
-    }
-
+  
   return (
     <div className='flex w-full h-auto font-dmMono bg-wineTexture  '>
         <div className='flex-[20%] border-r border-black bg-wineTexture gap-5'>
@@ -123,19 +84,18 @@ function ContactContent() {
                         <Button className='bg-softBlend'>Add new contact</Button>  
                     </SheetTrigger>
                     <SheetContent className='text-zinc-800'>
-        <SheetHeader>
-          <SheetTitle>Friend zone</SheetTitle>
-          <SheetDescription>
-         Add new numbers to contact list
-          </SheetDescription>
-        </SheetHeader>
-          <ItemPageSelector/>
-          <div>
-            <ContainerAddContent addNewContacts={addNewContacts}/>
-          </div>
+                      <SheetHeader>
+                      <SheetTitle>Friend zone</SheetTitle>
+                         <SheetDescription>Add new numbers to contact list </SheetDescription>
+                        </SheetHeader>
 
-              </SheetContent>
-         </Sheet>
+
+                      <div>
+                         <ContainerAddContent addNewContacts={addNewContacts}/>
+                         </div>
+
+                        </SheetContent>
+                     </Sheet>
                 </div>
 
             </div>
