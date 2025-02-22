@@ -18,3 +18,21 @@ export type UsePaginationReturn = {
     totalPages: number;
     paginatedItems: <T>(items: T[])=>T[];
 }
+
+
+export type Contact = {
+    firstName:string;
+    lastName:string;
+    gmail:string;
+    relationship?:string;
+    occupation:string;
+    x?:string;
+    date?:string;
+    ig?:string;
+    phone?:string | number | any;
+}
+
+export type SelectedContactContextType ={
+    selectedContact: Contact | null;
+    setSelectedContact: (contact: Contact | null)=>void;
+}
