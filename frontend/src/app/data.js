@@ -253,14 +253,14 @@ export const exploreSection=[
 
 
   export const eventGroup = [
-    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
-    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
-    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com' ,date:'21st june 003'},
-    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
-    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
-    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com',date:'21st june 003' },
-    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
-    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'}
+    // { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    // { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+    // { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com' ,date:'21st june 003'},
+    // { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+    // { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    // { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com',date:'21st june 003' },
+    // { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    // { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'}
   ];
   
 
