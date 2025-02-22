@@ -6,6 +6,7 @@ import ItemPageSelector from '@/components/content/ItemPageSelector'
 import { Button } from '@/components/ui/button'
 import UnavailableData from '@/components/unavailable/UnavailableData'
 import { usePagination } from '@/hooks/usePagination'
+import { useSelectedContactContext } from '@/app/context/SelectContext'
 
 function ContactList() {
 
@@ -17,6 +18,8 @@ function ContactList() {
     paginatedItems,
     totalPages
   } = usePagination({itemsPerPage:5, totalItems:contactNumbers.length})
+
+  const {setSelectedContact} = useSelectedContactContext();
 
   const currentItems = paginatedItems(contactNumbers)
 
@@ -41,7 +44,10 @@ function ContactList() {
            />
 
           {currentItems.map((data,index)=>(
-           <ContactData data={data} key={index}/>
+           <ContactData 
+             data={data} 
+           key={index}/>
+
            ))}
 
     <div className="flex items-center text-[12px] justify-center gap-3 text-zinc-800">

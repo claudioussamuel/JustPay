@@ -15,7 +15,7 @@ function ContactDescriptionEvents({ date, title, description, images: { images }
   return (
     <div className="text-zinc-800">
       <h1 className="mb-1 text-[13px]">{date}</h1>
-      <div className="border rounded-2xl p-5 bg-softBlend">
+      <div className=" rounded-2xl p-5 bg-softBlend">
         <h3 className="font-semibold">{title}</h3>
         <p className="text-sm ">{description}</p>
 

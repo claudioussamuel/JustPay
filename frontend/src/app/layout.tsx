@@ -8,6 +8,7 @@ import { AppProvider } from "./context/AppContext";
 import { AuthProvider } from "./context/AuthContext";
 import { HistoryProvider } from "./context/HistoryContext";
 import { UserProvider } from "./context/UserContext";
+import { SelectedContactProvider } from "./context/SelectContext";
 
 
 
@@ -42,6 +43,8 @@ export default function RootLayout({
         className={`${bowlby.variable} ${dmMono.variable} ${playWright.variable} antialiased bg-wineTexture`}
       >
         <Providers>
+
+          <SelectedContactProvider>
           <UserProvider>
           <HistoryProvider>
          <AuthProvider>
@@ -52,7 +55,8 @@ export default function RootLayout({
           <Toaster/>
           </HistoryProvider>
           </UserProvider>
-      
+          </SelectedContactProvider>
+          
         </Providers>
       </body>
     </html>

@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {
     title:string;
-    description:string;
+    description:string | number | any;
 }
 
 function ContactInscription({title,description}: Props) {
