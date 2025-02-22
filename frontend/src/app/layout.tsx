@@ -8,7 +8,7 @@ import { AppProvider } from "./context/AppContext";
 import { AuthProvider } from "./context/AuthContext";
 import { HistoryProvider } from "./context/HistoryContext";
 import { UserProvider } from "./context/UserContext";
-import { PaginationProvider } from "./context/PaginationContext";
+
 
 
 const bowlby = localFont({
@@ -42,7 +42,6 @@ export default function RootLayout({
         className={`${bowlby.variable} ${dmMono.variable} ${playWright.variable} antialiased bg-wineTexture`}
       >
         <Providers>
-          <PaginationProvider>
           <UserProvider>
           <HistoryProvider>
          <AuthProvider>
@@ -53,7 +52,7 @@ export default function RootLayout({
           <Toaster/>
           </HistoryProvider>
           </UserProvider>
-          </PaginationProvider>
+      
         </Providers>
       </body>
     </html>
