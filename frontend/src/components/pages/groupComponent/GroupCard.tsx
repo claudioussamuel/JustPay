@@ -213,15 +213,13 @@ function GroupCard({ data, index }: GroupTypes & { index: number }) {
         <div className="absolute top-12 right-3 bg-white border border-gray-200 rounded-lg shadow-lg p-3 space-y-2 z-50 animate-fade-in">
           <Button 
           onClick={payRequest}
-            variant="default"
-            className="w-full text-green-700 transition-colors duration-200"
+            className="w-full text-green-700 bg-gray-50 transition-colors duration-200"
           >
             Approved
           </Button>
           <Button
           onClick={rejectRequest}
-            variant="default"
-            className="w-full text-red-700 transition-colors duration-200"
+            className="w-full text-red-700 bg-gray-50 transition-colors duration-200"
           >
             Decline
           </Button>
