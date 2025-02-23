@@ -1,15 +1,25 @@
+"use client"
+
 import { useSelectedContactContext } from '@/app/context/SelectContext';
 import ContactInscription from '@/components/content/ContactInscription';
 import { Button } from '@/components/ui/button';
 import UnavailableData from '@/components/unavailable/UnavailableData';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { GiReceiveMoney } from 'react-icons/gi';
 import { IoSendOutline } from 'react-icons/io5';
 
 function ContactDynamism() {
   const { selectedContact } = useSelectedContactContext();
+  const router = useRouter();
 
+
+  const handleRequestPayment = () => {
+    if (!selectedContact?.wallet) return;
+  
+    router.push(`/payment?tab=receive&wallet=${selectedContact.wallet}`);
+  };
 
   if (!selectedContact) {
     return (
@@ -48,26 +58,28 @@ function ContactDynamism() {
         </div>
 
         <div className='mt-5 flex flex-row gap-5 justify-around text-white'>
-          <Link href="/payment">
-            <Button className='hover:bg-none flex items-center gap-3 bg-brand-hue-color w-full justify-center py-2'>
-              <IoSendOutline />
-              send
-            </Button>
-          </Link>
 
-          <div className='flex items-center gap-3 bg-green-400 w-full justify-center py-2'>
-            receive
-            <GiReceiveMoney />
+          <div className='flex items-center  bg-brand-hue-color py-1 pr-5 rounded-md'>
+            <Link href={`/payment?wallet=${selectedContact.wallet}`}>
+              <Button className='bg-transparent'>Send</Button>
+            </Link>
+            <IoSendOutline />
           </div>
+
+          <div className='flex items-center  bg-green-400 py-1 pr-3 rounded-md' onClick={handleRequestPayment}>
+            <Button className='bg-transparent'>Request</Button>
+            <GiReceiveMoney/>
+          </div>
+
         </div>
       </div>
 
       <div className='p-5 space-y-3'>
+        <ContactInscription title='Wallet Address' description={selectedContact.wallet} />
         <ContactInscription title='phone number' description={selectedContact.phone} />
         <ContactInscription title='gmail' description={selectedContact.gmail} />
         <ContactInscription title='work' description={selectedContact.occupation} />
         <ContactInscription title='X' description={selectedContact.x} />
-        <ContactInscription title='Birthday' description={selectedContact.date} />
       </div>
     </div>
   );
