@@ -33,7 +33,7 @@ function AcceptOrDecline() {
     fetchRequests();
   }, []);
 
-  if(eventGroup.length===0){
+  if(requests.length===0){
     return(
       <UnavailableData title="Nothings to accept or decline"
       description="For the mean time we have nothing to acess"
