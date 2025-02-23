@@ -1,14 +1,17 @@
 "use client";
 
 import React from "react";
-import { ContainerAddContentProps } from "../../../../types/global.types";
 import { Button } from "@/components/ui/button";
 import AddToContactList from "@/components/content/AddToContactList";
 import UnavailableData from "@/components/unavailable/UnavailableData";
 import { usePagination } from "@/hooks/usePagination";
 import ItemPageSelector from "@/components/content/ItemPageSelector";
+import { IoSearchCircleOutline } from "react-icons/io5";
+import useContactSearch from "@/hooks/useContactSearch";
 
-function ContainerAddContent({ addNewContacts }: ContainerAddContentProps) {
+function ContainerAddContent() {
+
+  const { searchQuery, setSearchQuery, filteredContacts } = useContactSearch();
   const {
     currentPage,
     itemsPerPage,
@@ -16,11 +19,14 @@ function ContainerAddContent({ addNewContacts }: ContainerAddContentProps) {
     setItemsPerPage,
     paginatedItems,
     totalPages,
-  } = usePagination({ itemsPerPage: 5, totalItems: addNewContacts.length });
+  } = usePagination({ itemsPerPage: 5, totalItems: filteredContacts.length}); 
 
-  const currentItems = paginatedItems(addNewContacts);
 
-  if (addNewContacts.length === 0) {
+
+
+  const currentItems = paginatedItems(filteredContacts);
+
+  if (filteredContacts.length === 0) {
     return (
       <div>
         <UnavailableData
@@ -40,10 +46,32 @@ function ContainerAddContent({ addNewContacts }: ContainerAddContentProps) {
         setItemsPerPage={setItemsPerPage}
       />
 
-      {currentItems.map((data, index) => (
-        <AddToContactList key={index} data={data} />
-      ))}
+    
+      <div className="flex border gap-5 items-center p-2 border-zinc-800 rounded-md">
+        <IoSearchCircleOutline className="text-2xl" />
+        <input
+          className="outline-none bg-transparent placeholder:text-zinc-800"
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
 
+
+      {currentItems.length === 0 ? (
+        <UnavailableData
+          title="No contacts found"
+          description="Try searching for a different name or occupation."
+          image="/images/contact-book.png"
+        />
+      ) : (
+        currentItems.map((data, index) => (
+          <AddToContactList key={index} data={data} />
+        ))
+      )}
+
+   
       <div className="flex items-center text-[12px] justify-center gap-3 text-zinc-800">
         <Button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
           Previous

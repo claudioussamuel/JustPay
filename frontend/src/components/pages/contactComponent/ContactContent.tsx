@@ -86,9 +86,8 @@ function ContactContent() {
 
 
                       <div>
-                         <ContainerAddContent addNewContacts={addNewContacts}/>
+                         <ContainerAddContent />
                          </div>
-
                         </SheetContent>
                      </Sheet>
                 </div>

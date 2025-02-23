@@ -1,13 +1,19 @@
 import React from 'react'
 import { ContactAddedType } from '../../../types/global.types'
 import { Button } from '../ui/button'
+import { ContactListProps } from '../pages/contactComponent/ContactList'
+import UnavailableData from '../unavailable/UnavailableData'
 
 
-function AddToContactList({data}:{data:ContactAddedType}) {
+interface AddToContactListProps {
+  data: ContactAddedType;
+}
+
+function AddToContactList({data}:AddToContactListProps) {
+
+
   return (
     <div className='border border-t border-b border-black flex p-5 rounded-md  justify-between '>
-
-
 
       <div className='flex gap-3'>
         <div className="w-10 h-10 p-3 rounded-full place-self-start font-dmMono bg-gradient-to-r text-nowrap from-pink-500 via-purple-500 to-indigo-500 flex justify-center items-center">

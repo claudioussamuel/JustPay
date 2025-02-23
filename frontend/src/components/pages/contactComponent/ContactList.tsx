@@ -7,7 +7,7 @@ import UnavailableData from '@/components/unavailable/UnavailableData'
 import { usePagination } from '@/hooks/usePagination'
 import { Contact } from '../../../../types/Context.types'
 
-interface ContactListProps{
+export interface ContactListProps{
   searchQuery: string;
   setSearchQuery: (query:string)=>void;
   filteredContacts:Contact[]

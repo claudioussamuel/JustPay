@@ -35,7 +35,7 @@ function ContactData({ data, className ,isHighlighted}: { data: Contact, classNa
             <p>{data.occupation}</p>
           </div>
         </div>
-
+1
       </div>
 
       <div className="place-self-start">
