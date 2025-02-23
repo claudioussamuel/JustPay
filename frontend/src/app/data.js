@@ -2,14 +2,12 @@ import { LuArrowDownRight } from "react-icons/lu";
 import { HiClipboardList} from "react-icons/hi";
 import { HiUser } from "react-icons/hi";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
-import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { HiReceiptRefund } from "react-icons/hi";
-import { FaPeopleGroup } from "react-icons/fa6";
+
 
 
 export const navLinks=[
     {name:'home',href:'/'},
-    {name:'dashboard', href:'/dashboard'},
     {name:'profile',href:'/profile'},
     {name:'contacts',href:'/contacts'},
     {name:'payment', href:'/payment'},
@@ -94,11 +92,9 @@ export const exploreSection=[
   
   
   export const sidearContent=[
-    {name:'dashboard',href:"/dashboard",icon:<HiOutlineDesktopComputer/>},
     {name:'payment',href:"/payment",icon:<HiOutlineCurrencyDollar/>},
     {name:'profile',href:"/profile",icon:<HiUser/>},
     {name:'history',href:"/history",icon:<HiReceiptRefund/>},
-    {name:'groups',href:"/groups",icon:<FaPeopleGroup/>},
     {name:'contacts',href:"/contacts",icon:<HiClipboardList/>},
   ]
   
@@ -128,13 +124,15 @@ export const exploreSection=[
   export const contactNumbers = [
     {
       firstName: "Claud",
-      occupation: " Associate @Samosure",
+      occupation: "Associate @Samosure",
       lastName: "Mensah",
       gmail: "claud.mensah@gmail.com",
       date: "21st June 2003",
       x: "@broski",
       ig: "@dbro",
-      relationship: 'Friend'
+      wallet: "addr1qxyz1234567890abcd",
+      relationship: "Colleague",
+      phone: "+1234567890"
     },
     {
       firstName: "Sophia",
@@ -144,7 +142,9 @@ export const exploreSection=[
       date: "15th August 1995",
       x: "@soph_data",
       ig: "@sophie_art",
-       relationship: 'Friend'
+      wallet: "addr1qabc9876543210xyz",
+      relationship: "Best Friend",
+      phone: "+1987654321"
     },
     {
       firstName: "Michael",
@@ -154,7 +154,9 @@ export const exploreSection=[
       date: "10th December 1988",
       x: "@mike_codes",
       ig: "@mike_life",
-       relationship: 'Friend'
+      wallet: "addr1qdef6543210987lmn",
+      relationship: "Brother",
+      phone: "+1122334455"
     },
     {
       firstName: "Alice",
@@ -164,7 +166,9 @@ export const exploreSection=[
       date: "5th March 1992",
       x: "@alice_designs",
       ig: "@alice_creates",
-       relationship: 'Friend'
+      wallet: "addr1qghi3210987654opq",
+      relationship: "Cousin",
+      phone: "+1555666777"
     },
     {
       firstName: "Emma",
@@ -174,7 +178,9 @@ export const exploreSection=[
       date: "30th September 1985",
       x: "@emma_teach",
       ig: "@emma_lifestyle",
-       relationship: 'Friend'
+      wallet: "addr1qjkl0987654321rst",
+      relationship: "Mentor",
+      phone: "+1222333444"
     },
     {
       firstName: "John",
@@ -184,9 +190,13 @@ export const exploreSection=[
       date: "12th April 1990",
       x: "@john_cares",
       ig: "@john_daily",
-       relationship: 'Friend'
+      wallet: "addr1quvw5678901234xyz",
+      relationship: "Neighbor",
+      phone: "+1999888777"
     }
   ];
+  
+  
 
   export const eventsData = [
     {
