@@ -7,8 +7,17 @@ import { Button } from '@/components/ui/button'
 import UnavailableData from '@/components/unavailable/UnavailableData'
 import { usePagination } from '@/hooks/usePagination'
 import { useSelectedContactContext } from '@/app/context/SelectContext'
+import useContactSearch from '@/hooks/useContactSearch'
+import { Contact } from '../../../../types/Context.types'
 
-function ContactList() {
+interface ContactListProps{
+  searchQuery: string;
+  setSearchQuery: (query:string)=>void;
+  filteredContacts:Contact[]
+}
+
+function ContactList({searchQuery, setSearchQuery,filteredContacts}: ContactListProps) {
+
 
   const {
     currentPage,
@@ -17,13 +26,13 @@ function ContactList() {
     setItemsPerPage,
     paginatedItems,
     totalPages
-  } = usePagination({itemsPerPage:5, totalItems:contactNumbers.length})
+  } = usePagination({itemsPerPage:5, totalItems:filteredContacts.length})
 
-  const {setSelectedContact} = useSelectedContactContext();
 
-  const currentItems = paginatedItems(contactNumbers)
 
-  if(contactNumbers.length === 0){
+  const currentItems = paginatedItems(filteredContacts)
+
+  if(filteredContacts.length === 0){
     return(
       <div>
         <UnavailableData 
@@ -46,7 +55,9 @@ function ContactList() {
           {currentItems.map((data,index)=>(
            <ContactData 
              data={data} 
-           key={index}/>
+           key={index}
+           isHighlighted={searchQuery.length > 0}
+           />
 
            ))}
 

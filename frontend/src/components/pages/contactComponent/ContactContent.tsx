@@ -4,9 +4,6 @@ import { addNewContacts, contactDevice, contactNumbers, contactPsync, contactSha
 import React, { useState } from 'react'
 import { IoSearchCircleOutline } from 'react-icons/io5'
 
-import { IoSendOutline } from "react-icons/io5";
-import { GiReceiveMoney } from 'react-icons/gi'
-import ContactInscription from '@/components/content/ContactInscription'
 import { Calendar } from 'lucide-react'
 import EventContact from './EventContact'
 import { Button } from '@/components/ui/button'
@@ -15,18 +12,15 @@ import { Sheet,  SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetT
 
 import ContainerAddContent from './ContainerAddContent'
 import ContactList from './ContactList'
-import { useSelectedContactContext } from '@/app/context/SelectContext';
 import ContactDynamism from './ContactDynamism';
+import useContactSearch from '@/hooks/useContactSearch'
+
 
 
 
 function ContactContent() {
-  const {selectedContact} = useSelectedContactContext();
 
-  if(!selectedContact){
-     <div>Nothing selected</div>
-  }
-
+  const {setSearchQuery,searchQuery,filteredContacts} = useContactSearch()
   return (
     <div className='flex w-full h-auto font-dmMono bg-wineTexture  '>
         <div className='flex-[20%] border-r border-black bg-wineTexture gap-5'>
@@ -104,15 +98,26 @@ function ContactContent() {
 
         <div className='flex-[20%] border-r border-black bg-wineTexture p-3'>
             <div className='text-zinc-800 mb-5'>
-                <h1>Displayed contacts-117</h1>
+                <h1>Displayed contacts-{filteredContacts.length}</h1>
                 <div className='mx-10 flex justify-center border gap-5 items-center p-2 border-zinc-800 rounded-md'>
                     <IoSearchCircleOutline className='text-2xl'/>
-                    <input className='outline-none bg-transparent placeholder:text-zinc-800' type="text" placeholder="Search"/>
+                    <input 
+                    className='outline-none
+                     bg-transparent
+                      placeholder:text-zinc-800'
+                       type="text" placeholder="Search"
+                       value={searchQuery}
+                       onChange={(e)=>setSearchQuery(e.target.value)}
+                       />
                 </div>
             </div>
 
             <div>
-                <ContactList/>
+                <ContactList
+                 searchQuery ={searchQuery}
+                 setSearchQuery={setSearchQuery}
+                 filteredContacts = {filteredContacts}
+                />
             </div>
         </div>
 

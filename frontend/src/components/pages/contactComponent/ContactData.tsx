@@ -9,13 +9,14 @@ import { useSelectedContactContext } from '@/app/context/SelectContext';
 
 
 
-function ContactData({ data, className }: { data: Contact, className?: string }) {
+function ContactData({ data, className ,isHighlighted}: { data: Contact, className?: string,isHighlighted:boolean }) {
    const {setSelectedContact} = useSelectedContactContext()
   
   return (
     <div
      onClick={()=>setSelectedContact(data)} 
-    className={clsx("flex mb-3 items-center cursor-pointer justify-between gap-5 text-zinc-800 group transition duration-300 hover:bg-zinc-100 hover:shadow-md p-3 rounded-lg", className)}>
+    className={
+      clsx("flex mb-3 items-center cursor-pointer justify-between gap-5 text-zinc-800 group transition duration-300 hover:bg-zinc-100 hover:shadow-md p-3 rounded-lg", className,{"bg-yellow-100":isHighlighted})}>
       
       <div className="flex gap-5">
 
