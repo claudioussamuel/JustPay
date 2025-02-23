@@ -30,10 +30,57 @@ import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol
 
 /**
  * @title Just Pay
- * @author Opoku Claudious Samuel Mensah
+ * @dev Just Pay is a contract for a decentralized p2p that allows users to exchange stable coins.
  *
- * @dev Just Pay is a contract for a decentralized p2p
- *  that allows users to exchange stable coins.
+ * @notice This contract allows users to add personal information, create and pay requests, manage friends, and send tokens.
+ *
+ * @dev The contract uses OpenZeppelin's ReentrancyGuard and SafeERC20 libraries to prevent reentrancy attacks and ensure safe token transfers.
+ *
+ * @dev The contract includes the following functionalities:
+ * - Adding user information
+ * - Creating payment requests
+ * - Adding and removing friends
+ * - Paying and rejecting requests
+ * - Sending tokens
+ * - Viewing transaction history, requests, friends, and user information
+ * - Checking ERC20 token balance
+ *
+ * @dev The contract uses several custom errors for better error handling.
+ *
+ * @dev The contract emits a TransferSent event when tokens are sent.
+ *
+ * @dev The contract includes the following modifiers:
+ * - moreThanZero: Ensures the amount is greater than zero.
+ * - noSuchRequest: Ensures the request exists.
+ *
+ * @dev The contract uses the following state variables:
+ * - s_owner: The owner of the contract.
+ * - s_names: Mapping of address to UserInfo struct.
+ * - s_requests: Mapping of address to request array.
+ * - s_history: Mapping of address to SendReceive array.
+ * - s_myFriends: Mapping of address to UserInfo array.
+ * - s_allUsers: Array of all public users.
+ *
+ * @dev The contract includes the following structs:
+ * - Request: Struct for payment requests.
+ * - SendReceive: Struct for transaction history.
+ * - UserInfo: Struct for user information.
+ *
+ * @dev The contract includes the following functions:
+ * - constructor: Initializes the contract owner.
+ * - addName: Adds user information.
+ * - createRequest: Creates a payment request.
+ * - addFriends: Adds a friend.
+ * - removeFriend: Removes a friend.
+ * - payRequest: Pays a payment request.
+ * - rejectRequest: Rejects a payment request.
+ * - sendToken: Sends ERC20 tokens.
+ * - addHistory: Adds transaction history (internal function).
+ * - getMyHistory: Returns the transaction history of a user.
+ * - getMyRequests: Returns the payment requests of a user.
+ * - getAllMyFriends: Returns the friends of a user.
+ * - getMyName: Returns the user information of a user.
+ * - getERC20Balance: Returns the ERC20 token balance of an account.
  */
 
 contract JustPay is ReentrancyGuard {
@@ -82,6 +129,10 @@ contract JustPay is ReentrancyGuard {
         string xHandle;
         string facebookHandle;
         string igHandle;
+        string location;
+        string email;
+        string phone;
+        address userAddress;
         bool hasName;
     }
 
@@ -140,7 +191,10 @@ contract JustPay is ReentrancyGuard {
         string memory _imageUrl,
         string memory _xHandle,
         string memory _facebookHandle,
-        string memory _igHandle
+        string memory _igHandle,
+        string memory _location,
+        string memory _email,
+        string memory _phone
     ) public {
         UserInfo storage newUserInfo = s_names[msg.sender];
         newUserInfo.firstName = _firstName;
@@ -151,6 +205,10 @@ contract JustPay is ReentrancyGuard {
         newUserInfo.xHandle = _xHandle;
         newUserInfo.facebookHandle = _facebookHandle;
         newUserInfo.igHandle = _igHandle;
+        newUserInfo.email = _email;
+        newUserInfo.phone = _phone;
+        newUserInfo.userAddress = msg.sender;
+        newUserInfo.location = _location;
         newUserInfo.hasName = true;
 
         // Create a new instance to push into the array
@@ -163,6 +221,10 @@ contract JustPay is ReentrancyGuard {
             xHandle: newUserInfo.xHandle,
             facebookHandle: newUserInfo.facebookHandle,
             igHandle: newUserInfo.igHandle,
+            location: newUserInfo.location,
+            email: newUserInfo.email,
+            phone: newUserInfo.phone,
+            userAddress: msg.sender,
             hasName: newUserInfo.hasName
         });
         s_allUsers.push(newUser);
@@ -187,6 +249,44 @@ contract JustPay is ReentrancyGuard {
             newRequest.name = s_names[msg.sender].firstName;
         }
         s_requests[user].push(newRequest);
+    }
+
+    function addFriends(
+        string memory _firstName,
+        string memory _lastName,
+        string memory _gender,
+        string memory _dateOfBirth,
+        string memory _imageUrl,
+        string memory _xHandle,
+        string memory _facebookHandle,
+        string memory _igHandle,
+        string memory _location,
+        string memory _email,
+        string memory _phone,
+        address userAddress
+    ) public {
+        UserInfo memory newUserInfo;
+        newUserInfo.firstName = _firstName;
+        newUserInfo.lastName = _lastName;
+        newUserInfo.gender = _gender;
+        newUserInfo.dateOfBirth = _dateOfBirth;
+        newUserInfo.imageUrl = _imageUrl;
+        newUserInfo.xHandle = _xHandle;
+        newUserInfo.facebookHandle = _facebookHandle;
+        newUserInfo.igHandle = _igHandle;
+        newUserInfo.email = _email;
+        newUserInfo.phone = _phone;
+        newUserInfo.userAddress = userAddress;
+        newUserInfo.location = _location;
+        newUserInfo.hasName = true;
+
+        s_myFriends[msg.sender].push(newUserInfo);
+    }
+
+    function removeFriend(uint256 _request) public payable {
+        UserInfo[] storage myFriends = s_myFriends[msg.sender];
+        myFriends[_request] = myFriends[myFriends.length - 1];
+        myFriends.pop();
     }
 
     //Pay a Request
@@ -234,6 +334,14 @@ contract JustPay is ReentrancyGuard {
         myRequests.pop();
     }
 
+    /**
+     * @notice Sends ERC20 tokens from one user to another
+     * @param to The recipient address
+     * @param token The ERC20 token contract address
+     * @param amount The amount of tokens to send
+     * @param message Optional message for the transaction
+     */
+
     function sendToken(
         address to,
         IERC20 token,
@@ -261,7 +369,13 @@ contract JustPay is ReentrancyGuard {
         newSend.message = _message;
         newSend.otherPartyAddress = receiver;
         if (s_names[receiver].hasName) {
-            newSend.otherPartyName = s_names[receiver].firstName;
+            newSend.otherPartyName = string(
+                abi.encodePacked(
+                    s_names[receiver].firstName,
+                    " ",
+                    s_names[receiver].lastName
+                )
+            );
         }
         newSend.time = block.timestamp;
         s_history[sender].push(newSend);
@@ -272,41 +386,17 @@ contract JustPay is ReentrancyGuard {
         newReceive.message = _message;
         newReceive.otherPartyAddress = sender;
         if (s_names[sender].hasName) {
-            newReceive.otherPartyName = s_names[sender].firstName;
+            newReceive.otherPartyName = string(
+                abi.encodePacked(
+                    s_names[sender].firstName,
+                    " ",
+                    s_names[sender].lastName
+                )
+            );
         }
         newReceive.time = block.timestamp;
         s_history[receiver].push(newReceive);
     }
-
-    //Get all requests sent to a User
-
-    // function getMyRequests(
-    //     address _user
-    // )
-    //     public
-    //     view
-    //     returns (
-    //         address[] memory,
-    //         uint256[] memory,
-    //         string[] memory,
-    //         string[] memory
-    //     )
-    // {
-    //     address[] memory addrs = new address[](s_requests[_user].length);
-    //     uint256[] memory amnt = new uint256[](s_requests[_user].length);
-    //     string[] memory msge = new string[](s_requests[_user].length);
-    //     string[] memory nme = new string[](s_requests[_user].length);
-
-    //     for (uint i = 0; i < s_requests[_user].length; i++) {
-    //         Request storage myRequests = s_requests[_user][i];
-    //         addrs[i] = myRequests.requestor;
-    //         amnt[i] = myRequests.amount;
-    //         msge[i] = myRequests.message;
-    //         nme[i] = myRequests.name;
-    //     }
-
-    //     return (addrs, amnt, msge, nme);
-    // }
 
     //Get all historic transactions user has been apart of
 
@@ -322,6 +412,12 @@ contract JustPay is ReentrancyGuard {
         return s_requests[_user];
     }
 
+    function getAllMyFriends(
+        address _user
+    ) public view returns (UserInfo[] memory) {
+        return s_myFriends[_user];
+    }
+
     function getMyName(address _user) public view returns (UserInfo memory) {
         return s_names[_user];
     }
@@ -332,42 +428,4 @@ contract JustPay is ReentrancyGuard {
     ) public view returns (uint256) {
         return (token).balanceOf(account);
     }
-
-    /**
-     * @notice Sends ERC20 tokens from one user to another
-     * @param to The recipient address
-     * @param token The ERC20 token contract address
-     * @param amount The amount of tokens to send
-     * @param message Optional message for the transaction
-     * @param tokenName The name of the token (for display purposes)
-     */
 }
-
-// Order Creation (Function to lock your Stable coin (USDT,USDC))
-//1. Lock the stable coin
-// 2. Add Name
-// 3. Add Rate
-// 4. Add Order limit
-// 5. Add Payment Method
-
-// Order Matching (Function to match the order with the best price)
-// 1. Select Add Order
-// 2. Select the amount of stable coin to be exchanged
-
-// Order Calculation (Function to calculate the order)
-// Seller Confirms the order
-// Buyer Confirms the order
-// Sent the stable coin to the buyer
-// Seller get on chain credibility
-
-// Order Cancellation (Function to cancel the order)
-// Seller Cancels the order
-// Buyer Cancels the order
-
-// Order Conflict (Function to resolve the conflict)
-// Seller add proof of payment
-// Buyer add proof of payment
-// Admin resolve the conflict
-
-// Withdrawal (Function to withdraw the stable coin)
-// Seller has no conflict nor order
