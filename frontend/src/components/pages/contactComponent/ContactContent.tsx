@@ -2,69 +2,25 @@
 
 import { addNewContacts, contactDevice, contactNumbers, contactPsync, contactShared } from '@/app/data'
 import React, { useState } from 'react'
-import { BiPlus } from 'react-icons/bi'
 import { IoSearchCircleOutline } from 'react-icons/io5'
-import ContactData from './ContactData'
-import { IoSendOutline } from "react-icons/io5";
-import { GiReceiveMoney } from 'react-icons/gi'
-import ContactInscription from '@/components/content/ContactInscription'
+
 import { Calendar } from 'lucide-react'
 import EventContact from './EventContact'
 import { Button } from '@/components/ui/button'
-import { useWallets } from '@privy-io/react-auth'
-import { base } from 'viem/chains'
-import { parseEther } from 'viem'
-import { useToast } from '@/hooks/use-toast'
-import { ToastAction } from '@radix-ui/react-toast'
 import Link from 'next/link'
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { Label } from '@radix-ui/react-label'
-import { Input } from '@/components/ui/input'
-import { useUserContext } from '@/app/context/UserContext'
+import { Sheet,  SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+
 import ContainerAddContent from './ContainerAddContent'
-import ItemPageSelector from '@/components/content/ItemPageSelector'
-import { usePaginationContext } from '@/app/context/PaginationContext'
-import { ContainerAddContentProps } from '../../../../types/global.types'
 import ContactList from './ContactList'
+import ContactDynamism from './ContactDynamism';
+import useContactSearch from '@/hooks/useContactSearch'
+
 
 
 
 function ContactContent() {
-    const {addUser} = useUserContext();
 
-
-    const [newUser, setNewUser] = useState({
-        firstName: "",
-        lastName: "",
-        xHandle: "",
-        facebookHandle: "",
-        igHandle: "",
-        address: "",
-        occupation: "",
-      });
-
-
-    const {wallets} = useWallets();
-    const {toast} = useToast()
-
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-        const {id,value} = e.target;
-        setNewUser((prev)=>({...prev, [id]:value}))
-    }
-
-    const handleSave=()=>{
-        addUser(newUser);
-        setNewUser({
-            firstName: "",
-            lastName: "",
-            xHandle: "",
-            facebookHandle: "",
-            igHandle: "",
-            address: "",
-            occupation: "",
-          });
-    }
-
+  const {setSearchQuery,searchQuery,filteredContacts} = useContactSearch()
   return (
     <div className='flex w-full h-auto font-dmMono bg-wineTexture  '>
         <div className='flex-[20%] border-r border-black bg-wineTexture gap-5'>
@@ -123,19 +79,18 @@ function ContactContent() {
                         <Button className='bg-softBlend'>Add new contact</Button>  
                     </SheetTrigger>
                     <SheetContent className='text-zinc-800'>
-        <SheetHeader>
-          <SheetTitle>Friend zone</SheetTitle>
-          <SheetDescription>
-         Add new numbers to contact list
-          </SheetDescription>
-        </SheetHeader>
-          <ItemPageSelector/>
-          <div>
-            <ContainerAddContent addNewContacts={addNewContacts}/>
-          </div>
+                      <SheetHeader>
+                      <SheetTitle>Friend zone</SheetTitle>
+                         <SheetDescription>Add new numbers to contact list </SheetDescription>
+                        </SheetHeader>
 
-              </SheetContent>
-         </Sheet>
+
+                      <div>
+                         <ContainerAddContent addNewContacts={addNewContacts}/>
+                         </div>
+
+                        </SheetContent>
+                     </Sheet>
                 </div>
 
             </div>
@@ -143,71 +98,33 @@ function ContactContent() {
 
         <div className='flex-[20%] border-r border-black bg-wineTexture p-3'>
             <div className='text-zinc-800 mb-5'>
-                <h1>Displayed contacts-117</h1>
+                <h1>Displayed contacts-{filteredContacts.length}</h1>
                 <div className='mx-10 flex justify-center border gap-5 items-center p-2 border-zinc-800 rounded-md'>
                     <IoSearchCircleOutline className='text-2xl'/>
-                    <input className='outline-none bg-transparent placeholder:text-zinc-800' type="text" placeholder="Search"/>
+                    <input 
+                    className='outline-none
+                     bg-transparent
+                      placeholder:text-zinc-800'
+                       type="text" placeholder="Search"
+                       value={searchQuery}
+                       onChange={(e)=>setSearchQuery(e.target.value)}
+                       />
                 </div>
             </div>
 
             <div>
-                <ContactList/>
+                <ContactList
+                 searchQuery ={searchQuery}
+                 setSearchQuery={setSearchQuery}
+                 filteredContacts = {filteredContacts}
+                />
             </div>
         </div>
 
         <div className='flex-[60%]'>
             <div className='flex flex-row gap-5'>
-            <div className='flex-[50%] bg-softBlend border h-auto'>
-
-                <div className='p-5 border bg-brand-beige m-5 rounded-md'>
-                   <div className='flex gap-5'>
-
-                   <div className="w-20 h-20 p-3 rounded-full font-dmMono bg-gradient-to-r text-nowrap from-pink-500 via-purple-500 to-indigo-500 flex justify-center items-center">
-                     <h1 className="text-2xl text-white flex justify-center items-center text-nowrap">
-                     <span className=''>C</span> <span className='text-nowrap'>K</span>
-                    </h1>
-                    </div>
-                    <div>
-                        <h1 className='text-2xl'>Cdisplalaud Mensah</h1>
-                        <div>
-                            <p>Developer</p>
-                        </div>
-
-                        <div className='bg-brand-light p-1 w-20 rounded-md'>
-                            <p className='text-center text-white text-[10px]'>Colleauge</p>
-                        </div>
-                    </div>
-                   </div>
-                   
-                   <div className='mt-5 flex flex-row gap-5 justify-around text-white'>
-
-                     <Link href="/payment">
-                      <Button
-                       className='hover:bg-none flex items-center gap-3 bg-brand-hue-color w-full justify-center py-2'>
-                        <IoSendOutline/>
-                        send
-                        </Button>
-                        </Link>
-
-                      <div className='flex items-center gap-3 bg-green-400 w-full justify-center py-2'>receive
-                        <GiReceiveMoney/>
-                      </div>
-                   </div>
-
-                </div>
-
-                <div className='p-5 space-y-3'>
-                   <ContactInscription title='phone number' description='+233-548672'/>
-                   <ContactInscription title='gmail' description='claudious@gmail.com'/>
-                   <ContactInscription title='work' description='Blockchain Developer'/>
-                   <ContactInscription title='X ' description='@codeClaus'/>
-                   <ContactInscription title='Birthday' description='2nd March'/>
-                </div>
-
-            </div>
-
-
-            <div className='flex-[50%] border h-auto border-black'>
+                <ContactDynamism/>
+            <div className='flex-[50%] border border-t-0 border-b-0 h-auto border-black'>
                 <div className='m-3'>
                 <div className='flex flex-row items-center justify-between text-zinc-800 mb-5'>
                     <h1 className='text-[18px]'>Schedule events</h1>
@@ -216,8 +133,7 @@ function ContactContent() {
                 <EventContact/>
             </div>
 
-            </div>
-                    
+            </div>     
             </div>
 
         </div>

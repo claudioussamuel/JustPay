@@ -1,6 +1,5 @@
 "use client"
 
-import { usePaginationContext } from "@/app/context/PaginationContext";
 import React from "react";
 import {
   Select,
@@ -13,18 +12,19 @@ import {
 } from "@/components/ui/select";
 import clsx from "clsx";
 
-function ItemPageSelector({className}:{className?:string}) {
-  const { itemsPerPage, setItemsPerPage, setCurrentPage } = usePaginationContext();
+interface ItemPageSelectorProps {
+  className?: string;
+  itemsPerPage: number;
+  setItemsPerPage: (items: number) => void;
+}
 
+function ItemPageSelector({ className, itemsPerPage, setItemsPerPage }: ItemPageSelectorProps) {
   return (
-    <div className={clsx("flex items-center gap-3 py-5",className)}>
+    <div className={clsx("flex items-center gap-3 py-5", className)}>
       <label htmlFor="itemsPerPage">Items per page:</label>
       <Select
         value={itemsPerPage.toString()}
-        onValueChange={(value) => {
-          setItemsPerPage(Number(value));
-          setCurrentPage(1); 
-        }}
+        onValueChange={(value) => setItemsPerPage(Number(value))}
       >
         <SelectTrigger className="w-[60px]">
           <SelectValue placeholder="Select number" />

@@ -24,8 +24,14 @@ export interface ContactAddedType{
     lastName:string;
     gmail:string;
     occupation:string;
+    x?:string;
+    date?:string;
+    ig?:string;
+    phone?:string;
 }
 
 export interface ContainerAddContentProps {
     addNewContacts: ContactAddedType[];
 }
+
+
