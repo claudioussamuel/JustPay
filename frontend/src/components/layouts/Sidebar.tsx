@@ -6,7 +6,6 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Button } from '../ui/button';
-import { base } from 'viem/chains';
 import { useFundWallet, useWallets } from '@privy-io/react-auth';
 
 
@@ -41,7 +40,7 @@ function Sidebar() {
         ))}
 
         <Button 
-          onClick={()=>fundWallet(wallets[0].address)}
+          onClick={()=>fundWallet(wallets[0].address,)}
           className='font-dmMono bg-black text-white'>
           Fund Wallet</Button>
         
