@@ -44,18 +44,18 @@ function ProfileContent() {
 
 
     const [users, setUser] = useState({
-        firstName: "...",  //1
-        lastName: "....",  //2
+        firstName: "...",  
+        lastName: "....",  
         email: "...",
         phone: "...",
         city: "...",
-        gender: "...",  //3
-        dob: "...", //4
+        gender: "...",  
+        dob: "...", 
         address: "...", 
-        profilePic: "/images/v4.jpg", //5
-        xHandle:"...", //6
-        igHandle:"...", //7
-        facebookHandle:"..." //8
+        profilePic: "/images/v4.jpg", 
+        xHandle:"...",
+        igHandle:"...", 
+        facebookHandle:"..." 
     });
 
     // Add useEffect to fetch contract data
@@ -76,7 +76,7 @@ function ProfileContent() {
                         hasName
                     ] = data;
 
-                    console.log(`claudfiodds ${data}`)
+              
                     setUser(prev => ({
                         ...prev,
                         firstName: firstName || "",
@@ -283,6 +283,18 @@ function ProfileContent() {
                         <Label>X</Label>
                         <Input className="pb-3" name="xHandle" value={tempUser.xHandle} onChange={handleChange} />
                         </div>
+
+
+                        <div className='mb-3'>
+                        <Label>Gmail</Label>
+                        <Input className="pb-3" name="address" value={tempUser.email} onChange={handleChange} />
+                        </div>
+
+                        <div className='mb-3'>
+                        <Label>Phone</Label>
+                        <Input className="pb-3" name="address" value={tempUser.phone} onChange={handleChange} />
+                        </div>
+
 
                         <div className='mb-3'>
                         <Label>Facebook</Label>

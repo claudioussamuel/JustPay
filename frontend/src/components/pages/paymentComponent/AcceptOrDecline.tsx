@@ -1,8 +1,9 @@
-import { eventGroup } from '@/app/data'
 import React, { useEffect, useState } from 'react'
 import GroupCard from '../groupComponent/GroupCard'
 import { readMyRequests } from '@/lib/integrations/viem/contract'
 import { usePrivy } from '@privy-io/react-auth';
+import UnavailableData from '@/components/unavailable/UnavailableData'
+
 
 interface Request {
   requestor:string;
@@ -12,7 +13,6 @@ interface Request {
   stableCoin:string;
   time:bigint;
 }
-import UnavailableData from '@/components/unavailable/UnavailableData'
 
 function AcceptOrDecline() {
   const [requests, setRequests] = useState<Request[]>([]);
@@ -23,7 +23,7 @@ function AcceptOrDecline() {
 
   useEffect(() => {
     const fetchRequests = async () => {
-     // Replace with actual user address
+
       const data = await readMyRequests(`${walletAddress}` as `0x${string}`);
       if (data) {
         setRequests(data);

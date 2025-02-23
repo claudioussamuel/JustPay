@@ -1,16 +1,13 @@
 import React from 'react'
 
-import { contactNumbers } from '@/app/data'
 import ContactData from './ContactData'
 import ItemPageSelector from '@/components/content/ItemPageSelector'
 import { Button } from '@/components/ui/button'
 import UnavailableData from '@/components/unavailable/UnavailableData'
 import { usePagination } from '@/hooks/usePagination'
-import { useSelectedContactContext } from '@/app/context/SelectContext'
-import useContactSearch from '@/hooks/useContactSearch'
 import { Contact } from '../../../../types/Context.types'
 
-interface ContactListProps{
+export interface ContactListProps{
   searchQuery: string;
   setSearchQuery: (query:string)=>void;
   filteredContacts:Contact[]
