@@ -28,6 +28,7 @@ export type Contact = {
     occupation:string;
     x?:string;
     date?:string;
+    wallet?:string;
     ig?:string;
     phone?:string | number | any;
 }
