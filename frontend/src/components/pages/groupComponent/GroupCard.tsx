@@ -163,12 +163,11 @@ function GroupCard({ data, index }: GroupTypes & { index: number }) {
     setShowToggle((prevState) => !prevState);
   };
 
-  // Generate avatar fallback from initials
   const avatarFallback = `${data.name[0]}`;
 
   return (
     <div className="w-80 border rounded-lg p-3 border-zinc-800 font-dmMono bg-softBlend relative hover:shadow-lg transition-shadow duration-300">
-      {/* Header Section */}
+
       <div className="flex justify-between">
         <div className="flex gap-5 items-center">
           <Avatar>
@@ -188,10 +187,10 @@ function GroupCard({ data, index }: GroupTypes & { index: number }) {
         />
       </div>
 
-      {/* Divider */}
+
       <div className="h-[2px] w-full bg-gray-400 mt-2" />
 
-      {/* Details Section */}
+     
       <div className="pt-3 space-y-3">
         <div className="flex items-center gap-2">
           <FaRegMessage className="text-white" />

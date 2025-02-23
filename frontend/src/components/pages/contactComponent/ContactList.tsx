@@ -4,18 +4,35 @@ import { contactNumbers } from '@/app/data'
 import ContactData from './ContactData'
 import ItemPageSelector from '@/components/content/ItemPageSelector'
 import { Button } from '@/components/ui/button'
-import { usePaginationContext } from '@/app/context/PaginationContext'
 import UnavailableData from '@/components/unavailable/UnavailableData'
+import { usePagination } from '@/hooks/usePagination'
+import { useSelectedContactContext } from '@/app/context/SelectContext'
+import useContactSearch from '@/hooks/useContactSearch'
+import { Contact } from '../../../../types/Context.types'
 
-function ContactList() {
+interface ContactListProps{
+  searchQuery: string;
+  setSearchQuery: (query:string)=>void;
+  filteredContacts:Contact[]
+}
 
-  const {setCurrentPage, setItemsPerPage,currentPage, itemsPerPage} = usePaginationContext()
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage;
-  const totalPages = Math.ceil( contactNumbers.length / itemsPerPage);
-  const currentItems = contactNumbers.slice(startIndex, endIndex)
+function ContactList({searchQuery, setSearchQuery,filteredContacts}: ContactListProps) {
 
-  if(contactNumbers.length === 0){
+
+  const {
+    currentPage,
+    itemsPerPage,
+    setCurrentPage,
+    setItemsPerPage,
+    paginatedItems,
+    totalPages
+  } = usePagination({itemsPerPage:5, totalItems:filteredContacts.length})
+
+
+
+  const currentItems = paginatedItems(filteredContacts)
+
+  if(filteredContacts.length === 0){
     return(
       <div>
         <UnavailableData 
@@ -29,29 +46,34 @@ function ContactList() {
 
   return (
     <div>
-           <ItemPageSelector className='text-zinc-800  place-self-center'/>
+           <ItemPageSelector 
+           className='text-zinc-800  place-self-center'
+            itemsPerPage={itemsPerPage}
+            setItemsPerPage={setItemsPerPage}
+           />
 
           {currentItems.map((data,index)=>(
-           <ContactData data={data} key={index}/>
+           <ContactData 
+             data={data} 
+           key={index}
+           isHighlighted={searchQuery.length > 0}
+           />
+
            ))}
 
-      <div className="flex items-center text-[12px] justify-center gap-3 text-zinc-800">
-        <Button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-        >
+    <div className="flex items-center text-[12px] justify-center gap-3 text-zinc-800">
+        <Button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
           Previous
         </Button>
         <span>
           Page {currentPage} of {totalPages}
         </span>
-        <Button
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-          disabled={currentPage === totalPages}
-        >
+        <Button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>
           Next
         </Button>
       </div>
+
+
     </div>
   )
 }

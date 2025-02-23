@@ -96,6 +96,10 @@ contract JustPay is ReentrancyGuard {
     mapping(address => Request[]) private s_requests;
     /// @dev Mapping of address to history
     mapping(address => SendReceive[]) private s_history;
+    /// @dev Mapping of address to Friends
+    mapping(address => UserInfo[]) private s_myFriends;
+    /// @dev All public users
+    UserInfo[] public s_allUsers;
 
     ///////////////////
     // Events
@@ -148,6 +152,20 @@ contract JustPay is ReentrancyGuard {
         newUserInfo.facebookHandle = _facebookHandle;
         newUserInfo.igHandle = _igHandle;
         newUserInfo.hasName = true;
+
+        // Create a new instance to push into the array
+        UserInfo memory newUser = UserInfo({
+            firstName: newUserInfo.firstName,
+            lastName: newUserInfo.lastName,
+            gender: newUserInfo.gender,
+            dateOfBirth: newUserInfo.dateOfBirth,
+            imageUrl: newUserInfo.imageUrl,
+            xHandle: newUserInfo.xHandle,
+            facebookHandle: newUserInfo.facebookHandle,
+            igHandle: newUserInfo.igHandle,
+            hasName: newUserInfo.hasName
+        });
+        s_allUsers.push(newUser);
     }
 
     //Create a Request

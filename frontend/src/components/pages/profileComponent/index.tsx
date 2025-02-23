@@ -36,27 +36,26 @@ import { readContractData } from '@/lib/integrations/viem/contract';
 
 function ProfileContent() {
 
-    const {login, authenticated,ready, user,logout,} = usePrivy()
+    const { user,} = usePrivy()
     const walletAddress = user?.wallet?.address;
     
     const { wallets} = useWallets();
-    const {fundWallet} = useFundWallet();
  
 
 
     const [users, setUser] = useState({
-        firstName: "...",
-        lastName: "....",
+        firstName: "...",  //1
+        lastName: "....",  //2
         email: "...",
         phone: "...",
         city: "...",
-        gender: "...", 
-        dob: "...",
-        address: "...",
-        profilePic: "/images/v4.jpg",
-        xHandle:"...",
-        igHandle:"...",
-        facebookHandle:"..."
+        gender: "...",  //3
+        dob: "...", //4
+        address: "...", 
+        profilePic: "/images/v4.jpg", //5
+        xHandle:"...", //6
+        igHandle:"...", //7
+        facebookHandle:"..." //8
     });
 
     // Add useEffect to fetch contract data
@@ -70,10 +69,6 @@ function ProfileContent() {
                         lastName, 
                         gender, 
                         dateOfBirth, 
-                        homeTown, 
-                        gmail, 
-                        telephone, 
-                        country, 
                         imageUrl,
                         xHandle,
                         facebookHandle,
@@ -81,16 +76,13 @@ function ProfileContent() {
                         hasName
                     ] = data;
 
+                    console.log(`claudfiodds ${data}`)
                     setUser(prev => ({
                         ...prev,
                         firstName: firstName || "",
                         lastName: lastName || "",
-                        email: gmail || "",
-                        phone: telephone || "",
-                        city: homeTown || "",
                         gender: gender || "",
                         dob: dateOfBirth || "",
-                        address: country || "",
                         profilePic: imageUrl || "/images/v4.jpg",
                         xHandle:xHandle || "",
                         facebookHandle: facebookHandle || "",
@@ -121,68 +113,61 @@ function ProfileContent() {
 
     async function addUserDataToTheBlocChain(userData: any) {
         try {
-          if (!wallets || wallets.length === 0) {
-            console.error("No wallet connected");
-            return;
-          }
-      
-          const wallet = wallets[0];
-          if (!wallet) {
-            console.error("Wallet is undefined");
-            return;
-          }
-      
-    
-          const provider = await wallet.getEthereumProvider();
-          if (!provider) {
-            console.error("Provider is undefined");
-            return;
-          }
-      
-          const currentChainId = await provider.request({ method: "eth_chainId" });
+            if (!wallets || wallets.length === 0) {
+                console.error("No wallet connected");
+                return;
+            }
 
-          if (currentChainId !== `0x${sepolia.id.toString(16)}`) {
-            await wallet.switchChain(sepolia.id);
-          }
+            const wallet = wallets[0];
+            if (!wallet) {
+                console.error("Wallet is undefined");
+                return;
+            }
 
+            const provider = await wallet.getEthereumProvider();
+            if (!provider) {
+                console.error("Provider is undefined");
+                return;
+            }
 
-          const client = createWalletClient({
-            chain: sepolia,
-            transport: custom(provider),
-            account: walletAddress as `0x${string}`,
-          });
-      
-          const contract = getContract({
-            address: contractAddress,
-            abi: contractAbi,
-            client,
-          });
-      
-          await contract.write.addName([
-            userData.firstName,
-            userData.lastName,
-            userData.gender,
-            userData.dateOfBirth,
-            userData.city,
-            userData.gmail,
-            userData.homeTown,
-            userData.phone,
-            userData.address,
-            userData.xHandle,
-            userData.facebookHandle,
-            userData.imageUrl,
-            userData.igHandle
-          ]);
-      
-          console.log("User data added to the blockchain");
+            const currentChainId = await provider.request({ method: "eth_chainId" });
+
+            if (currentChainId !== `0x${sepolia.id.toString(16)}`) {
+                await wallet.switchChain(sepolia.id);
+            }
+
+            const client = createWalletClient({
+                chain: sepolia,
+                transport: custom(provider),
+                account: walletAddress as `0x${string}`,
+            });
+
+            const contract = getContract({
+                address: contractAddress,
+                abi: contractAbi,
+                client,
+            });
+
+            await contract.write.addName([
+                userData.firstName,
+                userData.lastName,
+                userData.gender,
+                userData.dob,
+                userData.profilePic,
+                userData.xHandle,
+                userData.facebookHandle,
+                userData.igHandle
+            ]);
+
+            console.log("User data added to the blockchain");
         } catch (error) {
-          console.error("Failed to update blockchain:", error);
+            console.error("Failed to update blockchain:", error);
         }
-      }
+    }
     // Handle save changes
     const handleSave = async ()  => {
         setUser(tempUser);
-       await addUserDataToTheBlocChain(users);
+       await addUserDataToTheBlocChain(tempUser);
     };
 
 
@@ -199,7 +184,8 @@ function ProfileContent() {
             console.log(`Kenny ${imageURL}`)
             setUser((prevUser) => ({
                 ...prevUser, 
-                imageUrl: imageURL
+                profilePic: imageURL,
+                imageURL
             }));
         }
     };
@@ -295,22 +281,22 @@ function ProfileContent() {
 
                         <div className='mb-3'>
                         <Label>X</Label>
-                        <Input className="pb-3" name="gender" value={tempUser.xHandle} onChange={handleChange} />
+                        <Input className="pb-3" name="xHandle" value={tempUser.xHandle} onChange={handleChange} />
                         </div>
 
                         <div className='mb-3'>
                         <Label>Facebook</Label>
-                        <Input className="pb-3" name="gender" value={tempUser.facebookHandle} onChange={handleChange} />
+                        <Input className="pb-3" name="facebookHandle" value={tempUser.facebookHandle} onChange={handleChange} />
                         </div>
 
                         <div className='mb-3'>
                         <Label>Instagram</Label>
-                        <Input className="pb-3" name="gender" value={tempUser.igHandle} onChange={handleChange} />
+                        <Input className="pb-3" name="igHandle" value={tempUser.igHandle} onChange={handleChange} />
                         </div>
 
                         <div className='mb-3'>
                         <Label>Address</Label>
-                        <Input className="pb-3" name="gender" value={tempUser.address} onChange={handleChange} />
+                        <Input className="pb-3" name="address" value={tempUser.address} onChange={handleChange} />
                         </div>
 
                     </div>

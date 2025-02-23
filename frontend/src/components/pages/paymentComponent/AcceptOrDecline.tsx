@@ -12,6 +12,7 @@ interface Request {
   stableCoin:string;
   time:bigint;
 }
+import UnavailableData from '@/components/unavailable/UnavailableData'
 
 function AcceptOrDecline() {
   const [requests, setRequests] = useState<Request[]>([]);
@@ -32,6 +33,14 @@ function AcceptOrDecline() {
     fetchRequests();
   }, []);
 
+  if(eventGroup.length===0){
+    return(
+      <UnavailableData title="Nothings to accept or decline"
+      description="For the mean time we have nothing to acess"
+      image="/images/yes.png"
+      />
+    )
+  }
   return (
     <div className='grid place-content-center'>
         <div className='space-y-5 grid grid-cols-3 gap-10'>

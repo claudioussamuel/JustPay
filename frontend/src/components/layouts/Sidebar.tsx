@@ -42,7 +42,7 @@ function Sidebar() {
 
         <Button 
           onClick={()=>fundWallet(wallets[0].address)}
-          className='font-dmMono'>
+          className='font-dmMono bg-black text-white'>
           Fund Wallet</Button>
         
       </div>

@@ -1,53 +1,57 @@
+"use client";
+
 import React from "react";
-import { usePaginationContext } from "@/app/context/PaginationContext";
-import { ContactAddedType, ContainerAddContentProps } from "../../../../types/global.types";
+import { ContainerAddContentProps } from "../../../../types/global.types";
 import { Button } from "@/components/ui/button";
 import AddToContactList from "@/components/content/AddToContactList";
 import UnavailableData from "@/components/unavailable/UnavailableData";
+import { usePagination } from "@/hooks/usePagination";
+import ItemPageSelector from "@/components/content/ItemPageSelector";
 
-function ContainerAddContent({ addNewContacts }:ContainerAddContentProps) {
-  const { currentPage, itemsPerPage, setCurrentPage } = usePaginationContext();
+function ContainerAddContent({ addNewContacts }: ContainerAddContentProps) {
+  const {
+    currentPage,
+    itemsPerPage,
+    setCurrentPage,
+    setItemsPerPage,
+    paginatedItems,
+    totalPages,
+  } = usePagination({ itemsPerPage: 5, totalItems: addNewContacts.length });
 
-  if(addNewContacts.length ===0){
-    return(
+  const currentItems = paginatedItems(addNewContacts);
+
+  if (addNewContacts.length === 0) {
+    return (
       <div>
-        <UnavailableData 
-        title="Contact list is empty" 
-        description="Add contact to see your data please!!!"
-         image="/images/contact-book.png"
-         />
+        <UnavailableData
+          title="Contact list is empty"
+          description="Add contacts to see your data!"
+          image="/images/contact-book.png"
+        />
       </div>
-    )
+    );
   }
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = addNewContacts.slice(startIndex, endIndex);
-
-
-  const totalPages = Math.ceil(addNewContacts.length / itemsPerPage);
 
   return (
-    <div className="space-y-10 mt-5">
-    
-      {currentItems.map((data: any, index: any) => (
+    <div className="space-y-5">
+      <ItemPageSelector
+        className="text-zinc-800 place-self-center"
+        itemsPerPage={itemsPerPage}
+        setItemsPerPage={setItemsPerPage}
+      />
+
+      {currentItems.map((data, index) => (
         <AddToContactList key={index} data={data} />
       ))}
 
-   
-      <div className="flex items-center text-[12px] justify-center gap-3">
-        <Button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-        >
+      <div className="flex items-center text-[12px] justify-center gap-3 text-zinc-800">
+        <Button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
           Previous
         </Button>
         <span>
           Page {currentPage} of {totalPages}
         </span>
-        <Button
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-          disabled={currentPage === totalPages}
-        >
+        <Button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>
           Next
         </Button>
       </div>

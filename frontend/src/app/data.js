@@ -126,17 +126,67 @@ export const exploreSection=[
   ]
 
   export const contactNumbers = [
-    { firstName: 'Claud', lastName: 'Mensah', relationship: 'Friend', occupation: 'Developer' },
-    { firstName: 'Sophia', lastName: 'Smith', relationship: 'Colleague', occupation: 'Designer' },
-    { firstName: 'Liam', lastName: 'Johnson', relationship: 'Family', occupation: 'Engineer' },
-    { firstName: 'Emma', lastName: 'Davis', relationship: 'Friend', occupation: 'Doctor' },
-    { firstName: 'Oliver', lastName: 'Martinez', relationship: 'Neighbor', occupation: 'Teacher' },
-    { firstName: 'Mia', lastName: 'Brown', relationship: 'Colleague', occupation: 'Artist' },
-    { firstName: 'Ethan', lastName: 'Wilson', relationship: 'Family', occupation: 'Writer' },
-    { firstName: 'Ava', lastName: 'Moore', relationship: 'Friend', occupation: 'Entrepreneur' },
-    { firstName: 'James', lastName: 'Taylor', relationship: 'Friend', occupation: 'Photographer' },
+    {
+      firstName: "Claud",
+      occupation: " Associate @Samosure",
+      lastName: "Mensah",
+      gmail: "claud.mensah@gmail.com",
+      date: "21st June 2003",
+      x: "@broski",
+      ig: "@dbro",
+      relationship: 'Friend'
+    },
+    {
+      firstName: "Sophia",
+      occupation: "Data Analyst",
+      lastName: "Smith",
+      gmail: "sophia.smith@gmail.com",
+      date: "15th August 1995",
+      x: "@soph_data",
+      ig: "@sophie_art",
+       relationship: 'Friend'
+    },
+    {
+      firstName: "Michael",
+      occupation: "Software Engineer",
+      lastName: "Johnson",
+      gmail: "michael.johnson@gmail.com",
+      date: "10th December 1988",
+      x: "@mike_codes",
+      ig: "@mike_life",
+       relationship: 'Friend'
+    },
+    {
+      firstName: "Alice",
+      occupation: "Graphic Designer",
+      lastName: "Brown",
+      gmail: "alice.brown@gmail.com",
+      date: "5th March 1992",
+      x: "@alice_designs",
+      ig: "@alice_creates",
+       relationship: 'Friend'
+    },
+    {
+      firstName: "Emma",
+      occupation: "Teacher",
+      lastName: "Davis",
+      gmail: "emma.davis@gmail.com",
+      date: "30th September 1985",
+      x: "@emma_teach",
+      ig: "@emma_lifestyle",
+       relationship: 'Friend'
+    },
+    {
+      firstName: "John",
+      occupation: "Nurse",
+      lastName: "Doe",
+      gmail: "john.doe@gmail.com",
+      date: "12th April 1990",
+      x: "@john_cares",
+      ig: "@john_daily",
+       relationship: 'Friend'
+    }
   ];
-  
 
   export const eventsData = [
     {
@@ -203,14 +253,14 @@ export const exploreSection=[
 
 
   export const eventGroup = [
-    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
-    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
-    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com' ,date:'21st june 003'},
-    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
-    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
-    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com',date:'21st june 003' },
-    { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
-    { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'}
+    // { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    // { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+    // { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com' ,date:'21st june 003'},
+    // { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'},
+    // { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    // { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com',date:'21st june 003' },
+    // { firstName: 'Claud', pathner:'Premium',lastName: 'Mensah',  number: '(+233) 8603300000', gmail: '@kuvi@gmail.com',date:'21st june 003' },
+    // { firstName: 'Sophia',pathner:'Premium', lastName: 'Smith',  number: '(+233) 8603300000', gmail: '@roseNtuman@gmail.com' ,date:'21st june 003'}
   ];
   
 
@@ -246,45 +296,57 @@ export const exploreSection=[
   
   export const addNewContacts = [
     {
-      "firstName": "Claud",
-      "occupation": "Junior Public Health Officer, Associate @Samosure",
-      "lastName": "Mensah",
-      "gmail": "claud.mensah@gmail.com",
-      "date": "21st June 2003"
+      firstName: "Claud",
+      occupation: "Junior Public Health Officer, Associate @Samosure",
+      lastName: "Mensah",
+      gmail: "claud.mensah@gmail.com",
+      date: "21st June 2003",
+      x: "@broski",
+      ig: "@dbro"
     },
     {
-      "firstName": "Sophia",
-      "occupation": "Data Analyst, Freelancer @Upwork",
-      "lastName": "Smith",
-      "gmail": "sophia.smith@gmail.com",
-      "date": "15th August 1995"
+      firstName: "Sophia",
+      occupation: "Data Analyst, Freelancer @Upwork",
+      lastName: "Smith",
+      gmail: "sophia.smith@gmail.com",
+      date: "15th August 1995",
+      x: "@soph_data",
+      ig: "@sophie_art"
     },
     {
-      "firstName": "Michael",
-      "occupation": "Software Engineer, Google",
-      "lastName": "Johnson",
-      "gmail": "michael.johnson@gmail.com",
-      "date": "10th December 1988"
+      firstName: "Michael",
+      occupation: "Software Engineer, Google",
+      lastName: "Johnson",
+      gmail: "michael.johnson@gmail.com",
+      date: "10th December 1988",
+      x: "@mike_codes",
+      ig: "@mike_life"
     },
     {
-      "firstName": "Alice",
-      "occupation": "Graphic Designer, Adobe",
-      "lastName": "Brown",
-      "gmail": "alice.brown@gmail.com",
-      "date": "5th March 1992"
+      firstName: "Alice",
+      occupation: "Graphic Designer, Adobe",
+      lastName: "Brown",
+      gmail: "alice.brown@gmail.com",
+      date: "5th March 1992",
+      x: "@alice_designs",
+      ig: "@alice_creates"
     },
     {
-      "firstName": "Emma",
-      "occupation": "Teacher, Greenfield High School",
-      "lastName": "Davis",
-      "gmail": "emma.davis@gmail.com",
-      "date": "30th September 1985"
+      firstName: "Emma",
+      occupation: "Teacher, Greenfield High School",
+      lastName: "Davis",
+      gmail: "emma.davis@gmail.com",
+      date: "30th September 1985",
+      x: "@emma_teach",
+      ig: "@emma_lifestyle"
     },
     {
-      "firstName": "John",
-      "occupation": "Nurse, City General Hospital",
-      "lastName": "Doe",
-      "gmail": "john.doe@gmail.com",
-      "date": "12th April 1990"
+      firstName: "John",
+      occupation: "Nurse, City General Hospital",
+      lastName: "Doe",
+      gmail: "john.doe@gmail.com",
+      date: "12th April 1990",
+      x: "@john_cares",
+      ig: "@john_daily"
     }
-  ]
+  ];

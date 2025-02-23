@@ -23,8 +23,8 @@ interface Request {
     time:bigint;
 }
 
-export async function readContractData(userAddress: `0x${string}`): Promise<[string, string, string, string, string, string, string, string, string, string, string, string, boolean] | null> {
-    const {toast} = useToast();
+export async function readContractData(userAddress: `0x${string}`): Promise<[string, string, string, string, string, string, string, string, boolean] | null> {
+   
     try {
         const contract = getContract({
             address: contractAddress,
@@ -42,10 +42,6 @@ export async function readContractData(userAddress: `0x${string}`): Promise<[str
              && "lastName" in data 
              && "gender" in data 
              && "dateOfBirth" in data 
-             && "homeTown" in data 
-             && "gmail" in data 
-             && "telephone" in data 
-             && "country" in data 
              && "imageUrl" in data 
              && "xHandle" in data 
              && "facebookHandle" in data 
@@ -53,21 +49,13 @@ export async function readContractData(userAddress: `0x${string}`): Promise<[str
              && "hasName" in data
             ) {
           
-            return [data.firstName, data.lastName,data.gender,data.dateOfBirth,data.homeTown,data.gmail,data.telephone,data.country,data.imageUrl,data.xHandle,data.facebookHandle,data.igHandle,data.hasName] as [string, string,string,string,string,string,string,string,string,string,string,string,boolean];
+            return [data.firstName, data.lastName,data.gender,data.dateOfBirth,data.imageUrl,data.xHandle,data.facebookHandle,data.igHandle,data.hasName] as [string, string,string,string,string,string,string,string,boolean];
         } else {
-            toast({
-                variant: 'destructive',
-                title:'Unexpected data format',
-                description: 'Unexpected data format sent !!!'
-            })
+           
             return null;
         }
     } catch (error) {
-        toast({
-            variant: 'destructive',
-            title:'Error occured',
-            description: 'Error reading contract !!!'
-        })
+     
         console.error("Error reading contract:", error);
         return null;
     }
