@@ -3,7 +3,6 @@
 import { Badge } from '@/components/ui/badge';
 import clsx from 'clsx';
 import React from 'react'
-import { BsStarFill } from 'react-icons/bs';
 import { Contact } from '../../../../types/Context.types';
 import { useSelectedContactContext } from '@/app/context/SelectContext';
 

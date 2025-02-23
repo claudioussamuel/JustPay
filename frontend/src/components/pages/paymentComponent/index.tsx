@@ -1,12 +1,13 @@
 "use client"
 
-import PaymentContent from "./PaymentContent"
+
 import { IoMdWallet } from "react-icons/io";
 import { usePrivy } from '@privy-io/react-auth';
 import {useWallets} from '@privy-io/react-auth';
 import { useEffect, useState } from "react";
 import { readERC20Balance } from "@/lib/integrations/viem/contract";
 import { stableCoinAddress } from "@/lib/integrations/viem/abi";
+import { PaymentContent } from "./PaymentContent";
 
 
 
@@ -44,7 +45,7 @@ function Payment() {
                 <h2>$ {amount ? (Number(amount) / 1e18).toFixed(2) : 0}</h2>
             </div>
          </div>
-        <PaymentContent/>
+         <PaymentContent/>
     </div>
   )
 }

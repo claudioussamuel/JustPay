@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { contactNumbers } from "@/app/data"; // Import contacts
+import { contactNumbers } from "@/app/data"; 
 
 function useContactSearch() {
   const [searchQuery, setSearchQuery] = useState("");
