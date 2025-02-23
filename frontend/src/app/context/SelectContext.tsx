@@ -10,6 +10,7 @@ interface Contact {
     occupation:string;
     x?:string;
     date?:string;
+    wallet?:string;
     ig?:string;
     phone?:number;
 }

@@ -1,11 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+
 
 import { Button } from '@/components/ui/button'
-import Bounded from '@/components/shared/Bounded'
 import { CiSearch } from 'react-icons/ci'
-import { Input } from '@/components/ui/input'
 import { usePrivy } from '@privy-io/react-auth'; 
 import {useWallets} from '@privy-io/react-auth';
 import { allowance } from '@/lib/integrations/viem/contract'
@@ -23,7 +23,16 @@ function SendPayment() {
   const { wallets} = useWallets();
   const [loading, setLoading] = useState(false); 
   const [txs, setTxs] = useState(""); 
+  const searchParams = useSearchParams();
+  const walletFromUrl = searchParams.get('wallet') || "";
 
+
+  useEffect(()=>{
+
+    if(walletFromUrl){
+      setRecipientAddress(walletFromUrl)
+    }
+  },[walletAddress])
 
   async function approveTokenTransfer() {
     setLoading(true);
@@ -100,7 +109,7 @@ function SendPayment() {
         }
         <div className='max-w-2xl flex items-center gap-5 mt-5 border p-2 bg-brand-gray rounded-full '>
           <CiSearch className='text-zinc-800 text-3xl'/>
-          <Input 
+          <input 
             type="text" 
             className='w-full
             placeholder:text-[20px]

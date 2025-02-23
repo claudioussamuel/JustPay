@@ -6,7 +6,6 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Button } from '../ui/button';
-import { base } from 'viem/chains';
 import { useFundWallet, useWallets } from '@privy-io/react-auth';
 
 

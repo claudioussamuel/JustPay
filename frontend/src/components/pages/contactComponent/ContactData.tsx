@@ -3,7 +3,6 @@
 import { Badge } from '@/components/ui/badge';
 import clsx from 'clsx';
 import React from 'react'
-import { BsStarFill } from 'react-icons/bs';
 import { Contact } from '../../../../types/Context.types';
 import { useSelectedContactContext } from '@/app/context/SelectContext';
 
@@ -36,7 +35,7 @@ function ContactData({ data, className ,isHighlighted}: { data: Contact, classNa
             <p>{data.occupation}</p>
           </div>
         </div>
-
+1
       </div>
 
       <div className="place-self-start">
