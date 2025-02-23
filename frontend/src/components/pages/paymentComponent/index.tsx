@@ -5,16 +5,76 @@ import { IoMdWallet } from "react-icons/io";
 import { usePrivy } from '@privy-io/react-auth';
 import {useWallets} from '@privy-io/react-auth';
 import { useEffect, useState } from "react";
-import { readERC20Balance } from "@/lib/integrations/viem/contract";
-import { stableCoinAddress } from "@/lib/integrations/viem/abi";
-
-
+import { allowance, readERC20Balance } from "@/lib/integrations/viem/contract";
+import { contractAddress, stableCoinAddress } from "@/lib/integrations/viem/abi";
+import { Button } from "@/components/ui/button";
+import {  stableCoinAbi } from '@/lib/integrations/viem/abi'
+import { sepolia } from 'viem/chains'
+import { createWalletClient, custom,getContract } from 'viem'
 
 function Payment() {
   const [amount, setAmount] = useState<bigint>();
-
+  const { wallets} = useWallets();
+  const [allowanceAmount, setAllowsAmount] = useState<bigint | null>(null);
+ const [loading, setLoading] = useState(false); 
   const { user} = usePrivy()
   const walletAddress = user?.wallet?.address;
+  const [transaction, setTransaction] = useState<string>();
+  
+
+  async function approveTokenTransfer() {
+    setLoading(true);
+    try {
+      if (!wallets || wallets.length === 0) {
+        console.error("No wallet connected");
+        return;
+      }
+  
+      const wallet = wallets[0];
+      if (!wallet) {
+        console.error("Wallet is undefined");
+        return;
+      }
+  
+
+      const provider = await wallet.getEthereumProvider();
+      if (!provider) {
+        console.error("Provider is undefined");
+        return;
+      }
+  
+      const currentChainId = await provider.request({ method: "eth_chainId" });
+
+      if (currentChainId !== `0x${sepolia.id.toString(16)}`) {
+        await wallet.switchChain(sepolia.id);
+      }
+
+
+      const client = createWalletClient({
+        chain: sepolia,
+        transport: custom(provider),
+        account: walletAddress as `0x${string}`,
+      });
+      const contract = getContract({
+        address: stableCoinAddress,
+        abi: stableCoinAbi,
+        client,
+      });
+  
+      const tsxx =    await contract.write.approve([
+        contractAddress,BigInt(1000000000000000000000000000000000000000000)
+      ]);
+  
+
+      setTransaction(tsxx);
+    } catch (error) {
+      console.error("Failed to update blockchain:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
   useEffect(()=> {
     const fetchUserData = async () => {
         if(walletAddress){
@@ -22,10 +82,14 @@ function Payment() {
             if (balance) {
                 setAmount(balance);
             }
+            const history = await allowance(`${walletAddress}` as `0x${string}`,contractAddress);
+            if (history) {
+                setAllowsAmount(history);     
+            }
         }
     };
     fetchUserData();
-},[walletAddress])
+},[walletAddress,transaction])
 
 
 
@@ -44,9 +108,18 @@ function Payment() {
                 <h2>$ {amount ? (Number(amount) / 1e18).toFixed(2) : 0}</h2>
             </div>
          </div>
-        <PaymentContent/>
+         {allowanceAmount ? (
+        <PaymentContent/>)  :<Button 
+          className='px-10 mx-4 py-5 text-2xl bg-softBlend' 
+          onClick={approveTokenTransfer}
+          disabled={loading}
+        >
+          {loading ? 'Approving...' : 'Approve'}
+        </Button> }
     </div>
   )
 }
 
 export default Payment
+
+
