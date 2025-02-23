@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import React from 'react'
+
 import { GoArrowDownRight } from "react-icons/go";
 
 function FrequentAskQuestionCard({

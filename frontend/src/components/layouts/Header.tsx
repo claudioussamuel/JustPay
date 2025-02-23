@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 
@@ -8,20 +7,15 @@ import {navLinks} from '@/app/data';
 import clsx from 'clsx';
 import { Button } from '../ui/button';
 import { usePrivy } from '@privy-io/react-auth';
-import {useFundWallet} from '@privy-io/react-auth';
-import {useWallets} from '@privy-io/react-auth';
+
 
 
 function Header() {
     const pathname = usePathname();
-    const {login, authenticated,ready, user,logout,} = usePrivy()
+    const {login, authenticated,user,logout,} = usePrivy()
     const walletAddress = user?.wallet?.address;
     
-    const { wallets} = useWallets();
-    const {fundWallet} = useFundWallet();
- 
 
-    const disabledLogin= !ready || (ready && authenticated)
   return (
     <div className='bg-wineTexture  border border-zinc-800 border-b-0 border-l-0 border-r-0'>
 

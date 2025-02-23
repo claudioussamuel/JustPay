@@ -13,7 +13,7 @@ export interface ContactListProps{
   filteredContacts:Contact[]
 }
 
-function ContactList({searchQuery, setSearchQuery,filteredContacts}: ContactListProps) {
+function ContactList({searchQuery,filteredContacts}: ContactListProps) {
 
 
   const {

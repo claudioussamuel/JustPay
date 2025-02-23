@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { contractAbi, contractAddress, stableCoinAddress } from '@/lib/integrations/viem/abi';
 import Link from 'next/link';
-import React, { useState } from 'react';
 import { AiFillDollarCircle } from 'react-icons/ai';
 import { CiWallet } from 'react-icons/ci';
 import { createWalletClient, custom, getContract } from 'viem';

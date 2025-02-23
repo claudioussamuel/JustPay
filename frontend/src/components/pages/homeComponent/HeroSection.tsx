@@ -1,8 +1,8 @@
-import Bounded from '@/components/shared/Bounded'
 import { Heading } from '@/components/shared/Heading'
 import React from 'react'
 import { PayText, JustText } from './AnimateText'
 import BaseDescription from './BaseDescription'
+
 
 function HeroSection() {
   return (
