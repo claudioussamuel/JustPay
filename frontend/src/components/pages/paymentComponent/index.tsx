@@ -1,7 +1,7 @@
 "use client"
 
 import { IoMdWallet } from "react-icons/io";
-import { usePrivy } from '@privy-io/react-auth';
+import { usePrivy, useWallets } from '@privy-io/react-auth';
 import { useEffect, useState } from "react";
 import { allowance, readERC20Balance } from "@/lib/integrations/viem/contract";
 import { contractAddress, stableCoinAddress } from "@/lib/integrations/viem/abi";
