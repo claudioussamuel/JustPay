@@ -15,11 +15,9 @@ import UnavailableData from '@/components/unavailable/UnavailableData';
 
 function History() {
     const [transactionHistory, setTransactionHistory] = useState<SendReceive[]>([]);
-    const {login, authenticated,ready, user,logout,} = usePrivy()
+    const {user} = usePrivy()
     const walletAddress = user?.wallet?.address;
     
-    const { wallets} = useWallets();
-    const {fundWallet} = useFundWallet();
 
     const ref = useRef(null);
     const [isLoading, setLoading]=useState(false)

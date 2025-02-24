@@ -1,5 +1,5 @@
 import React from 'react'
-import GroupCard from './GroupCard'
+
 import Extent from './Extent'
 import NewLead from './NewLead'
 import RecentlyAdded from './RecentlyAdded'

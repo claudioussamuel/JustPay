@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Heading } from '../../shared/Heading'
-import Bounded from '../../shared/Bounded'
 import FrequentAskQuestionCard from '../../content/FrequentAskQuestionCard'
 import { faqs } from '@/app/data'
 

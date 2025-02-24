@@ -1,8 +1,7 @@
 import React from 'react'
 import { ContactAddedType } from '../../../types/global.types'
 import { Button } from '../ui/button'
-import { ContactListProps } from '../pages/contactComponent/ContactList'
-import UnavailableData from '../unavailable/UnavailableData'
+
 
 
 interface AddToContactListProps {

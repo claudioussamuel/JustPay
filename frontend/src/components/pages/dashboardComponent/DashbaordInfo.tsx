@@ -1,9 +1,8 @@
 import { Button } from '@/components/ui/button'
-import { Asterisk, Calendar, Hash, Link, Mail, User } from 'lucide-react'
+import { Calendar, Hash, Link, Mail, User } from 'lucide-react'
 import React from 'react'
 import LogoAndText from './LogoAndText'
-import { Avatar } from '@radix-ui/react-avatar'
-import { BsOctagon, BsQuestionOctagon } from 'react-icons/bs'
+import { BsQuestionOctagon } from 'react-icons/bs'
 import { contactNumbers, transactions } from '@/app/data'
 import ContactData from '../contactComponent/ContactData'
 import TransactionContent from './TransactionContent'
@@ -64,7 +63,7 @@ function DashbaordInfo() {
 
                     <div className='grid grid-cols-2 gap-5 font-dmMono'>
                     {contactNumbers.map((data,index)=>(
-                         <ContactData className='text-white' data={data} key={index}/>
+                         <ContactData className='text-white' data={data} key={index} isHighlighted={false}/>
                      ))}
                     </div>
                 </div>

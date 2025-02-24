@@ -1,13 +1,12 @@
 "use client"
 
-import { addNewContacts, contactDevice, contactNumbers, contactPsync, contactShared } from '@/app/data'
+import {  contactDevice, contactPsync, contactShared } from '@/app/data'
 import React, { useState } from 'react'
 import { IoSearchCircleOutline } from 'react-icons/io5'
 
 import { Calendar } from 'lucide-react'
 import EventContact from './EventContact'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import { Sheet,  SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 
 import ContainerAddContent from './ContainerAddContent'

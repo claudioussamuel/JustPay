@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { contractAbi, contractAddress, stableCoinAddress } from '@/lib/integrations/viem/abi';
 import Link from 'next/link';
-import React, { useState } from 'react';
 import { AiFillDollarCircle } from 'react-icons/ai';
 import { CiWallet } from 'react-icons/ci';
 import { createWalletClient, custom, getContract } from 'viem';
@@ -87,14 +86,13 @@ function SendPaymentForm() {
       console.log("User data added to the blockchain");
 
 
-      // Resetting the state after successful transaction
-      setAmount('0'); // Reset amount to zero
-      setDescription(''); // Reset description to empty string
-      setIsEditingAmount(false); // Optionally reset editing state
-      setIsEditingDescription(false); // Optionally reset editing state
-      setRecipientAddress(""); // Reset recipient address to empty string
+     
+      setAmount('0'); 
+      setDescription('');
+      setIsEditingAmount(false); 
+      setIsEditingDescription(false); 
+      setRecipientAddress(""); 
 
-      // Navigate to history page after successful payment
       router.push('/history');
 
     } catch (error) {
