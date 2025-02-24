@@ -29,7 +29,7 @@ function Sidebar() {
             className={clsx(
               "flex items-center gap-3 font-dmMono capitalize text-[20px]",
               {
-                "bg-softBlend px-5 py-2 ": pathname === href,
+                "bg-softBlend px-5 py-2 ": pathname.startsWith(href),
               }
             )}
             key={index}
