@@ -102,7 +102,7 @@ function SendPayment() {
 },[walletAddress,txs])
   return (
     <div className='h-[100vh]'>
-        <h3 className="font-dmMono capitalize text-3xl text-zinc-800">Send payment To</h3>
+        <h3 className="font-dmMono capitalize text-3xl text-zinc-800">Send payment To the address below</h3>
         {amount ?<p></p> : (
         <p className='text-[18px] font-dmMono text-zinc-800'>Click on approve first, before you proceed</p>
         ) 
@@ -130,19 +130,16 @@ function SendPayment() {
         </div>
 
       <div className='mt-5'>
-      {amount ?<div></div> : (
-        <Button 
-          className='px-10 mx-4 py-5 text-2xl bg-softBlend' 
-          onClick={approveTokenTransfer}
-          disabled={loading}
-        >
-          {loading ? 'Approving...' : 'Approve'}
-        </Button>
-      )}
-      
-      <Link href="/payment/sendPayment" className='font-dmMono capitalize '>
-          <Button className='px-10 py-5 text-2xl bg-softBlend'>next</Button>
+
+  
+
+  {amount ? 
+          <Link href="/payment/sendPayment" className='font-dmMono '>
+          <Button className='px-10 py-5 text-2xl bg-softBlend capitalize mt-3'>Next</Button>
         </Link>
+  : null }
+
+
       </div>
 
 
