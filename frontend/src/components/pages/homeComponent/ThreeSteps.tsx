@@ -2,9 +2,11 @@ import StepsCard from '@/components/content/StepsCard'
 import { Heading } from '@/components/shared/Heading'
 
 
+
 function ThreeSteps() {
+  
   return (
-      <div className='border-zinc-800  border-t  border-b bg-wineTexture py-20'>
+      <div id="three-steps" className='border-zinc-800  border-t  border-b bg-wineTexture py-20'>
         <div className=' flex justify-center '>
           <Heading className='text-6xl text-zinc-800 pb-20'>Let&apos;s get you started</Heading>
         </div>
