@@ -121,80 +121,81 @@ export const exploreSection=[
     {title: 'Coupon', number:18},
   ]
 
-  export const contactNumbers = [
-    {
-      firstName: "Claud",
-      occupation: "Associate @Samosure",
-      lastName: "Mensah",
-      gmail: "claud.mensah@gmail.com",
-      date: "21st June 2003",
-      x: "@broski",
-      ig: "@dbro",
-      wallet: "addr1qxyz1234567890abcd",
-      relationship: "Colleague",
-      phone: "+1234567890"
-    },
-    {
-      firstName: "Sophia",
-      occupation: "Data Analyst",
-      lastName: "Smith",
-      gmail: "sophia.smith@gmail.com",
-      date: "15th August 1995",
-      x: "@soph_data",
-      ig: "@sophie_art",
-      wallet: "addr1qabc9876543210xyz",
-      relationship: "Best Friend",
-      phone: "+1987654321"
-    },
-    {
-      firstName: "Michael",
-      occupation: "Software Engineer",
-      lastName: "Johnson",
-      gmail: "michael.johnson@gmail.com",
-      date: "10th December 1988",
-      x: "@mike_codes",
-      ig: "@mike_life",
-      wallet: "addr1qdef6543210987lmn",
-      relationship: "Brother",
-      phone: "+1122334455"
-    },
-    {
-      firstName: "Alice",
-      occupation: "Graphic Designer",
-      lastName: "Brown",
-      gmail: "alice.brown@gmail.com",
-      date: "5th March 1992",
-      x: "@alice_designs",
-      ig: "@alice_creates",
-      wallet: "addr1qghi3210987654opq",
-      relationship: "Cousin",
-      phone: "+1555666777"
-    },
-    {
-      firstName: "Emma",
-      occupation: "Teacher",
-      lastName: "Davis",
-      gmail: "emma.davis@gmail.com",
-      date: "30th September 1985",
-      x: "@emma_teach",
-      ig: "@emma_lifestyle",
-      wallet: "addr1qjkl0987654321rst",
-      relationship: "Mentor",
-      phone: "+1222333444"
-    },
-    {
-      firstName: "John",
-      occupation: "Nurse",
-      lastName: "Doe",
-      gmail: "john.doe@gmail.com",
-      date: "12th April 1990",
-      x: "@john_cares",
-      ig: "@john_daily",
-      wallet: "addr1quvw5678901234xyz",
-      relationship: "Neighbor",
-      phone: "+1999888777"
-    }
-  ];
+  // export const contactNumbers = [
+  //   {
+  //     firstName: "Claud",
+  //     occupation: "Associate @Samosure",
+  //     lastName: "Mensah",
+  //     email: "claud.mensah@gmail.com",
+  //     dateOfBirth: "21st June 2003",
+  //     xHandle: "@broski",
+  //     igHandle: "@dbro",
+  //     facebookHandle:"@dbro",
+  //     userAddress: "addr1qxyz1234567890abcd",
+  //     relationship: "Colleague",
+  //     phone: "+1234567890"
+  //   },
+  //   {
+  //     firstName: "Sophia",
+  //     occupation: "Data Analyst",
+  //     lastName: "Smith",
+  //     gmail: "sophia.smith@gmail.com",
+  //     date: "15th August 1995",
+  //     x: "@soph_data",
+  //     ig: "@sophie_art",
+  //     wallet: "addr1qabc9876543210xyz",
+  //     relationship: "Best Friend",
+  //     phone: "+1987654321"
+  //   },
+  //   {
+  //     firstName: "Michael",
+  //     occupation: "Software Engineer",
+  //     lastName: "Johnson",
+  //     gmail: "michael.johnson@gmail.com",
+  //     date: "10th December 1988",
+  //     x: "@mike_codes",
+  //     ig: "@mike_life",
+  //     wallet: "addr1qdef6543210987lmn",
+  //     relationship: "Brother",
+  //     phone: "+1122334455"
+  //   },
+  //   {
+  //     firstName: "Alice",
+  //     occupation: "Graphic Designer",
+  //     lastName: "Brown",
+  //     gmail: "alice.brown@gmail.com",
+  //     date: "5th March 1992",
+  //     x: "@alice_designs",
+  //     ig: "@alice_creates",
+  //     wallet: "addr1qghi3210987654opq",
+  //     relationship: "Cousin",
+  //     phone: "+1555666777"
+  //   },
+  //   {
+  //     firstName: "Emma",
+  //     occupation: "Teacher",
+  //     lastName: "Davis",
+  //     gmail: "emma.davis@gmail.com",
+  //     date: "30th September 1985",
+  //     x: "@emma_teach",
+  //     ig: "@emma_lifestyle",
+  //     wallet: "addr1qjkl0987654321rst",
+  //     relationship: "Mentor",
+  //     phone: "+1222333444"
+  //   },
+  //   {
+  //     firstName: "John",
+  //     occupation: "Nurse",
+  //     lastName: "Doe",
+  //     gmail: "john.doe@gmail.com",
+  //     date: "12th April 1990",
+  //     x: "@john_cares",
+  //     ig: "@john_daily",
+  //     wallet: "addr1quvw5678901234xyz",
+  //     relationship: "Neighbor",
+  //     phone: "+1999888777"
+  //   }
+  // ];
   
   
 

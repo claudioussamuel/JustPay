@@ -16,9 +16,9 @@ function ContactDynamism() {
 
 
   const handleRequestPayment = () => {
-    if (!selectedContact?.wallet) return;
+    if (!selectedContact?.userAddress) return;
   
-    router.push(`/payment?tab=receive&wallet=${selectedContact.wallet}`);
+    router.push(`/payment?tab=receive&wallet=${selectedContact.userAddress}`);
   };
 
   if (!selectedContact) {
@@ -46,12 +46,12 @@ function ContactDynamism() {
               {selectedContact.firstName} {selectedContact.lastName}
             </h1>
             <div>
-              <p>{selectedContact.occupation}</p>
+              <p>{selectedContact.email}</p>
             </div>
 
             <div className='bg-brand-light p-1 w-20 rounded-md'>
               <p className='text-center text-white text-[10px]'>
-                {selectedContact.relationship}
+                {selectedContact.phone}
               </p>
             </div>
           </div>
@@ -60,7 +60,7 @@ function ContactDynamism() {
         <div className='mt-5 flex flex-row gap-5 justify-around text-white'>
 
           <div className='flex items-center  bg-brand-hue-color py-1 pr-5 rounded-md'>
-            <Link href={`/payment?wallet=${selectedContact.wallet}`}>
+            <Link href={`/payment?wallet=${selectedContact.userAddress}`}>
               <Button className='bg-transparent'>Send</Button>
             </Link>
             <IoSendOutline />
@@ -75,11 +75,11 @@ function ContactDynamism() {
       </div>
 
       <div className='p-5 space-y-3'>
-        <ContactInscription title='Wallet Address' description={selectedContact.wallet} />
+        <ContactInscription title='Wallet Address' description={selectedContact.userAddress} />
         <ContactInscription title='phone number' description={selectedContact.phone} />
-        <ContactInscription title='gmail' description={selectedContact.gmail} />
-        <ContactInscription title='work' description={selectedContact.occupation} />
-        <ContactInscription title='X' description={selectedContact.x} />
+        <ContactInscription title='email' description={selectedContact.email} />
+        <ContactInscription title='Address' description={selectedContact.location} />
+        <ContactInscription title='X' description={selectedContact.xHandle} />
       </div>
     </div>
   );

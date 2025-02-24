@@ -72,20 +72,27 @@ function ProfileContent() {
                         xHandle,
                         facebookHandle,
                         igHandle,
+                        location,
+                        email,
+                        phone,
+                        userAddress,
                         hasName
                     ] = data;
 
               
                     setUser(prev => ({
                         ...prev,
-                        firstName: firstName || "",
-                        lastName: lastName || "",
-                        gender: gender || "",
-                        dob: dateOfBirth || "",
+                        firstName: firstName || "...",
+                        lastName: lastName || "...",
+                        gender: gender || "...",
+                        dob: dateOfBirth || "...",
                         profilePic: imageUrl || "/images/v4.jpg",
-                        xHandle:xHandle || "",
-                        facebookHandle: facebookHandle || "",
-                        igHandle: igHandle || "",
+                        xHandle:xHandle || "...",
+                        facebookHandle: facebookHandle || "...",
+                        igHandle: igHandle || "...",
+                        address: location || "...",
+                        email: email || "...",
+                        phone: phone || "...",
                         hasName: hasName || false
                     }));
                 }
@@ -154,9 +161,12 @@ function ProfileContent() {
                 userData.profilePic,
                 userData.xHandle,
                 userData.facebookHandle,
-                userData.igHandle
+                userData.igHandle,
+                userData.address,
+                userData.email,
+                userData.phone,
             ]);
-
+          
             console.log("User data added to the blockchain");
         } catch (error) {
             console.error("Failed to update blockchain:", error);
@@ -284,13 +294,13 @@ function ProfileContent() {
 
 
                         <div className='mb-3'>
-                        <Label>Gmail</Label>
-                        <Input className="pb-3" name="address" value={tempUser.email} onChange={handleChange} />
+                        <Label>Email</Label>
+                        <Input className="pb-3" name="email" value={tempUser.email} onChange={handleChange} />
                         </div>
 
                         <div className='mb-3'>
                         <Label>Phone</Label>
-                        <Input className="pb-3" name="address" value={tempUser.phone} onChange={handleChange} />
+                        <Input className="pb-3" name="phone" value={tempUser.phone} onChange={handleChange} />
                         </div>
 
 

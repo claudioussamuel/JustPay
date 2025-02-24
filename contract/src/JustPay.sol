@@ -149,6 +149,7 @@ contract JustPay is ReentrancyGuard {
     mapping(address => SendReceive[]) private s_history;
     /// @dev Mapping of address to Friends
     mapping(address => UserInfo[]) private s_myFriends;
+    /// @dev Mpping of each address to
     /// @dev All public users
     UserInfo[] public s_allUsers;
 
@@ -348,7 +349,7 @@ contract JustPay is ReentrancyGuard {
         uint256 amount,
         string memory message
     ) external nonReentrant {
-        // Record transaction first (state modification)
+        // Record transaction first (state modification) ok
         addHistory(msg.sender, to, amount, message);
 
         (token).safeTransferFrom(msg.sender, to, amount);
@@ -416,6 +417,10 @@ contract JustPay is ReentrancyGuard {
         address _user
     ) public view returns (UserInfo[] memory) {
         return s_myFriends[_user];
+    }
+
+    function getAllUsers() public view returns (UserInfo[] memory) {
+        return s_allUsers;
     }
 
     function getMyName(address _user) public view returns (UserInfo memory) {
