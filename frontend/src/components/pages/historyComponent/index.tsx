@@ -18,8 +18,6 @@ function History() {
     const {user} = usePrivy()
     const walletAddress = user?.wallet?.address;
     
-    const { wallets} = useWallets();
-    const {fundWallet} = useFundWallet();
 
     const ref = useRef(null);
     const [isLoading, setLoading]=useState(false)

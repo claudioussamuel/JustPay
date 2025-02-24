@@ -3,7 +3,7 @@
 import { getContract } from "viem";
 import { contractAbi, contractAddress, stableCoinAbi, stableCoinAddress } from "./abi";
 import { client } from "./client";
-import { useToast } from "@/hooks/use-toast";
+
 
 interface SendReceive {
     action: string;

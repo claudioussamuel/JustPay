@@ -149,6 +149,7 @@ contract JustPay is ReentrancyGuard {
     mapping(address => SendReceive[]) private s_history;
     /// @dev Mapping of address to Friends
     mapping(address => UserInfo[]) private s_myFriends;
+    /// @dev Mpping of each address to
     /// @dev All public users
     UserInfo[] public s_allUsers;
 

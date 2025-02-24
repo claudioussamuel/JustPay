@@ -146,7 +146,7 @@ function RequestPaymentForm() {
           </div>
 
           {isEditingDescription ? (
-            <Input
+            <input
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}

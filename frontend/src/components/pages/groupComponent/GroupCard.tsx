@@ -8,7 +8,7 @@ import { PiPathFill } from "react-icons/pi";
 import { Button } from "@/components/ui/button";
 import {  createWalletClient, custom, getContract } from 'viem';
 import { sepolia } from 'viem/chains';
-import { contractAbi, contractAddress, stableCoinAddress } from '@/lib/integrations/viem/abi';
+import { contractAbi, contractAddress } from '@/lib/integrations/viem/abi';
 import { usePrivy, useWallets } from '@privy-io/react-auth'; 
 import { useRouter } from 'next/navigation';
 

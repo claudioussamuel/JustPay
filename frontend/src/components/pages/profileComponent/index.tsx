@@ -23,9 +23,8 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { usePrivy } from '@privy-io/react-auth';
-import {useFundWallet} from '@privy-io/react-auth';
 import {useWallets} from '@privy-io/react-auth';
-import { base, sepolia } from 'viem/chains';
+import { sepolia } from 'viem/chains';
 import { createWalletClient, getContract } from 'viem';
 import { custom } from 'viem';
 import { pinata } from '@/lib/pinanta';
@@ -103,16 +102,15 @@ function ProfileContent() {
         fetchUserData();
     }, [walletAddress]);
 
-    // Add this after the first useEffect
+
     useEffect(() => {
         setTempUser({ ...users });
     }, [users]);
 
-    // Update tempUser initialization to match users
+
     const [tempUser, setTempUser] = useState({ ...users });
     const [newProfilePic, setNewProfilePic] = useState(null);
 
- 
     const handleChange = (e:any) => {
         setTempUser({ ...tempUser, [e.target.name]: e.target.value });
     };

@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-import Bounded from '../../shared/Bounded'
 import { Heading } from '../../shared/Heading'
 import { teamMembers } from '@/app/data'
 import TeamCard from '@/components/content/TeamCard'
