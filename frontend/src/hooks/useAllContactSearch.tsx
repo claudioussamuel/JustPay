@@ -1,22 +1,19 @@
 import { useState, useMemo,useEffect } from "react";
 import { Contact } from "../../types/Context.types";
-import { readMyFriends } from "@/lib/integrations/viem/contract";
-import { usePrivy } from '@privy-io/react-auth'; 
+import { readAllMembers } from "@/lib/integrations/viem/contract";
+// import { contactNumbers } from "@/app/data"; 
 
-function useContactSearch() {
+function useAllContactSearch() {
   const [searchQuery, setSearchQuery] = useState("");
   const [contactNumbers, setContactNumbers] = useState<Contact[]>([]);
-  const {user} = usePrivy()
-  const walletAddress = user?.wallet?.address;
 
   useEffect(() => {
     const fetchRequests = async () => {
-      if(walletAddress){
-      const data = await readMyFriends(`${walletAddress}` as `0x${string}`);
+      // TODO: Implement myFriends
+      const data = await readAllMembers();
       if (data) {
         setContactNumbers(data);
       }
-    }
     };
 
     fetchRequests();
@@ -44,4 +41,4 @@ function useContactSearch() {
   return { searchQuery, setSearchQuery, filteredContacts };
 }
 
-export default useContactSearch;
+export default useAllContactSearch;

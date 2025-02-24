@@ -7,7 +7,7 @@ import UnavailableData from "@/components/unavailable/UnavailableData";
 import { usePagination } from "@/hooks/usePagination";
 import ItemPageSelector from "@/components/content/ItemPageSelector";
 import { IoSearchCircleOutline } from "react-icons/io5";
-import useContactSearch from "@/hooks/useContactSearch";
+import useContactSearch from "@/hooks/useAllContactSearch";
 
 function ContainerAddContent() {
 

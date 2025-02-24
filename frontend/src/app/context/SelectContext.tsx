@@ -2,17 +2,21 @@
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
+
 interface Contact {
-    firstName:string;
-    lastName:string;
-    gmail:string;
-    relationship?:string;
-    occupation:string;
-    x?:string;
-    date?:string;
-    wallet?:string;
-    ig?:string;
-    phone?:number;
+  firstName:string;
+  lastName:string;
+  gender:string;
+  dateOfBirth:string;
+  imageUrl:string;
+  xHandle:string;
+  facebookHandle:string;
+  igHandle:string;
+  location:string;
+  email:string;
+  phone:string;
+  userAddress:string;
+  hasName:boolean;
 }
 
 interface SelectedContactContextType {

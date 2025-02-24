@@ -20,14 +20,18 @@ export interface UserContextType{
 }
 
 export interface ContactAddedType{
-    firstName:string;
-    lastName:string;
-    gmail:string;
-    occupation:string;
-    x?:string;
-    date?:string;
-    ig?:string;
-    phone?:string;
+    firstName: string;
+    lastName: string;
+    gender: string;
+    dateOfBirth: string;
+    imageUrl: string;
+    xHandle: string;
+    facebookHandle: string;
+    igHandle: string;
+    location: string;
+    email: string;
+    phone: string;
+    userAddress: string;
 }
 
 export interface ContainerAddContentProps {

@@ -73,7 +73,7 @@ function Payment() {
     } finally {
       setLoading(false);
     }
-  }
+  } 
 
 
   useEffect(()=> {

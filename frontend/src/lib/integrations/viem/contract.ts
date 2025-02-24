@@ -22,6 +22,7 @@ interface Request {
     stableCoin:string;
     time:bigint;
 }
+
 interface UserInfo {
     firstName:string;
     lastName:string;
@@ -224,7 +225,7 @@ export async function readAllMembers(): Promise<UserInfo[] | null> {
             client,
         });
 
-        const data = await contract.read.s_allUsers();
+        const data = await contract.read.getAllUsers();
 
         console.log("My Requests Data:", data);
 
@@ -239,7 +240,6 @@ export async function readAllMembers(): Promise<UserInfo[] | null> {
     }
 }
 
-// unimplemented - 2
 export async function readMyFriends(userAddress: `0x${string}`): Promise<UserInfo[] | null> {
     try {
         const contract = getContract({
@@ -248,7 +248,7 @@ export async function readMyFriends(userAddress: `0x${string}`): Promise<UserInf
             client,
         });
 
-        const data = await contract.read.getMyRequests([userAddress]);
+        const data = await contract.read.getAllMyFriends([userAddress]);
 
         console.log("My Friends Data:", data);
 

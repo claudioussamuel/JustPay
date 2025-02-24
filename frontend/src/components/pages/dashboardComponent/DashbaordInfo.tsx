@@ -4,7 +4,7 @@ import React from 'react'
 import LogoAndText from './LogoAndText'
 import { Avatar } from '@radix-ui/react-avatar'
 import { BsOctagon, BsQuestionOctagon } from 'react-icons/bs'
-import { contactNumbers, transactions } from '@/app/data'
+import {  transactions } from '@/app/data'
 import ContactData from '../contactComponent/ContactData'
 import TransactionContent from './TransactionContent'
 import { BiChevronDown } from 'react-icons/bi'
@@ -63,9 +63,9 @@ function DashbaordInfo() {
                     <h1 className='font-bowlby text-2xl mb-3'>All contacts</h1>
 
                     <div className='grid grid-cols-2 gap-5 font-dmMono'>
-                    {contactNumbers.map((data,index)=>(
+                    {/* {contactNumbers.map((data,index)=>(
                          <ContactData className='text-white' data={data} key={index}/>
-                     ))}
+                     ))} */}
                     </div>
                 </div>
 

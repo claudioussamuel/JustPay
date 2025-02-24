@@ -32,7 +32,7 @@ function ContactData({ data, className ,isHighlighted}: { data: Contact, classNa
           </h1>
 
           <div className="text-[13px] font-light transition duration-300 group-hover:text-zinc-500">
-            <p>{data.occupation}</p>
+            <p>{data.phone}</p>
           </div>
         </div>
 1
@@ -40,7 +40,7 @@ function ContactData({ data, className ,isHighlighted}: { data: Contact, classNa
 
       <div className="place-self-start">
         <Badge className="text-[12px] transition duration-300 group-hover:bg-purple-600 group-hover:text-white">
-          {data.relationship}
+          {data.email}
         </Badge>
       </div>
 
