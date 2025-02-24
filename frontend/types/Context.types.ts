@@ -23,14 +23,17 @@ export type UsePaginationReturn = {
 export type Contact = {
     firstName:string;
     lastName:string;
-    gmail:string;
-    relationship?:string;
-    occupation:string;
-    x?:string;
-    date?:string;
-    wallet?:string;
-    ig?:string;
-    phone?:string | number | any;
+    gender:string;
+    dateOfBirth:string;
+    imageUrl:string;
+    xHandle:string;
+    facebookHandle:string;
+    igHandle:string;
+    location:string;
+    email:string;
+    phone:string;
+    userAddress:string;
+    hasName:boolean;
 }
 
 export type SelectedContactContextType ={

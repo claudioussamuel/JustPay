@@ -1,6 +1,6 @@
 "use client"
 
-import { addNewContacts, contactDevice, contactNumbers, contactPsync, contactShared } from '@/app/data'
+import { addNewContacts, contactDevice, contactPsync, contactShared } from '@/app/data'
 import React, { useState } from 'react'
 import { IoSearchCircleOutline } from 'react-icons/io5'
 
@@ -18,7 +18,7 @@ import useContactSearch from '@/hooks/useContactSearch'
 
 
 
-function ContactContent() {
+function ContactContent() { 
 
   const {setSearchQuery,searchQuery,filteredContacts} = useContactSearch()
   return (

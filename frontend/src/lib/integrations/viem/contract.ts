@@ -22,8 +22,23 @@ interface Request {
     stableCoin:string;
     time:bigint;
 }
+interface UserInfo {
+    firstName:string;
+    lastName:string;
+    gender:string;
+    dateOfBirth:string;
+    imageUrl:string;
+    xHandle:string;
+    facebookHandle:string;
+    igHandle:string;
+    location:string;
+    email:string;
+    phone:string;
+    userAddress:string;
+    hasName:boolean;
+}
 
-export async function readContractData(userAddress: `0x${string}`): Promise<[string, string, string, string, string, string, string, string, boolean] | null> {
+export async function readContractData(userAddress: `0x${string}`): Promise<[string, string, string, string, string, string, string, string,string,string,string,string, boolean] | null> {
    
     try {
         const contract = getContract({
@@ -46,10 +61,14 @@ export async function readContractData(userAddress: `0x${string}`): Promise<[str
              && "xHandle" in data 
              && "facebookHandle" in data 
              && "igHandle" in data 
+             && "location" in data
+             && "email" in data
+             && "phone" in data
+             && "userAddress" in data
              && "hasName" in data
             ) {
           
-            return [data.firstName, data.lastName,data.gender,data.dateOfBirth,data.imageUrl,data.xHandle,data.facebookHandle,data.igHandle,data.hasName] as [string, string,string,string,string,string,string,string,boolean];
+            return [data.firstName, data.lastName,data.gender,data.dateOfBirth,data.imageUrl,data.xHandle,data.facebookHandle,data.igHandle,data.location,data.email,data.phone,data.userAddress,data.hasName] as [string, string,string,string,string,string,string,string,string,string,string,string,boolean];
         } else {
            
             return null;
@@ -192,6 +211,54 @@ export async function readMyRequests(userAddress: `0x${string}`): Promise<Reques
         }
     } catch (error) {
         console.error("Error reading my requests:", error);
+        return null;
+    }
+}
+
+// unimplemented - 1
+export async function readAllMembers(): Promise<UserInfo[] | null> {
+    try {
+        const contract = getContract({
+            address: contractAddress,
+            abi: contractAbi,
+            client,
+        });
+
+        const data = await contract.read.s_allUsers();
+
+        console.log("My Requests Data:", data);
+
+        if (Array.isArray(data)) {
+            return data as UserInfo[];
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error("Error reading my requests:", error);
+        return null;
+    }
+}
+
+// unimplemented - 2
+export async function readMyFriends(userAddress: `0x${string}`): Promise<UserInfo[] | null> {
+    try {
+        const contract = getContract({
+            address: contractAddress,
+            abi: contractAbi,
+            client,
+        });
+
+        const data = await contract.read.getMyRequests([userAddress]);
+
+        console.log("My Friends Data:", data);
+
+        if (Array.isArray(data)) {
+            return data as UserInfo[];
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error("Error reading my friends:", error);
         return null;
     }
 }
