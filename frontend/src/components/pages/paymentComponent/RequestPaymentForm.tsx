@@ -93,10 +93,10 @@ function RequestPaymentForm() {
   
       console.log("User data added to the blockchain");
 
-      // Navigate to payment page after successful transaction
+     
       router.push('/payment');
 
-      // Resetting the state after successful transaction
+    
       setAmount('0'); // Reset amount to zero
       setDescription(''); // Reset description to empty string
       setIsEditingAmount(false); // Optionally reset editing state
@@ -168,7 +168,7 @@ function RequestPaymentForm() {
         <div className='text-[13px] place-self-center space-y-3'>
           <div className='flex gap-1 items-center'>
             <p>For all your information, read our</p>
-            <Link href="#" className='text-blue-500 underline'>help guide</Link>
+            <Link href="/#three-steps" className='text-blue-500 underline'>help guide</Link>
           </div>
 
          

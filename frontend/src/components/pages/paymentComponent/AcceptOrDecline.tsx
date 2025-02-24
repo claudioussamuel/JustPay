@@ -31,7 +31,7 @@ function AcceptOrDecline() {
     };
 
     fetchRequests();
-  }, []);
+  }, [walletAddress ]);
 
   if(requests.length===0){
     return(

@@ -5,6 +5,11 @@ export interface UnavailabeDataType  {
 }
 
 export interface User{
+    gender: unknown;
+    dob: unknown;
+    profilePic: unknown;
+    email: unknown;
+    phone: unknown;
     firstName:string;
     lastName: string;
     xHandle: string;
@@ -34,8 +39,27 @@ export interface ContactAddedType{
     userAddress: string;
 }
 
+export type PrivyUser={
+    id?:string;
+    email?:string;
+    name?:string;
+}
 export interface ContainerAddContentProps {
     addNewContacts: ContactAddedType[];
 }
 
+
+export interface UserData {
+    firstName: string;
+    lastName: string;
+    gender: string;
+    dob: string;
+    profilePic: string;
+    xHandle: string;
+    facebookHandle: string;
+    igHandle: string;
+    address: string;
+    email: string;
+    phone: string;
+}
 

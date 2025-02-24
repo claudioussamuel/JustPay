@@ -16,11 +16,9 @@ export const usePagination = ({
 
 
   const safeSetCurrentPage = useCallback((page: number) => {
-    setCurrentPage((prevPage) => {
-      const newPage = Math.min(Math.max(page, 1), totalPages);
-      return newPage;
-    });
+    setCurrentPage(Math.min(Math.max(page, 1), totalPages));
   }, [totalPages]);
+  
 
   const safeSetItemsPerPage = useCallback((items: number) => {
     if (items > 0) {

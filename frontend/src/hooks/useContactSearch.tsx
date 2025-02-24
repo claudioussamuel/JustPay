@@ -20,7 +20,7 @@ function useContactSearch() {
     };
 
     fetchRequests();
-  }, []);
+  }, [walletAddress]);
 
   useEffect(() => {
     // Any additional logic that needs to run after contactNumbers has been set

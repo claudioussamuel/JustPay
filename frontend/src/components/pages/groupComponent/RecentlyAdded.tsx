@@ -11,7 +11,7 @@ function RecentlyAdded() {
     
             <div className='space-y-5 grid place-content-center'>
                 {eventGroup.map((item, index)=>(
-                    <GroupCard key={index} data={item}/>
+                    <GroupCard key={index} data={item} index={index}/>
                 ))}
             </div>
         </div>
