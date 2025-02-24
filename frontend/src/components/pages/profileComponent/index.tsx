@@ -32,6 +32,7 @@ import { pinata } from '@/lib/pinanta';
 
 import { contractAbi, contractAddress } from "@/lib/integrations/viem/abi";
 import { readContractData } from '@/lib/integrations/viem/contract';
+import { UserData } from '../../../../types/global.types';
 
 function ProfileContent() {
 
@@ -57,7 +58,7 @@ function ProfileContent() {
         facebookHandle:"..." 
     });
 
-    // Add useEffect to fetch contract data
+ 
     useEffect(() => {
         const fetchUserData = async () => {
             if (walletAddress) {
@@ -75,7 +76,6 @@ function ProfileContent() {
                         location,
                         email,
                         phone,
-                        userAddress,
                         hasName
                     ] = data;
 
@@ -109,14 +109,14 @@ function ProfileContent() {
 
 
     const [tempUser, setTempUser] = useState({ ...users });
-    const [newProfilePic, setNewProfilePic] = useState(null);
+    const [newProfilePic] = useState(null);
 
-    const handleChange = (e:any) => {
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         setTempUser({ ...tempUser, [e.target.name]: e.target.value });
     };
 
 
-    async function addUserDataToTheBlocChain(userData: any) {
+    async function addUserDataToTheBlocChain(userData: UserData) {
         try {
             if (!wallets || wallets.length === 0) {
                 console.error("No wallet connected");
@@ -172,7 +172,7 @@ function ProfileContent() {
             console.error("Failed to update blockchain:", error);
         }
     }
-    // Handle save changes
+
     const handleSave = async ()  => {
         setUser(tempUser);
        await addUserDataToTheBlocChain(tempUser);
@@ -180,15 +180,15 @@ function ProfileContent() {
 
 
     const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0]; // Get the selected file
+        const file = event.target.files?.[0];
         if (file) {
-             // Generate URL for the image
+
             const response = await pinata.upload.file(file);
            
             const ipfsHash = response.IpfsHash;
-            // const imageURL = URL.createObjectURL(file);
+          
             const imageURL = `https://ipfs.io/ipfs/${ipfsHash}`;
-            // Update the user state with the new profile picture URL
+
             console.log(`Kenny ${imageURL}`)
             setUser((prevUser) => ({
                 ...prevUser, 
@@ -233,7 +233,7 @@ function ProfileContent() {
             </div>
           </div>
 
-          {/* Account Details with Sheet Modal */}
+
           <div className="flex-[60%] border border-black bg-softBlend text-zinc-800 p-5 font-dmMono">
             <h3 className='text-3xl'>Account details</h3>
             <div className='text-2xl mt-5 space-y-5'>

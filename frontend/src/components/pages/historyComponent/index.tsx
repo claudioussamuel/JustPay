@@ -4,8 +4,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import HistoryDetails from './HistoryDetails'
 import { motion, useScroll } from 'framer-motion'
 import { usePrivy } from '@privy-io/react-auth';
-import {useFundWallet} from '@privy-io/react-auth';
-import {useWallets} from '@privy-io/react-auth';
 
 import { readHistoryData } from '@/lib/integrations/viem/contract';
 import { SendReceive } from '../../../../types/transaction.types';
@@ -27,17 +25,23 @@ function History() {
         offset: ["start end", "center start"]
     });
 
-    useEffect(()=> {
-        const fetchUserData = async () => {
-            if(walletAddress){
-                const history = await readHistoryData(`${walletAddress}` as `0x${string}`);
-                if (history) {
-                    setTransactionHistory(history);
-                }
-            }
-        };
-        fetchUserData();
-    },[walletAddress])
+    useEffect(() => {
+      const fetchUserData = async () => {
+          if (!walletAddress) return;
+          
+          setLoading(true);
+          try {
+              const history = await readHistoryData(walletAddress as `0x${string}`);
+              setTransactionHistory(history || []);
+          } catch (error) {
+              console.error("Error fetching history:", error);
+          } finally {
+              setLoading(false);
+          }
+      };
+      
+      fetchUserData();
+  }, [walletAddress]);
 
 
     return (

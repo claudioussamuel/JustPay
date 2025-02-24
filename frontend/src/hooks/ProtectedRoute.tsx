@@ -26,7 +26,7 @@ export default function ProtectedRoute({children}:{children:React.ReactNode}){
                 className:'toast-success'
             })
         }
-    },[isAuthenticated, router]);
+    },[isAuthenticated, router,toast]);
 
     if(!isAuthenticated) return null;
 
