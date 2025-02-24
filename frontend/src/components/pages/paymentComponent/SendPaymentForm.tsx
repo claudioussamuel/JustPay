@@ -104,11 +104,11 @@ function SendPaymentForm() {
 
 
   return (
-    <div className='text-3xl h-dvh text-zinc-800 grid place-content-center place-self-center font-dmMono max-w-[20%]'>
+    <div className='text-3xl h-dvh text-zinc-800 grid place-content-center place-self-center font-dmMono max-w-[60%]'>
       <div className="place-content-center">
         <div className='place-self-center max-w-2xl h-auto p-5 border border-black rounded-2xl mb-3'>
           <div className='flex gap-5'>
-            <CiWallet />
+            <CiWallet className='font-extrabold' />
             <h1>{truncateAddress(receipientAddress)}</h1>
           </div>
 
@@ -134,7 +134,7 @@ function SendPaymentForm() {
                 </h1>
               )}
             </div>
-            <Button className='w-10 place-self-center'>USD</Button>
+            <Button className='w-10 place-self-center'>USDC</Button>
           </div>
 
           {isEditingDescription ? (
@@ -160,7 +160,7 @@ function SendPaymentForm() {
         <div className='text-[13px] place-self-center space-y-3'>
           <div className='flex gap-1 items-center'>
             <p>For all your information, read our</p>
-            <Link href="#" className='text-blue-500 underline'>help guide</Link>
+            <Link href="/#three-steps" className='text-blue-500 underline'>help guide</Link>
           </div>
 
             <div className='place-self-center max-w-[20%]'>

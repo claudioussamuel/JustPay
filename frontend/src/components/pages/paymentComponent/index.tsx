@@ -107,14 +107,46 @@ function Payment() {
                 <h2>$ {amount ? (Number(amount) / 1e18).toFixed(2) : 0}</h2>
             </div>
          </div>
-         {allowanceAmount ? (
-        <PaymentContent/>)  :<Button 
-          className='px-10 mx-4 py-5 text-2xl bg-softBlend' 
-          onClick={approveTokenTransfer}
-          disabled={loading}
-        >
-          {loading ? 'Approving...' : 'Approve'}
-        </Button> }
+
+         {allowanceAmount ? 
+            <PaymentContent/>
+              :
+
+              <div className='space-y-5'>
+              <div className=' text-[0.8rem] flex flex-col w-full border-t border-b border-l border-r border-zinc-800  md:text-[3rem] lg:text-[2.5rem] '>
+                  <div className='grid grid-cols-3 border-b border-zinc-800 text-zinc-800 '>
+                    <div className='uppercase font-bold pl-10 font-dmMono'>
+                      <h1 className='place-self-center'>get</h1>
+                     </div> 
+           
+                     <div className='border-l border-zinc-800 pl-5'>
+                      <h1 className='font-allura uppercase font-playWright'>approved</h1>
+                     </div> 
+           
+                     <div className='border-l  border-zinc-800 '>
+                      <h1 className='font-bold font-dmMono uppercase pl-10'>to</h1>
+                     </div> 
+                  </div>
+           
+                  <div className='flex flex-row text-zinc-800'>
+                    <div className='flex-shrink-0 w-50 border-r border-zinc-800 '>
+                     <h1 className=' text-center uppercase font-playWright px-10 '>start</h1>
+                    </div>
+           
+                    <div className='border-r border-black  flex-grow'>
+                     <h1 className='pl-10 font-dmMono uppercase font-bold place-self-center'>transaction</h1>
+                    </div>
+           
+                    <div className='flex-grow'>
+                     <h1 className='  uppercase pl-10 font-playWright' >effortless</h1>
+                    </div>
+                  </div>
+               </div> 
+               <Button className='text-zinc-800 font-dmMono bg-softBlend py-5 text-[20px] ' onClick={approveTokenTransfer}>
+               {loading ? 'Approving...' : 'Approve to proceed'}
+                </Button>
+          </div>
+       }
     </div>
   )
 }
