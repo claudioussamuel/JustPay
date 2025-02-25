@@ -7,12 +7,15 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Button } from '../ui/button';
 import { useFundWallet, useWallets } from '@privy-io/react-auth';
+import { usePrivy } from '@privy-io/react-auth';
 
 
 function Sidebar() {
   const pathname = usePathname();
   const {wallets} = useWallets();
   const {fundWallet} = useFundWallet();
+  const {user} = usePrivy()
+  const walletAddress = user?.wallet?.address;
 
   return (
     <div className="bg-wineTexture border border-t-0 border-l-0 border-black h-[100vh] ">
@@ -40,7 +43,7 @@ function Sidebar() {
         ))}
 
         <Button 
-          onClick={()=>fundWallet(wallets[0].address,)}
+          onClick={()=>fundWallet(`${walletAddress}`)}
           className='font-dmMono bg-black text-white'>
           Fund Wallet</Button>
         
