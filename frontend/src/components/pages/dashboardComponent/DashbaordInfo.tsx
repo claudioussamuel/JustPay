@@ -4,7 +4,6 @@ import React from 'react'
 import LogoAndText from './LogoAndText'
 import { BsQuestionOctagon } from 'react-icons/bs'
 import {  transactions } from '@/app/data'
-import ContactData from '../contactComponent/ContactData'
 import TransactionContent from './TransactionContent'
 import { BiChevronDown } from 'react-icons/bi'
 
