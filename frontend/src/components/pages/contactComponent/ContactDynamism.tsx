@@ -2,12 +2,14 @@
 
 import { useSelectedContactContext } from '@/app/context/SelectContext';
 import ContactInscription from '@/components/content/ContactInscription';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import UnavailableData from '@/components/unavailable/UnavailableData';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { GiReceiveMoney } from 'react-icons/gi';
+import { GiCancel } from "react-icons/gi";
 import { IoSendOutline } from 'react-icons/io5';
 
 function ContactDynamism() {
@@ -49,10 +51,10 @@ function ContactDynamism() {
               <p>{selectedContact.email}</p>
             </div>
 
-            <div className='bg-brand-light p-1 w-20 rounded-md'>
-              <p className='text-center text-white text-[10px]'>
+            <div className='w-20 rounded-md'>
+              <Badge>
                 {selectedContact.phone}
-              </p>
+              </Badge>
             </div>
           </div>
         </div>
@@ -66,10 +68,16 @@ function ContactDynamism() {
             <IoSendOutline />
           </div>
 
+          <div className='flex items-center  bg-red-400 py-1 pr-3 rounded-md' onClick={handleRequestPayment}>
+            <Button className='bg-transparent'>Remove</Button>
+            <GiCancel/>
+          </div>
+
           <div className='flex items-center  bg-green-400 py-1 pr-3 rounded-md' onClick={handleRequestPayment}>
             <Button className='bg-transparent'>Request</Button>
             <GiReceiveMoney/>
           </div>
+          
 
         </div>
       </div>
