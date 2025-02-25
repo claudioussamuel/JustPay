@@ -64,7 +64,7 @@ function HistoryDetails({ items }: Props) {
           )}
         </div>
         <span>{items.time}</span>
-        <h3 className="font-bowlby">{items.amount} USDT</h3>
+        <h3 className="font-bowlby">{items.amount} USDC</h3>
         <div>
           <p>
             From: {items.from} To: {items.to}

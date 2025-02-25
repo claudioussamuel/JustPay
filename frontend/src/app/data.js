@@ -33,55 +33,55 @@ export const sociaLinks=[
   
   export const faqs = [
     {
-     question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-     hovered:"Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo? consectetur adipisicing elit. Enim, explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
+     question:"What is JustPay?",
+     hovered:"JustPay is a fast, secure, and low-cost way to send and receive stablecoins, just like traditional payment apps. Built on blockchain technology, it ensures private, permissionless transactions—giving you full control over your money without relying on banks.",
     },
     {
-      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
+      question:"How is JustPay different from traditional payment apps?",
+      hovered:"Unlike traditional apps that depend on banks, JustPay operates on blockchain technology, allowing for instant, borderless, and low-fee transactions. Plus, with stablecoins, you avoid price volatility while enjoying full financial control and privacy.",
      },
      {
-      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
+      question:"Are my transactions private and secure?",
+      hovered:"Yes! We prioritize your security and financial freedom. JustPay enables private, encrypted, and permissionless transactions, meaning no third parties can freeze your funds or control your money.",
      },
      {
-      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?"
+      question:" What are stablecoins, and why should I use them?",
+      hovered:"Stablecoins are cryptocurrencies pegged to the value of a stable asset, like the US dollar. This means you get the benefits of fast, decentralized payments without the price fluctuations of traditional cryptocurrencies like Bitcoin or Ethereum."
      },
      {
-      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
+      question:"Do I need a bank account to use JustPay?",
+      hovered:"No! JustPay is completely decentralized, meaning you don’t need a bank account to send, receive, or hold funds. All you need is a crypto wallet to start making transactions instantly.",
      },
      {
-      question:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
-      hovered:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, explicabo?",
+      question:"How much does it cost to send money?",
+      hovered:"Transactions on JustPay are designed to be low-cost, with significantly lower fees than traditional financial services. Since we operate on blockchain networks, fees depend on network conditions but remain much cheaper than traditional banking fees.",
      }
   ]
   
     
  
 export const exploreSection=[
-    {description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque expedita nam in repudiandae, quibusdam debitis iure dicta molestiae dolor quaerat.',
+    {description:'Experience fast, secure, and low-cost transactions with JustPay. Our platform lets you send and receive stablecoins effortlessly—just like traditional payment apps, but powered by blockchain technology.',
       image:"/images/v1.jpg"},
   
-    {description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque expedita nam in repudiandae, quibusdam debitis iure dicta molestiae dolor quaerat.',
+    {description:'No more waiting for bank transfers or dealing with high fees. With JustPay, you can make instant transactions globally, all while keeping your funds stable and secure.',
       image:"/images/v2.jpg"},
   
-    {description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque expedita nam in repudiandae, quibusdam debitis iure dicta molestiae dolor quaerat.', 
+    {description: 'We prioritize your security and financial freedom. JustPay ensures private, permissionless transactions without the need for traditional banks—giving you complete control over your money.', 
       image:"/images/v3.jpg"},
   
-    {description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque expedita nam in repudiandae, quibusdam debitis iure dicta molestiae dolor quaerat.',
+    {description:'We believe in true financial sovereignty. With JustPay, there are no middlemen, no unnecessary verifications, and no frozen accounts—just pure financial independence. Your transactions are peer-to-peer, encrypted, and verified on the blockchain, ensuring that only you have access to your funds.',
        image:"/images/v4.jpg"}
   ]
   
 
   export const recommend = [
-    { firstName: "Frinquilla",lastName:'Sempe', occupation:'UI/UX Designer', info:"loremhighest solid must be worked and info a", img:'/images/v1.jpg'},
-    { firstName: "February",lastName:'Sempe', occupation:'UI/UX Designer', info:"loremhighest solid must be worked and info a", img:'/images/v1.jpg' },
-    { firstName: "March",lastName:'Sempe', occupation:'UI/UX Designer', info:"loremhighest solid must be worked and info a", img:'/images/v1.jpg' },
-    { firstName: "April",lastName:'Sempe', occupation:'UI/UX Designer', info:"loremhighest solid must be worked and info a", img:'/images/v1.jpg'},
-    { firstName: "May", lastName:'Sempe', occupation:'UI/UX Designer', info:"loremhighest solid must be worked and info a", img:'/images/v1.jpg'},
-    { firstName: "June",lastName:'Sempe', occupation:'UI/UX Designer', info:"loremhighest solid must be worked and info a", img:'/images/v1.jpg' },
+    { firstName: "Frinquilla",lastName:'Sempe', occupation:'Doctor', info:"Finally, a payment app that gives me full control over my funds. No banks, no limits—just instant transfers!", img:'/images/v1.jpg'},
+    { firstName: "James",lastName:'K', occupation:'UI/UX Designer', info:"I love that I can send money to my family overseas without worrying about delays or crazy fees", img:'/images/v1.jpg' },
+    { firstName: "Emily",lastName:'R', occupation:'Crypto Enthusiast', info:"As someone who values privacy, this app is a game changer. No one tracks my transactions, and I feel truly in control.", img:'/images/v1.jpg' },
+    { firstName: "Michael",lastName:'T', occupation:'Remote Worker', info:"I don’t have to worry about market swings anymore. Stablecoins give me the best of crypto and traditional finance.", img:'/images/v1.jpg'},
+    { firstName: "Carlos", lastName:'M.', occupation:'Digital Nomad', info:"I ditched my bank account months ago, and this app makes it so easy to manage my money without one.", img:'/images/v1.jpg'},
+    { firstName: "Aisha",lastName:'B', occupation:'Small Business Owner', info:"Fees are almost non-existent compared to banks and PayPal. This app saves me money every day!", img:'/images/v1.jpg' },
   ]
   
   export const teamMembers=[
