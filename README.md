@@ -28,56 +28,39 @@ Before you begin, ensure you have the following installed:
 - **Git** (for cloning the repository)
 - **MetaMask** or any Ethereum wallet (for interacting with the DApp)
 
----
 
 ### Installation
 
 1. **Clone the Repository**
    - Open your terminal or command prompt.
    - Run the following command to clone the repository:
-     ```bash
-    git clone  https://github.com/your-username/dapp-project.git](https://github.com/claudioussamuel/JustPay 
-     ```
-   - Navigate to the project directory:
-     ```bash
-     cd dapp-project
-     ```
+     
+    ![clone](frontend/public/images/gitcllone.png)
 
 2. **Install Dependencies**
    - Install all required dependencies by running:
-     ```bash
-     npm install
-     ```
+
      or if you're using Yarn:
-     ```bash
-     yarn install
-     ```
+     
+
 
 3. **Set Up Environment Variables**
    - Create a `.env.local` file in the root directory of the project.
    - Add the following environment variables:
-     ```env
-     NEXT_PUBLIC_PRIVY_APP_ID=your_privy_app_id
-     NEXT_PUBLIC_INFURA_API_KEY=your_infura_api_key
-     ```
+     ![secret-keys](frontend/public/images/privy_id.png)
+
      - Replace `your_privy_app_id` with your actual Privy App ID (get it from the [Privy Dashboard](https://privy.io/)).
      - Replace `your_infura_api_key` with your Infura API key (if you're using Infura for Ethereum node access).
 
 4. **Run the Development Server**
    - Start the development server by running:
-     ```bash
-     npm run dev
-     ```
-     or if you're![npm_install](https://github.com/user-attachments/asset![npm_install](https://github.com/user-attachments/assets/4960069d-8c20-4d77-9168-2bfc1a2dc3f1)
-s/d3adc3fd-ebb6-4090-bbed-28c68e148a3e)
- using Yarn:
-     ```bash
-     yarn dev
-     ```
+        ![clone](frontend/public/images/npm_install.png)
+     or if you're using Yarn:
+     ![clone](frontend/public/images/yi.png)
+     
+
    - Open your browser and navigate to:
-     ```
-     http://localhost:3000
-     ```
+   ![clone](frontend/public/images/local.png)
 
 ---
 
@@ -116,9 +99,7 @@ s/d3adc3fd-ebb6-4090-bbed-28c68e148a3e)
     npx hardhat deploy
     ```
   - Run tests for the smart contracts:
-    ```bash
-    npx hardhat test
-    ```
+   ![clone](frontend/public/images/npx-test.png)
 
 - **Testing the DApp**:
   - Use testnet stablecoins (e.g., USDT on Goerli) to simulate payments.
