@@ -61,8 +61,6 @@ Before you begin, ensure you have the following installed:
      NEXT_PUBLIC_INFURA_API_KEY=your_infura_api_key
      ```
    - Add the following environment variables:
-     ![secret-keys](frontend/public/images/privy_id.png)
-
      - Replace `your_privy_app_id` with your actual Privy App ID (get it from the [Privy Dashboard](https://privy.io/)).
      - Replace `your_infura_api_key` with your Infura API key (if you're using Infura for Ethereum node access).
 
