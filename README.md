@@ -33,19 +33,33 @@ Before you begin, ensure you have the following installed:
 
 1. **Clone the Repository**
    - Open your terminal or command prompt.
+      ```bash
+     cd dapp-project
+     ```
    - Run the following command to clone the repository:
-     
-    ![clone](frontend/public/images/gitcllone.png)
+   - 
+     ```bash
+     git clone https://github.com/claudioussamuel/JustPay
+     ```
 
 2. **Install Dependencies**
    - Install all required dependencies by running:
-
+     ```bash
+     npm install
+     ```
      or if you're using Yarn:
+      ```bash
+     yarn  install
+     ```
      
 
 
 3. **Set Up Environment Variables**
    - Create a `.env.local` file in the root directory of the project.
+      ```env
+     NEXT_PUBLIC_PRIVY_APP_ID=your_privy_app_id
+     NEXT_PUBLIC_INFURA_API_KEY=your_infura_api_key
+     ```
    - Add the following environment variables:
      ![secret-keys](frontend/public/images/privy_id.png)
 
@@ -53,16 +67,21 @@ Before you begin, ensure you have the following installed:
      - Replace `your_infura_api_key` with your Infura API key (if you're using Infura for Ethereum node access).
 
 4. **Run the Development Server**
+   
    - Start the development server by running:
-        ![clone](frontend/public/images/npm_install.png)
+    ```bash
+     npm run dev
+     ```
      or if you're using Yarn:
-     ![clone](frontend/public/images/yi.png)
+     ```bash
+     yarn run dev
+     ```
      
+    - Open your browser and navigate to:
+   ```bash
+     http://localhost:3000
+     ```
 
-   - Open your browser and navigate to:
-   ![clone](frontend/public/images/local.png)
-
----
 
 ### Usage
 
@@ -99,7 +118,9 @@ Before you begin, ensure you have the following installed:
     npx hardhat deploy
     ```
   - Run tests for the smart contracts:
-   ![clone](frontend/public/images/npx-test.png)
+    ```bash
+    npx hardhat test
+    ```
 
 - **Testing the DApp**:
   - Use testnet stablecoins (e.g., USDT on Goerli) to simulate payments.
