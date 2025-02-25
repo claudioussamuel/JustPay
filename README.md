@@ -1,4 +1,4 @@
-![App logo](frontend/public/images/just-image-pay.png)
+![renew brand](frontend/public/images/Just-image-pay.png)
 
 <p align="left">
   <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
