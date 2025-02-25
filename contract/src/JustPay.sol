@@ -147,9 +147,12 @@ contract JustPay is ReentrancyGuard {
     mapping(address => Request[]) private s_requests;
     /// @dev Mapping of address to history
     mapping(address => SendReceive[]) private s_history;
+    /// @dev Mapping of each address to history
+    mapping(address => mapping(address => SendReceive[]))
+        private s_historyWithAFriend;
     /// @dev Mapping of address to Friends
     mapping(address => UserInfo[]) private s_myFriends;
-    /// @dev Mpping of each address to
+
     /// @dev All public users
     UserInfo[] public s_allUsers;
 
@@ -380,6 +383,7 @@ contract JustPay is ReentrancyGuard {
         }
         newSend.time = block.timestamp;
         s_history[sender].push(newSend);
+        s_historyWithAFriend[sender][receiver].push(newSend);
 
         SendReceive memory newReceive;
         newReceive.action = "Receive";
@@ -397,6 +401,7 @@ contract JustPay is ReentrancyGuard {
         }
         newReceive.time = block.timestamp;
         s_history[receiver].push(newReceive);
+        s_historyWithAFriend[receiver][sender].push(newReceive);
     }
 
     //Get all historic transactions user has been apart of
@@ -405,6 +410,13 @@ contract JustPay is ReentrancyGuard {
         address _user
     ) public view returns (SendReceive[] memory) {
         return s_history[_user];
+    }
+
+    function getMyHistoryWithAFriend(
+        address _user,
+        address _friend
+    ) public view returns (SendReceive[] memory) {
+        return s_historyWithAFriend[_user][_friend];
     }
 
     function getMyRequests(

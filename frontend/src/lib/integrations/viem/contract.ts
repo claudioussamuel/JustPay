@@ -145,6 +145,33 @@ export async function readHistoryData(userAddress: `0x${string}`): Promise<SendR
     }
 }
 
+export async function readHistoryBetweenFriendsData(userAddress: `0x${string}`,friendAddress: `0x${string}`): Promise<SendReceive[] | null> {
+    try {
+        const contract = getContract({
+            address: contractAddress,
+            abi: contractAbi,
+            client,
+        });
+
+        const data = await contract.read.getMyHistoryWithAFriend([userAddress,friendAddress]);
+
+        console.log("History Data:", data);
+
+        if (Array.isArray(data)) {
+            return data as SendReceive[];
+        } else {
+            
+            return null;
+        }
+    } catch (error) {
+        
+        console.error("Error reading history:", error);
+        return null;
+    }
+}
+
+//
+
 export async function approve(spender: `0x${string}`, amount: bigint): Promise<boolean | null> {
     try {
         const contract = getContract({
@@ -216,7 +243,7 @@ export async function readMyRequests(userAddress: `0x${string}`): Promise<Reques
     }
 }
 
-// unimplemented - 1
+
 export async function readAllMembers(): Promise<UserInfo[] | null> {
     try {
         const contract = getContract({
