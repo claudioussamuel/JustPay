@@ -1,101 +1,105 @@
 "use client"
 
 import { useSelectedContactContext } from '@/app/context/SelectContext';
-import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { usePrivy } from "@privy-io/react-auth";
 import { readHistoryBetweenFriendsData } from "@/lib/integrations/viem/contract";
 import { SendReceive } from '../../../types/transaction.types';
 import { getAddress } from 'viem'
-
- 
+import UnavailableData from '../unavailable/UnavailableData';
 
 function ContactDescriptionEvents() {
-  const {user} = usePrivy();
-  const walletAddress = user?.wallet?.address
-  const {selectedContact} = useSelectedContactContext();
+  const { user } = usePrivy();
+  const walletAddress = user?.wallet?.address;
+  const { selectedContact } = useSelectedContactContext();
+  const [transactionHistory, setTransactionHistory] = useState<SendReceive[]>([]);
 
-      const [transactionHistory, setTransactionHistory] = useState<SendReceive[]>([]);
+  useEffect(() => {
+    console.log("Selected Contact:", selectedContact); // Debug selectedContact
+    const fetchUserData = async () => {
+      if (!walletAddress || !selectedContact?.userAddress) return;
 
-      useEffect(()=>{
-        const fetchUserData=async()=>{
-            if(!walletAddress){
-                return
-            }
+      try {
+        const history = await readHistoryBetweenFriendsData(
+          walletAddress as `0x${string}`,
+          getAddress(selectedContact.userAddress as `0x${string}`)
+        );
+        console.log("Fetched Transaction History:", history); 
+        setTransactionHistory(history || []);
+      } catch (error) {
+        console.error("Error fetching transaction history:", error);
+      }
+    };
 
- 
+    fetchUserData();
+  }, [selectedContact?.userAddress, walletAddress]);
 
-            try {
-                const history = await readHistoryBetweenFriendsData(walletAddress as `0x${string}`, getAddress(selectedContact?.userAddress as `0x${string}`));
-                setTransactionHistory(history || []);
-            } catch (error) {
-               
-            }
-            finally{
-               
-            }
-        };
-
-        fetchUserData();
-
-    },[selectedContact?.userAddress]);
-
-
-
-  // const displayedImages = images.slice(0, 3);
-  // const extraImagesCount = images.length > 3 ? images.length - 3 : 0; 
+  if (transactionHistory.length===0){
+    return(
+        <div>
+          <p>Loading.......</p>
+      </div>
+      )
+  }
   return (
     <div className="text-zinc-800">
-      <h1 className="mb-1 text-[13px]">{selectedContact?.userAddress}</h1>
-      <div className=" rounded-2xl p-5 bg-softBlend">
-        {/* <h3 className="font-semibold">{title}</h3>
-        <p className="text-sm ">{description}</p> */}
+      <div>
+        {transactionHistory.map((tx, index) => {
+          const date = new Date(Number(tx.time) * 1000);
 
-        {/* Image Display Section */}
-        <div className='flex items-center justify-between'>
+          const formattedDate = date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          });
 
-        <div className="flex items-center mt-3 -space-x-3">
-           {transactionHistory.map((img, index) => (
-            <div key={index} className="relative w-10 h-10">
-              {/* <Image
-                src={img}
-                alt={`Event image ${index + 1}`}
-                layout="fill"
-                className="rounded-full object-cover border"
-              /> */}
-               (
-            <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-300 text-sm font-semibold">
-              {img.action}
+          return (
+            <div key={index} className="p-4 rounded-lg">
+              <div className='mb-3'>
+                <h1>{formattedDate}</h1>
+              </div>
+
+              <div className="bg-softBlend rounded-md p-3">
+                <div className="flex items-center ">
+
+                  <div className='space-y-3'>
+                     <div>
+                       <h1>Amount</h1>
+                      <h1>{tx.amount}</h1>
+                     </div>
+
+                     <div>
+                       <h1>Message</h1>
+                       <p>{tx.message}</p>
+                     </div>
+
+
+                     <div className='flex items-center justify-between gap-20'>
+                        <div className='bg-gray-400 p-2 rounded-md'>
+                          <h1 className='text-center'>{tx.action}</h1>
+                        </div>
+
+                        <div className="flex">
+                                <h1>Time:</h1>
+                                    <p>
+                                 {new Date(Number(tx.time) * 1000).toLocaleTimeString('en-US', {
+                                hour: 'numeric',
+                                      minute: '2-digit',
+                                hour12: true,
+                                   })}
+                                   </p>
+                                  </div>
+
+
+                     </div>
+
+                  </div>
+                </div>
+                
+              </div>
             </div>
-          )
-
-          /// action
-          /// amount
-          /// message
-          /// time
-          /// otherPartyName
-            </div>
-          ))} 
-
-         
-          {/* {extraImagesCount > 0 && (
-            <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-300 text-sm font-semibold">
-              +{extraImagesCount}
-            </div>
-          )} */}
-        </div>
-
-
-        {/* {time && (
-          <div className="mt-2  text-sm">
-            <h1>{time}</h1>
-          </div>
-        )} */}
-
-        </div>
-
-
-
+          );
+        })}
       </div>
     </div>
   );

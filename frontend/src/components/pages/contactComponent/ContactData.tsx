@@ -21,9 +21,13 @@ function ContactData({ data, className ,isHighlighted}: { data: Contact, classNa
 
         <div className="w-10 h-10 p-3 rounded-full font-dmMono bg-gradient-to-r text-nowrap from-pink-500 via-purple-500 to-indigo-500 flex justify-center items-center 
         transition duration-300 group-hover:scale-110">
-          <h1 className="text-[18px] text-white flex justify-center items-center text-nowrap">
-            <span>{data.firstName[0]}</span> <span className="text-nowrap">{data.lastName[0]}</span>
-          </h1>
+
+          <div>
+            <h1 className=" text-[18px] text-white flex justify-center items-center text-nowrap">
+              <span>{data.firstName[0]}</span> <span className="text-nowrap">{data.lastName[0]}</span>
+            </h1>
+          </div>
+
         </div>
 
         <div className="text-2xl font-semibold text-nowrap">
