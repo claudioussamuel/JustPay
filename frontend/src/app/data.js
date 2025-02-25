@@ -75,12 +75,12 @@ export const exploreSection=[
   
 
   export const recommend = [
-    { firstName: "Frinquilla",lastName:'Sempe', occupation:'Doctor', info:"Finally, a payment app that gives me full control over my funds. No banks, no limits—just instant transfers!", img:'/images/v1.jpg'},
-    { firstName: "James",lastName:'K', occupation:'UI/UX Designer', info:"I love that I can send money to my family overseas without worrying about delays or crazy fees", img:'/images/v1.jpg' },
-    { firstName: "Emily",lastName:'R', occupation:'Crypto Enthusiast', info:"As someone who values privacy, this app is a game changer. No one tracks my transactions, and I feel truly in control.", img:'/images/v1.jpg' },
-    { firstName: "Michael",lastName:'T', occupation:'Remote Worker', info:"I don’t have to worry about market swings anymore. Stablecoins give me the best of crypto and traditional finance.", img:'/images/v1.jpg'},
-    { firstName: "Carlos", lastName:'M.', occupation:'Digital Nomad', info:"I ditched my bank account months ago, and this app makes it so easy to manage my money without one.", img:'/images/v1.jpg'},
-    { firstName: "Aisha",lastName:'B', occupation:'Small Business Owner', info:"Fees are almost non-existent compared to banks and PayPal. This app saves me money every day!", img:'/images/v1.jpg' },
+    { firstName: "Frinquilla",lastName:'Sempe', occupation:'Doctor', info:"Finally, a payment app that gives me full control over my funds. No banks, no limits—just instant transfers!", img:'/images/iron1.jpg'},
+    { firstName: "James",lastName:'K', occupation:'UI/UX Designer', info:"I love that I can send money to my family overseas without worrying about delays or crazy fees", img:'/images/iron2.jpg' },
+    { firstName: "Emily",lastName:'R', occupation:'Crypto Enthusiast', info:"As someone who values privacy, this app is a game changer. No one tracks my transactions, and I feel truly in control.", img:'/images/iron3.jpg' },
+    { firstName: "Michael",lastName:'T', occupation:'Remote Worker', info:"I don’t have to worry about market swings anymore. Stablecoins give me the best of crypto and traditional finance.", img:'/images/iron4.jpg'},
+    { firstName: "Carlos", lastName:'M.', occupation:'Digital Nomad', info:"I ditched my bank account months ago, and this app makes it so easy to manage my money without one.", img:'/images/claud_img.jpg'},
+    { firstName: "Aisha",lastName:'B', occupation:'Small Business Owner', info:"Fees are almost non-existent compared to banks and PayPal. This app saves me money every day!", img:'/images/iron4.jpg' },
   ]
   
   export const teamMembers=[
