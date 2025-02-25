@@ -3,11 +3,11 @@ import { HiClipboardList} from "react-icons/hi";
 import { HiUser } from "react-icons/hi";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import { HiReceiptRefund } from "react-icons/hi";
-
+import { BiTransfer } from "react-icons/bi";
 
 
 export const navLinks=[
-    {name:'home',href:'/'},
+    {name:'transfer',href:'/transfer'},
     {name:'profile',href:'/profile'},
     {name:'contacts',href:'/contacts'},
     {name:'payment', href:'/payment'},
@@ -21,14 +21,13 @@ export const sociaLinks=[
   ]
  
   export const footerLinks=[
-    {name:'terms',href:"/"},
-    {name:'dashboard', href:"/dashboard"},
-    {name:'profile', href:"/profile"},
-    {name:'payment', href:"/payment"},
-    {name:'terms',href:"/aa"},
-    {name:'dashboard', href:"/cc"},
-    {name:'profile', href:"/pe"},
-    {name:'payment', href:"/pt"}
+    {name:'home',href:'/'},
+    {name:'profile',href:'/profile'},
+    {name:'contacts',href:'/contacts'},
+    {name:'payment', href:'/payment'},
+    {name:'history', href:'/history'},
+    {name:'transfer', href:'/transfer'},
+
   ]
   
   export const faqs = [
@@ -85,8 +84,8 @@ export const exploreSection=[
   ]
   
   export const teamMembers=[
-    {firstName:'Kenneth',role:"frontend developer", connect:"#", image:'/images/ken.jpg', lastName:'danso'},
-    {firstName:'Claud', role:"blockchain developer",connect:"#", image:'/images/claud_img.jpg', lastName:'opoku'},
+    {firstName:'Kenneth',role:"frontend developer", connect:"#", image:'/images/f31.jpeg', lastName:'danso'},
+    {firstName:'Claud', role:"blockchain developer",connect:"#", image:'/images/cnft.jpeg', lastName:'opoku'},
     {firstName:'makafui', role:"ui/ux designer",connect:"#", image:'/images/moto.jpg', lastName:'richmond'}
   ]
   
@@ -96,6 +95,7 @@ export const exploreSection=[
     {name:'profile',href:"/profile",icon:<HiUser/>},
     {name:'history',href:"/history",icon:<HiReceiptRefund/>},
     {name:'contacts',href:"/contacts",icon:<HiClipboardList/>},
+    {name:'transfer',href:"/transfer",icon:<BiTransfer/>},
   ]
   
 
