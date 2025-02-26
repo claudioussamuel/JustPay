@@ -3,7 +3,7 @@ import React from 'react'
 import { GoArrowDownRight } from "react-icons/go";
 
 function FrequentAskQuestionCard({
-  question, hovered,className}:{question:string; hovered:string, className?:string}) {
+  question, hovered}:{question:string; hovered:string}) {
 
   return (
     <div className='question-card-container  font-dmMono mb-5 md:mb-20 place-self-center'>

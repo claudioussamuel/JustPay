@@ -1,6 +1,5 @@
 "use client"
 
-import { contactDevice, contactPsync, contactShared } from '@/app/data'
 import { IoSearchCircleOutline } from 'react-icons/io5'
 
 import { Calendar } from 'lucide-react'
