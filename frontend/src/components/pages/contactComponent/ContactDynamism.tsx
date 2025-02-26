@@ -9,75 +9,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { GiReceiveMoney } from 'react-icons/gi';
-import { GiCancel } from "react-icons/gi";
 import { IoSendOutline } from 'react-icons/io5';
-import {  createWalletClient, custom, getContract } from 'viem';
-import { sepolia } from 'viem/chains';
-import { contractAbi, contractAddress, stableCoinAddress } from '@/lib/integrations/viem/abi';
-import { usePrivy, useWallets } from '@privy-io/react-auth'; 
+
 
 function ContactDynamism() {
   const { selectedContact } = useSelectedContactContext();
   const router = useRouter();
-  const { user,} = usePrivy()
-    const walletAddress = user?.wallet?.address;
-    const { wallets} = useWallets();
 
-     async function removeFriend() {
-        try {
-          if (!wallets || wallets.length === 0) {
-            console.error("No wallet connected");
-            return;
-          }
-      
-          const wallet = wallets[0];
-          if (!wallet) {
-            console.error("Wallet is undefined");
-            return;
-          }
-      
-    
-          const provider = await wallet.getEthereumProvider();
-          if (!provider) {
-            console.error("Provider is undefined");
-            return;
-          }
-      
-              const currentChainId = await provider.request({ method: "eth_chainId" });
-    
-              if (currentChainId !== `0x${sepolia.id.toString(16)}`) {
-                await wallet.switchChain(sepolia.id);
-              }
-    
-    
-            
-    
-              const client = createWalletClient({
-                chain: sepolia,
-                transport: custom(provider),
-                account: walletAddress as `0x${string}`,
-              });
-    
-    
-         
-        
-      
-          const contract = getContract({
-            address: contractAddress,
-            abi: contractAbi,
-            client,
-          });
-      
-          await contract.write.createRequest([
-          
-          ]);
-    
-        } catch (error) {
-          console.error("Failed to update blockchain:", error);
-        }
-      
-    
-      }
 
   const handleRequestPayment = () => {
     if (!selectedContact?.userAddress) return;

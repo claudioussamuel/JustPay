@@ -6,14 +6,13 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Button } from '../ui/button';
-import { useFundWallet, useWallets } from '@privy-io/react-auth';
+import { useFundWallet} from '@privy-io/react-auth';
 import { usePrivy } from '@privy-io/react-auth';
 import { WalletIcon } from 'lucide-react';
 
 
 function Sidebar() {
   const pathname = usePathname();
-  const {wallets} = useWallets();
   const {fundWallet} = useFundWallet();
   const {user} = usePrivy()
   const walletAddress = user?.wallet?.address;

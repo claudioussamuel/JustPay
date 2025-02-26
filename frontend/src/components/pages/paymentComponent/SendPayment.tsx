@@ -1,12 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { CiSearch } from "react-icons/ci";
-import { usePrivy } from "@privy-io/react-auth";
-import { allowance } from "@/lib/integrations/viem/contract";
-import { contractAddress } from "@/lib/integrations/viem/abi";
 import { useAppContext } from "@/app/context/AppContext";
 
 function SendPayment() {

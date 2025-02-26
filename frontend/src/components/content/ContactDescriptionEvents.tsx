@@ -6,7 +6,7 @@ import { usePrivy } from "@privy-io/react-auth";
 import { readHistoryBetweenFriendsData } from "@/lib/integrations/viem/contract";
 import { SendReceive } from '../../../types/transaction.types';
 import { getAddress } from 'viem'
-import UnavailableData from '../unavailable/UnavailableData';
+
 
 function ContactDescriptionEvents() {
   const { user } = usePrivy();
@@ -15,7 +15,7 @@ function ContactDescriptionEvents() {
   const [transactionHistory, setTransactionHistory] = useState<SendReceive[]>([]);
 
   useEffect(() => {
-    console.log("Selected Contact:", selectedContact); // Debug selectedContact
+    console.log("Selected Contact:", selectedContact);
     const fetchUserData = async () => {
       if (!walletAddress || !selectedContact?.userAddress) return;
 
@@ -32,7 +32,7 @@ function ContactDescriptionEvents() {
     };
 
     fetchUserData();
-  }, [selectedContact?.userAddress, walletAddress]);
+  }, [selectedContact?.userAddress, walletAddress, selectedContact]);
 
   if (transactionHistory.length===0){
     return(
