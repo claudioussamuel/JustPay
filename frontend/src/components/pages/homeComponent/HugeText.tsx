@@ -3,7 +3,7 @@ import Bounded from "../../shared/Bounded"
 function HugeText() {
     return (
      <Bounded className="border-zinc-800 bg-wineTexture py-10 border-t border-b">
-      <div className=' text-[0.8rem] flex flex-col w-full border-t border-b border-l border-r border-zinc-800  md:text-[3rem] lg:text-[4.5rem] '>
+      <div className=' text-[0.6rem] flex flex-col w-full border-t border-b border-l border-r border-zinc-800  md:text-[3rem] lg:text-[4.5rem] '>
          <div className='grid grid-cols-3 border-b border-zinc-800 text-zinc-800 '>
            <div className='uppercase font-bold pl-10 font-dmMono'>
              <h1>payments</h1>

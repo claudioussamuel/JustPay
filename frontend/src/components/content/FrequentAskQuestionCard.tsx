@@ -3,15 +3,15 @@ import React from 'react'
 import { GoArrowDownRight } from "react-icons/go";
 
 function FrequentAskQuestionCard({
-  question, hovered}:{question:string; hovered:string}) {
+  question, hovered,className}:{question:string; hovered:string, className?:string}) {
 
   return (
-    <div className='question-card-container font-dmMono mb-20 '>
+    <div className='question-card-container  font-dmMono mb-5 md:mb-20 place-self-center'>
       <div className="card">
 
       <div className='card-front grid p-5'>
         <div className="place-self-start ">
-          <p className='text-wrap mt-3 flex '>{question}</p>
+          <p className='text-wrap mt-3 flex  '>{question}</p>
         </div>
 
         <div className='place-self-end '>

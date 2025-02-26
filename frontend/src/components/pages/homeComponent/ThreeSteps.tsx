@@ -8,7 +8,7 @@ function ThreeSteps() {
   return (
       <div id="three-steps" className='border-zinc-800  border-t  border-b bg-wineTexture py-20'>
         <div className=' flex justify-center '>
-          <Heading className='text-6xl text-zinc-800 pb-20'>Let&apos;s get you started</Heading>
+          <Heading className='text-3xl text-center  text-zinc-800 pb-10 md:pb-20 md:text-6xl'>Let&apos;s get you started</Heading>
         </div>
         <div className='space-y-10 '>
           <StepsCard items={{
@@ -26,7 +26,7 @@ function ThreeSteps() {
           header: ' Connect Your Wallet',
           body:'Easily link your existing crypto wallet or create a new one.',
           themeOverride: "Blue",
-          className:'gap-52',
+          className:'md:gap-52',
           reverse: true,
           btnText: 'step-2'
         }}/>

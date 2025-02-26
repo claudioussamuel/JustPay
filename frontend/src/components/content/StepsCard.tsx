@@ -68,18 +68,18 @@ function StepsCard({items}: Props) {
                 {items.header}
             </Heading>
 
-            <div className='max-w-md text-[18px] font-dmMono leading-relaxed'>
+            <div className='max-w-md md:text-[18px] font-dmMono leading-relaxed'>
             <p>{items.body}</p>
             </div>
 
-            <ButtonLink href='#' className='bg-brand-beige t px-5 py-8  h-5 font-dmMono text-2xl uppercase'>
+            <ButtonLink href='#' className='bg-brand-beige px-3 py-5 md:px-5 md:py-8  h-5 font-dmMono text-2xl uppercase'>
                 <p className='text-zinc-800'>{items.btnText}</p>
             </ButtonLink>
         </div>
  
 
         <div className={clsx(
-            "grid grid-cols-1 place-items-center md:w-1/2",
+            "grid grid-cols-1 place-items-center md:w-1/2 mt-10",
             items.className
         )}>
             <div className='col-start-1 row-start-1 transition-transform place-items-center w-full'>
