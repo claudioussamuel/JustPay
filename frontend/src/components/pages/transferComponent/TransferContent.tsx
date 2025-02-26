@@ -2,13 +2,19 @@
 
 import React, { useState } from 'react';
 
+
+
+
 const TransferContent = () => {
   const [recipientAddress, setRecipientAddress] = useState('');
   const [purpose, setPurpose] = useState('');
   const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [duration, setDuration] = useState<'one-time' | 'daily' | 'weekly' | 'monthly'>('one-time');
+  // const [endDate, setEndDate] = useState('');
+  // const [duration, setDuration] = useState<'one-time' | 'daily' | 'weekly' | 'monthly'>('one-time');
 
+
+
+ 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,8 +22,8 @@ const TransferContent = () => {
       recipientAddress,
       purpose,
       startDate,
-      endDate,
-      duration,
+      //endDate,
+     // duration,
     });
    
   };
@@ -74,7 +80,7 @@ const TransferContent = () => {
         />
       </div>
 
-      <div>
+      {/* <div>
         <label htmlFor="endDate" className="block text-[18px] font-medium text-gray-700">
           End Date 
         </label>
@@ -85,9 +91,9 @@ const TransferContent = () => {
           onChange={(e) => setEndDate(e.target.value)}
           className="mt-1 block  rounded-md border-gray-300 shadow-sm text-[18px] text-zinc-500"
         />
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         <label htmlFor="duration" className="block text-[18px] font-medium text-gray-700 ">
           Duration
         </label>
@@ -102,7 +108,7 @@ const TransferContent = () => {
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
         </select>
-      </div>
+      </div> */}
 
       <button
         type="submit"
@@ -112,6 +118,7 @@ const TransferContent = () => {
       </button>
     </form>
     </div>
+    
   );
 };
 

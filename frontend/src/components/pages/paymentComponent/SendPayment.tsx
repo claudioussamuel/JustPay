@@ -10,14 +10,12 @@ import { contractAddress } from "@/lib/integrations/viem/abi";
 import { useAppContext } from "@/app/context/AppContext";
 
 function SendPayment() {
-  const { user } = usePrivy();
-  const walletAddress = user?.wallet?.address;
+ 
   const { receipientAddress, setRecipientAddress } = useAppContext();
-  const [txs] = useState(""); 
   const searchParams = useSearchParams();
   const walletFromUrl = searchParams.get("wallet") || "";
 
-
+ 
   useEffect(() => {
     if (walletFromUrl) {
       setRecipientAddress(walletFromUrl);
