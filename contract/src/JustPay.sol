@@ -267,12 +267,11 @@ contract JustPay is ReentrancyGuard {
         uint256 _amount,
         uint256 _executeAt,
         address _stableCoin
-    ) external payable {
+    ) external {
         require(
             _executeAt > block.timestamp,
             "Execution time must be in the future"
         );
-        require(msg.value == _amount, "Incorrect ETH sent");
 
         // Transfer tokens to contract until execution time
         IERC20(_stableCoin).safeTransferFrom(
@@ -467,7 +466,7 @@ contract JustPay is ReentrancyGuard {
      * @notice Removes a friend from user's friends list
      * @param _id Index of the friend in user's friends array
      */
-    function removeFriend(uint256 _id) public payable {
+    function removeFriend(uint256 _id) public {
         UserInfo[] storage myFriends = s_myFriends[msg.sender];
 
         // Swap with the last element and pop (gas efficient removal)
@@ -484,7 +483,6 @@ contract JustPay is ReentrancyGuard {
         uint256 _request
     )
         public
-        payable
         noSuchRequest(_request)
         nonReentrant
         moreThanZero(s_requests[msg.sender][_request].amount)
@@ -521,7 +519,6 @@ contract JustPay is ReentrancyGuard {
         uint256 _request
     )
         public
-        payable
         noSuchRequest(_request)
         nonReentrant
         moreThanZero(s_requests[msg.sender][_request].amount)
