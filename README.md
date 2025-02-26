@@ -71,7 +71,7 @@ Before you begin, ensure you have the following installed:
 
    - Before interacting with the DApp, you'll need to mint test ERC20 tokens from this address:
      ```
-     0x776b6fC2eD15D6Bb5Fc32e0c89DE68683118c62A
+     0xd484a0463a540E59Ff10954F74c2ec2efd785abc
      ```
    - Connect your wallet to the appropriate testnet and interact with this contract to mint tokens.
    - These tokens will be used for testing payment functionality within the DApp.

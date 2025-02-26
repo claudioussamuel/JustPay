@@ -65,7 +65,7 @@ function ContactDescriptionEvents() {
                   <div className='space-y-3'>
                      <div>
                        <h1>Amount</h1>
-                      <h1>{Number(tx.amount)/1e18} USDC</h1>
+                      <h1>{Number(tx.amount)/1e6} USDC</h1>
                      </div>
 
                      <div>

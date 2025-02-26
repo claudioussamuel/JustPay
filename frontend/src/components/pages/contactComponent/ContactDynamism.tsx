@@ -5,22 +5,28 @@ import ContactInscription from '@/components/content/ContactInscription';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import UnavailableData from '@/components/unavailable/UnavailableData';
+import { contractAbi, contractAddress } from '@/lib/integrations/viem/abi';
+import { usePrivy, useWallets } from '@privy-io/react-auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { GiCancel, GiReceiveMoney } from 'react-icons/gi';
 import { IoSendOutline } from 'react-icons/io5';
-import { stringToBytes } from 'viem';
+import { createWalletClient, custom, getContract, stringToBytes } from 'viem';
+import { sepolia } from 'viem/chains';
 
 
 interface ContactDynamismProps{
   id?:string;
 }
-
+ 
 
 function ContactDynamism({id}: ContactDynamismProps) {
   const { selectedContact , removeContact} = useSelectedContactContext();
   const router = useRouter();
+  const { user,} = usePrivy()
+  const walletAddress = user?.wallet?.address;
+  const { wallets} = useWallets();
 
 
   const handleRequestPayment = () => {
@@ -29,8 +35,67 @@ function ContactDynamism({id}: ContactDynamismProps) {
     router.push(`/payment?tab=receive&wallet=${selectedContact.userAddress}`);
   };
 
-  const handleRemoveUser=()=>{
+  const handleRemoveUser= async ()=>{
     if(id){
+         try {
+            if (!wallets || wallets.length === 0) {
+              console.error("No wallet connected");
+              return;
+            }
+        
+            const wallet = wallets[0];
+            if (!wallet) {
+              console.error("Wallet is undefined");
+              return;
+            }
+        
+      
+            const provider = await wallet.getEthereumProvider();
+            if (!provider) {
+              console.error("Provider is undefined");
+              return;
+            }
+        
+                const currentChainId = await provider.request({ method: "eth_chainId" });
+      
+                if (currentChainId !== `0x${sepolia.id.toString(16)}`) {
+                  await wallet.switchChain(sepolia.id);
+                }
+      
+      
+              
+      
+                const client = createWalletClient({
+                  chain: sepolia,
+                  transport: custom(provider),
+                  account: walletAddress as `0x${string}`,
+                });
+      
+      
+           
+          
+        
+            const contract = getContract({
+              address: contractAddress,
+              abi: contractAbi,
+              client,
+            });
+        
+        const tsx =    await contract.write.removeFriend([
+              BigInt(id)
+            ]);
+        
+            console.log("User data added to the blockchain",tsx);
+      
+           
+            router.push('/contacts');
+      
+          
+            
+      
+          } catch (error) {
+            console.error("Failed to update blockchain:", error);
+          }
       removeContact(id);
     }
   }
@@ -58,7 +123,7 @@ function ContactDynamism({id}: ContactDynamismProps) {
 
           <div>
             <h1 className='lg:text-2xl'>
-              {selectedContact.firstName} {selectedContact.lastName}
+              {selectedContact.firstName} {selectedContact.lastName} 
             </h1>
             <div>
               <p className='text-[12px] lg:text-[18px]'>{selectedContact.email}</p>

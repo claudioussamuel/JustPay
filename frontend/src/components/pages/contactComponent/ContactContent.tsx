@@ -74,7 +74,7 @@ function ContactContent() {
             <div className='flex flex-col md:flex-row gap-5'>
 
                 <div className='flex-[50%]'>
-                <ContactDynamism id={selectedContact?.id}/>
+                <ContactDynamism id={filteredContacts.indexOf(selectedContact!).toString()}/>
                 </div>
 
 
