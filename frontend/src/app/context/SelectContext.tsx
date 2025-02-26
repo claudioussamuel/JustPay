@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 
 interface Contact {
+  id?:string;
   firstName:string;
   lastName:string;
   gender:string;
@@ -22,6 +23,7 @@ interface Contact {
 interface SelectedContactContextType {
   selectedContact: Contact | null;
   setSelectedContact: (contact: Contact | null) => void;
+  removeContact:(id:string)=>void;
 }
 
 const SelectedContactContext = createContext<SelectedContactContextType | undefined>(undefined);
@@ -36,9 +38,17 @@ export const useSelectedContactContext = () => {
 
 export const SelectedContactProvider = ({ children }: { children: ReactNode }) => {
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+
+  const removeContact=(id:string)=>{
+    setContacts((prevContacts)=>prevContacts.filter((contact)=>contact.id !== id));
+    if(selectedContact?.id === id){
+      setSelectedContact(null)
+    }
+  } 
 
   return (
-    <SelectedContactContext.Provider value={{ selectedContact, setSelectedContact }}>
+    <SelectedContactContext.Provider value={{ selectedContact, setSelectedContact, removeContact }}>
       {children}
     </SelectedContactContext.Provider>
   );

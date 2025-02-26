@@ -42,12 +42,12 @@ function Sidebar() {
 </Link>
         ))}
 
-      <div className='grid place-content-center sm:hidden'>
+      <div className='grid place-content-center sm:hidden md:block lg:block w-full'>
       <Button 
           onClick={()=>fundWallet(`${walletAddress}`)}
-          className=' font-dmMono bg-black text-white text-[10px] md:text-[20px]'>
-            <WalletIcon className='inline sm:hidden'/>
-          <span className='hidden  md:block'>Fund Wallet</span>
+          className=' font-dmMono w-full bg-black text-white text-[10px] md:text-[20px]'>
+            <WalletIcon className='inline sm:hidden md:block lg:block'/>
+          <span className='hidden lg:block'>Fund Wallet</span>
           </Button>
       </div>
 
