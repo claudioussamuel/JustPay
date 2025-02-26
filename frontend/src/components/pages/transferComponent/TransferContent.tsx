@@ -72,7 +72,7 @@ const TransferContent = () => {
          walletAddress,
         recipientAddress,
         purpose,
-        BigInt(Number(amount) * 1e18),
+        BigInt(Number(amount) * 1e6),
         BigInt(timestampSeconds),
         stableCoinAddress
       ]);

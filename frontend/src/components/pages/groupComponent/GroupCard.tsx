@@ -178,7 +178,7 @@ function GroupCard({ data, index }: GroupTypes & { index: number }) {
             <h1 className="text-lg font-semibold">
               {truncateAddress(data.requestor)} 
             </h1>
-            <p className="text-sm ">{(Number(data.amount)/1e18).toFixed(2)} USD</p>
+            <p className="text-sm ">{(Number(data.amount)/1e6).toFixed(2)} USD</p>
           </div>
         </div>
         <PiDotsThreeOutlineFill
