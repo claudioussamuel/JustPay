@@ -19,7 +19,7 @@ function HeroSection() {
              <PayText/>
           </div>
 
-          <div className='md:mt-0 lg:w-[50%]'>
+          <div className='mt-0 md:mt-10 lg:w-[50%]'>
              <BaseDescription/>
           </div>
 

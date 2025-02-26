@@ -93,7 +93,7 @@ function Header() {
      </div>
 
      {showToggle && (
-          <div className='absolute h-[100vh] bg-softBlend w-[40%] z-50 top-24 border border-t-0 border-l-0 border-zinc-800'>
+          <div className='absolute h-[100vh] bg-softBlend  w-[50%] z-50 top-24 border border-t-0 border-l-0 border-zinc-800'>
             <div className='flex flex-col items-center text-[18px] font-dmMono capitalize'>
              {navLinks.map((items,index)=>(
                 <Link className={clsx(`py-5 px-10  border-zinc-800
@@ -105,7 +105,6 @@ function Header() {
              ))}
 
              <div className='flex flex-col space-x-3 ml-5 gap-5 items-center'>
-
                {authenticated &&(
                   <div className=' py-5 '>
                         <h1>{walletAddress?.slice(0,10)}...</h1>
