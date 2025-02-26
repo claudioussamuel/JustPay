@@ -10,43 +10,23 @@ import { contractAddress } from "@/lib/integrations/viem/abi";
 import { useAppContext } from "@/app/context/AppContext";
 
 function SendPayment() {
-  const { user } = usePrivy();
-  const walletAddress = user?.wallet?.address;
-  const [amount, setAmount] = useState<bigint | null>(null);
+ 
   const { receipientAddress, setRecipientAddress } = useAppContext();
-  const [txs] = useState(""); 
   const searchParams = useSearchParams();
   const walletFromUrl = searchParams.get("wallet") || "";
 
-
+ 
   useEffect(() => {
     if (walletFromUrl) {
       setRecipientAddress(walletFromUrl);
     }
   }, [walletFromUrl, setRecipientAddress]);
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (walletAddress) {
-        const history = await allowance(walletAddress as `0x${string}`, contractAddress);
-        if (history) {
-          setAmount(history);
-        }
-      }
-    };
-
-    fetchUserData();
-  }, [walletAddress, txs]);
 
   return (
     <div className="h-[100vh]">
       <h3 className="font-dmMono capitalize text-3xl text-zinc-800">
         Send payment To the address below
       </h3>
-      {!amount && (
-        <p className="text-[18px] font-dmMono text-zinc-800">
-          Click on approve first, before you proceed
-        </p>
-      )}
       <div className="max-w-2xl flex items-center gap-5 mt-5 border p-2 bg-brand-gray rounded-full">
         <CiSearch className="text-zinc-800 text-3xl" />
         <input

@@ -9,7 +9,7 @@ import UsdtImage from '../../../../public/images/sika.png';
 
 export function JustText() {
   return (
-    <div className='container-frame font-bowlby uppercase'>
+    <div className='container-frame font-bowlby uppercase '>
       <div className='text' style={{ "--j": 0} as React.CSSProperties}>
         <span style={{"--i":0} as React.CSSProperties}>j</span>
         <span style={{"--i":1} as React.CSSProperties}>j</span>
@@ -45,7 +45,7 @@ export function JustText() {
 
 export function PayText() {
   return (
-    <div className='container-frame font-dmMono uppercase'>
+    <div className=' container-frame font-dmMono uppercase'>
       <div className='text' style={{ "--j": 0} as React.CSSProperties}>
         <span style={{"--i":0} as React.CSSProperties}>p</span>
         <span style={{"--i":1} as React.CSSProperties}>p</span>

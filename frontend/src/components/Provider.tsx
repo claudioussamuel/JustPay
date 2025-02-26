@@ -1,7 +1,7 @@
 "use client"
 import { ReactNode } from "react";
 import { PrivyProvider } from "@privy-io/react-auth";
-import { sepolia } from "viem/chains";
+import { mainnet, sepolia } from "viem/chains";
 
 export function Providers({children}:{children:ReactNode}){
     return <PrivyProvider 
@@ -21,7 +21,7 @@ export function Providers({children}:{children:ReactNode}){
             
         },
         defaultChain: sepolia,
-        supportedChains:[sepolia]
+        supportedChains:[sepolia,mainnet],
         
     }}
     appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || ""}>

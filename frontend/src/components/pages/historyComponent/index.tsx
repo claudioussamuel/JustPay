@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import HistoryDetails from './HistoryDetails'
 import { motion, useScroll } from 'framer-motion'
 import { usePrivy } from '@privy-io/react-auth';
-
 import { readHistoryData } from '@/lib/integrations/viem/contract';
 import { SendReceive } from '../../../../types/transaction.types';
 import UnavailableData from '@/components/unavailable/UnavailableData';

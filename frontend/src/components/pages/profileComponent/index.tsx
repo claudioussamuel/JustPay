@@ -198,16 +198,16 @@ function ProfileContent() {
         }
     };
     return (
-      <div className="mx-10 mb-20">
-        <div className="flex gap-20 -mt-5 z-50 relative h-auto ">
+      <div className=" md:mx-10 mb-20">
+        <div className="flex flex-col   lg:flex-row gap-20 -mt-5 z-50 relative h-auto ">
 
-          <div className="flex-[40%] border border-black bg-softBlend font-dmMono text-white ">
+          <div className=" md:flex-[40%] border border-black bg-softBlend font-dmMono text-white ">
             <div className='flex justify-center items-center py-5'>
                 <label htmlFor="profile-pic" className='cursor-pointer'>
                     <Image 
                         src={newProfilePic || users.profilePic} 
                         alt="profile" 
-                        className='rounded-2xl w-[70%] object-cover h-[30vh]' 
+                        className='rounded-2xl  place-self-center  object-cover w-32 h-32 ' 
                         width={350} 
                         height={100}
                         unoptimized
@@ -216,40 +216,42 @@ function ProfileContent() {
                 <input type="file" id="profile-pic" className="hidden" onChange={handleImageUpload} />
             </div>
 
-            <h3 className='text-center text-5xl font-bowlby'>{users.firstName} {users.lastName}</h3>
+            <h3 className='text-center text-2xl md:text-5xl font-bowlby'>{users.firstName} {users.lastName}</h3>
             <div className='grid place-content-center space-y-3 mt-2 mb-5'>
                 <div className='flex gap-5 items-center'>
-                    <GrLocationPin className='text-2xl'/>
+                    <GrLocationPin className='text-[15px] md:text-2xl'/>
                     <h1>{users.address}</h1>
                 </div>
                 <div className='flex gap-5 items-center'>
-                    <CgMailOpen className='text-2xl'/>
+                    <CgMailOpen className='text-[15px] md:text-2xl'/>
                     <h1>{users.email}</h1>
                 </div>
                 <div className='flex gap-5 items-center'>
-                    <BsTelephone className='text-2xl'/>
+                    <BsTelephone className='text-[15px] md:text-2xl'/>
                     <h1>{users.phone}</h1>
                 </div>
             </div>
           </div>
 
 
-          <div className="flex-[60%] border border-black bg-softBlend text-zinc-800 p-5 font-dmMono">
-            <h3 className='text-3xl'>Account details</h3>
+          <div className="md:flex-[60%] border border-black bg-softBlend text-zinc-800 p-5 font-dmMono">
+            <h3 className='text-center font-bold md:text-3xl'>Account details</h3>
             <div className='text-2xl mt-5 space-y-5'>
-                <div className='flex justify-between'>
+
+                <div className='flex  text-[14px] font-bold md:text-[18px] md:flex-row justify-between'>
                     <div className='flex gap-5 items-center'><MdOutlinePersonOutline/><h3>First Name</h3></div>
                     <h3>{users.firstName}</h3>
                 </div>
-                <div className='flex justify-between'>
+
+                <div className='flex  text-[14px] font-bold md:text-[18px] md:flex-row justify-between'>
                     <div className='flex gap-5 items-center'><MdPersonAddAlt/><h3>Last Name</h3></div>
                     <h3>{users.lastName}</h3>
                 </div>
-                <div className='flex justify-between'>
+                <div className='flex   text-[14px] font-bold md:text-[18px] md:flex-row justify-between'>
                     <div className='flex gap-5 items-center'><SlCalender/><h3>Date of Birth</h3></div>
                     <h3>{users.dob}</h3>
                 </div>
-                <div className='flex justify-between'>
+                <div className='flex   text-[14px] font-bold md:text-[18px] md:flex-row justify-between'>
                     <div className='flex gap-5 items-center'><BsGenderAmbiguous/><h3>Gender</h3></div>
                     <h3>{users.gender}</h3>
                 </div>
@@ -329,14 +331,14 @@ function ProfileContent() {
                 </SheetContent>
             </Sheet>
           </div>
+
         </div>
 
 
 
         <div className='mt-10 border border-black bg-softBlend h-auto rounded-2xl text-zinc-800 p-5'>
-            <div className='flex items-center justify-between mx-10'>
-                <h3 className='text-2xl font-bowlby'>Personal Information</h3>
-
+            <div className='flex w-full items-center justify-center '>
+                <h3 className=' text-[18px] md:text-2xl font-bowlby'>Personal Information</h3>
             </div>
 
             <div className='max-w-2xl mt-2  font-dmMono'>
