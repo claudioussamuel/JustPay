@@ -74,12 +74,12 @@ function ContactDescriptionEvents() {
                      </div>
 
 
-                     <div className='flex items-center justify-between gap-20'>
+                     <div className='flex items-center justify-between gap-20 mr-10 lg:mr-0'>
                         <div className='bg-gray-400 p-2 rounded-md'>
                           <h1 className='text-center'>{tx.action}</h1>
                         </div>
 
-                        <div className="flex">
+                        <div className="text-[12px] flex text-nowrap ">
                                 <h1>Time:</h1>
                                     <p>
                                  {new Date(Number(tx.time) * 1000).toLocaleTimeString('en-US', {

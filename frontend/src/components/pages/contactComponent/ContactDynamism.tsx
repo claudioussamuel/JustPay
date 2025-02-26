@@ -8,12 +8,18 @@ import UnavailableData from '@/components/unavailable/UnavailableData';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { GiReceiveMoney } from 'react-icons/gi';
+import { GiCancel, GiReceiveMoney } from 'react-icons/gi';
 import { IoSendOutline } from 'react-icons/io5';
+import { stringToBytes } from 'viem';
 
 
-function ContactDynamism() {
-  const { selectedContact } = useSelectedContactContext();
+interface ContactDynamismProps{
+  id?:string;
+}
+
+
+function ContactDynamism({id}: ContactDynamismProps) {
+  const { selectedContact , removeContact} = useSelectedContactContext();
   const router = useRouter();
 
 
@@ -22,6 +28,13 @@ function ContactDynamism() {
   
     router.push(`/payment?tab=receive&wallet=${selectedContact.userAddress}`);
   };
+
+  const handleRemoveUser=()=>{
+    if(id){
+      removeContact(id);
+    }
+  }
+
 
   if (!selectedContact) {
     return (
@@ -36,19 +49,19 @@ function ContactDynamism() {
     <div className='flex-[50%] bg-softBlend border h-auto'>
       <div className='p-5 border bg-brand-beige m-5 rounded-md'>
         <div className='flex gap-5'>
-          <div className="w-20 h-20 p-3 rounded-full font-dmMono bg-gradient-to-r text-nowrap from-pink-500 via-purple-500 to-indigo-500 flex justify-center items-center">
-            <h1 className="text-2xl text-white flex justify-center items-center text-nowrap">
+          <div className="w-10 h-10 lg:w-20 lg:h-20 p-3 rounded-full font-dmMono bg-gradient-to-r text-nowrap from-pink-500 via-purple-500 to-indigo-500 flex justify-center items-center">
+            <h1 className="lg:text-2xl text-white flex justify-center items-center text-nowrap">
               <span>{selectedContact.firstName[0]}</span>{' '}
               <span className='text-nowrap'>{selectedContact.lastName[0]}</span>
             </h1>
           </div>
 
           <div>
-            <h1 className='text-2xl'>
+            <h1 className='lg:text-2xl'>
               {selectedContact.firstName} {selectedContact.lastName}
             </h1>
             <div>
-              <p>{selectedContact.email}</p>
+              <p className='text-[12px] lg:text-[18px]'>{selectedContact.email}</p>
             </div>
 
             <div className='w-20 rounded-md'>
@@ -69,10 +82,10 @@ function ContactDynamism() {
           </div>
 
 
-          {/* <div className='flex items-center  bg-red-400 py-1 pr-3 rounded-md' onClick={handleRequestPayment}>
+          <div className='flex items-center  bg-red-400 py-1 pr-3 rounded-md' onClick={handleRemoveUser}>
             <Button className='bg-transparent'>Remove</Button>
             <GiCancel/>
-          </div> */}
+          </div> 
 
           <div className='flex items-center  bg-green-400 py-1 pr-3 rounded-md' onClick={handleRequestPayment}>
             <Button className='bg-transparent'>Request</Button>

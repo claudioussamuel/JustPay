@@ -42,7 +42,7 @@ function ContactData({ data, className ,isHighlighted}: { data: Contact, classNa
 
       </div>
 
-      <div className="place-self-start">
+      <div className="hidden md:block md:place-self-start">
         <Badge className="text-[12px] transition duration-300 group-hover:bg-purple-600 group-hover:text-white">
           {data.email}
         </Badge>

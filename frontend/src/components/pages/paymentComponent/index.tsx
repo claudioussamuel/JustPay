@@ -93,9 +93,9 @@ function Payment() {
 
 
   return (
-    <div className="h-auto">
-         <div className=' bg-softBlend flex justify-between items-center p-5 rounded-2xl mb-10'>
-            <div className='flex flex-col font-dmMono text-[20px]'>
+    <div className="h-auto mx-5 mt-5  md:mx-0 lg:mx-0 lg:mt-0">
+         <div className=' bg-softBlend w-52 md:w-full lg:w-full flex flex-col lg:flex-row justify-between items-center p-5 rounded-2xl mb-10'>
+            <div className='flex flex-col font-dmMono text-[15px] lg:text-[20px]'>
              <h2>Total Balance</h2>
              <div className='flex flex-row gap-5 items-center'>
                 <IoMdWallet/>
@@ -103,7 +103,7 @@ function Payment() {
              </div>
             </div>
 
-            <div className='text-7xl font-bowlby text-brand-gray'>
+            <div className='text-3xl md:text-7xl font-bowlby text-brand-gray'>
                 <h2>$ {amount ? (Number(amount) / 1e18).toFixed(2) : 0}</h2>
             </div>
          </div>
@@ -113,13 +113,13 @@ function Payment() {
               :
 
               <div className='space-y-5'>
-              <div className=' text-[0.8rem] flex flex-col w-full border-t border-b border-l border-r border-zinc-800  md:text-[3rem] lg:text-[2.5rem] '>
+              <div className=' text-[11px] w-52 flex flex-col lg:w-full border-t border-b border-l border-r border-zinc-800  md:text-[3rem] lg:text-[2.5rem] '>
                   <div className='grid grid-cols-3 border-b border-zinc-800 text-zinc-800 '>
                     <div className='uppercase font-bold pl-10 font-dmMono'>
-                      <h1 className='place-self-center'>get</h1>
+                      <h1 className='lg:place-self-center '>get</h1>
                      </div> 
            
-                     <div className='border-l border-zinc-800 pl-5'>
+                     <div className='border-l pl-2 border-zinc-800 lg:pl-5'>
                       <h1 className='font-allura uppercase font-playWright'>approved</h1>
                      </div> 
            
@@ -133,17 +133,17 @@ function Payment() {
                      <h1 className=' text-center uppercase font-playWright px-10 '>start</h1>
                     </div>
            
-                    <div className='border-r border-black  flex-grow'>
-                     <h1 className='pl-10 font-dmMono uppercase font-bold place-self-center'>transaction</h1>
+                    <div className='lg:border-r border-black  flex-grow'>
+                     <h1 className='lg:pl-10 font-dmMono uppercase font-bold place-self-center'>transaction</h1>
                     </div>
            
-                    <div className='flex-grow'>
+                    <div className='flex-grow hidden lg:block'>
                      <h1 className='  uppercase pl-10 font-playWright' >effortless</h1>
                     </div>
                   </div>
                </div> 
-               <Button className='text-zinc-800 font-dmMono bg-softBlend py-5 text-[20px] ' onClick={approveTokenTransfer}>
-               {loading ? 'Approving...' : 'Approve to proceed'}
+               <Button className='text-zinc-800 text-[15px] font-dmMono bg-softBlend lg:py-5 lg:text-[20px] ' onClick={approveTokenTransfer}>
+                   {loading ? 'Approving...' : 'Approve to proceed'}
                 </Button>
           </div>
        }
