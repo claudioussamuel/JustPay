@@ -79,7 +79,7 @@ function SendPaymentForm() {
       await contract.write.sendToken([
         receipientAddress,
         stableCoinAddress, 
-        BigInt(Number(amount)*1e18),
+        BigInt(Number(amount)*1e6),
         description
       ]);
   

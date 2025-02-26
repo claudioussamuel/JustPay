@@ -104,7 +104,7 @@ function Payment() {
             </div>
 
             <div className='text-3xl md:text-7xl font-bowlby text-brand-gray'>
-                <h2>$ {amount ? (Number(amount) / 1e18).toFixed(2) : 0}</h2>
+                <h2>$ {amount ? (Number(amount) / 1e6).toFixed(2) : 0}</h2>
             </div>
          </div>
 
