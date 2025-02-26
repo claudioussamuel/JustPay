@@ -7,7 +7,7 @@ import { BiTransfer } from "react-icons/bi";
 
 
 export const navLinks=[
-    {name:'transfer',href:'/transfer'},
+    {name:'schedule Payment',href:'/transfer'},
     {name:'profile',href:'/profile'},
     {name:'contacts',href:'/contacts'},
     {name:'payment', href:'/payment'},
@@ -26,7 +26,7 @@ export const sociaLinks=[
     {name:'contacts',href:'/contacts'},
     {name:'payment', href:'/payment'},
     {name:'history', href:'/history'},
-    {name:'transfer', href:'/transfer'},
+    {name:'Schedule Payment', href:'/transfer'},
 
   ]
   
@@ -95,7 +95,7 @@ export const exploreSection=[
     {name:'profile',href:"/profile",icon:<HiUser/>},
     {name:'history',href:"/history",icon:<HiReceiptRefund/>},
     {name:'contacts',href:"/contacts",icon:<HiClipboardList/>},
-    {name:'transfer',href:"/transfer",icon:<BiTransfer/>},
+    {name:'Schedule',href:"/transfer",icon:<BiTransfer/>},
   ]
   
 

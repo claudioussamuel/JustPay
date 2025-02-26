@@ -290,10 +290,3 @@ export async function readMyFriends(userAddress: `0x${string}`): Promise<UserInf
     }
 }
 
-// const history = await readHistoryData(userAddress);
-// if (history) {
-//     // Process the history data
-//     history.forEach(transaction => {
-//         console.log(transaction.action, transaction.amount, transaction.message);
-//     });
-// }

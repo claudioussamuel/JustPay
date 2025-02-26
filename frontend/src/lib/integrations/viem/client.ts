@@ -1,6 +1,8 @@
+
 import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia } from "viem/chains";
+
 
 if (!process.env.NEXT_PUBLIC_SEPOLIA_ID) {
   throw new Error("Missing NEXT_PUBLIC_BASE_SEPOLIA_ID in environment variables");
