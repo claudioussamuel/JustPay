@@ -266,3 +266,105 @@ The `frontend` folder contains the code for the user interface and application l
 7. **Pagination**  
    - Implements pagination for transaction history and contacts list.  
    - Ensures smooth navigation and better performance for large datasets.
+  
+### **Special Instruction: Setting Up Cron Job for Blockchain Transactions**
+
+Follow these steps to set up a cron job that sends transactions to the blockchain using **viem** and a **private key**:
+
+---
+
+#### **1. Visit Cron-Job.org**
+- Go to [https://console.cron-job.org](https://console.cron-job.org).
+- Create an account or log in if you already have one.
+
+---
+
+#### **2. Prepare Your Private Key**
+- Ensure you have the **private key** of an Ethereum address that will be used to send transactions.
+- Store the private key securely in your environment variables (e.g., `.env.local`) as `NEXT_PUBLIC_META_MASK`.
+
+---
+
+#### **3. Set Up the Cron Job**
+1. **Create a New Cron Job**:
+   - In the cron-job.org dashboard, click on **"Create Cron Job"**.
+   - Set the **URL** to your application's API endpoint:  
+     ```
+     https://justpaystablecoin.vercel.app/api/cron
+     ```
+   - Configure the **schedule** (e.g., every 5 minutes, hourly, etc.).
+
+2. **Add Headers (Optional)**:
+   - If your API requires authentication, add the necessary headers (e.g., API keys) in the cron job settings.
+
+3. **Save the Cron Job**:
+   - Once configured, save the cron job and ensure it is active.
+
+---
+
+#### **4. Implement the API Endpoint**
+- In your application, create an API route (e.g., `/api/cron`) that:
+  1. Uses **viem** to interact with the blockchain.
+  2. Signs and sends transactions using the private key stored in `NEXT_PUBLIC_META_MASK`.
+  3. Handles any errors and logs the transaction status.
+
+---
+
+#### **5. Test the Cron Job**
+- Manually trigger the cron job to ensure it works as expected.
+- Verify that transactions are being sent to the blockchain successfully.
+
+---
+
+### **Example Code Snippet for API Endpoint**
+```javascript
+import { contractAddress, contractAbi } from '@/lib/integrations/viem/abi';
+import { NextResponse } from 'next/server';
+import { createWalletClient, getContract, http, publicActions } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
+import { sepolia } from 'viem/chains';
+
+export async function GET() {
+  const PRIVATE_KEY = process.env.NEXT_PUBLIC_META_MASK_PRIVATE_KEY
+    ? process.env.NEXT_PUBLIC_META_MASK_PRIVATE_KEY.startsWith('0x')
+      ? (process.env.NEXT_PUBLIC_META_MASK_PRIVATE_KEY as `0x${string}`)
+      : (`0x${process.env.NEXT_PUBLIC_META_MASK_PRIVATE_KEY}` as `0x${string}`)
+    : null;
+
+  if (!PRIVATE_KEY) {
+    return NextResponse.json(
+      { error: 'Private key is missing or invalid' },
+      { status: 400 }
+    );
+  }
+
+  const BASE_SEPOLIA = `https://eth-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_SEPOLIA_ID}`;
+  const account = privateKeyToAccount(PRIVATE_KEY);
+
+  try {
+    const client = createWalletClient({
+      account,
+      chain: sepolia,
+      transport: http(BASE_SEPOLIA),
+    }).extend(publicActions);
+
+    const contract = getContract({
+      address: contractAddress,
+      abi: contractAbi,
+      client,
+    });
+
+    await contract.write.executeTransactions();
+
+    return NextResponse.json({ message: 'Transactions executed successfully' });
+  } catch (error) {
+    console.error('Error executing transactions:', error);
+    return NextResponse.json(
+      { error: 'Failed to execute transactions' },
+      { status: 500 }
+    );
+  }
+}
+
+
+
