@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { GiCancel, GiReceiveMoney } from 'react-icons/gi';
 import { IoSendOutline } from 'react-icons/io5';
-import { createWalletClient, custom, getContract, stringToBytes } from 'viem';
+import { createWalletClient, custom, getContract} from 'viem';
 import { sepolia } from 'viem/chains';
 
 

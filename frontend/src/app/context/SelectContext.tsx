@@ -38,7 +38,7 @@ export const useSelectedContactContext = () => {
 
 export const SelectedContactProvider = ({ children }: { children: ReactNode }) => {
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
-  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [, setContacts] = useState<Contact[]>([]);
 
   const removeContact=(id:string)=>{
     setContacts((prevContacts)=>prevContacts.filter((contact)=>contact.id !== id));
