@@ -5,8 +5,8 @@
   <img src="https://img.shields.io/badge/Solidity-363636?style=for-the-badge&logo=solidity&logoColor=white" />
   <img src="https://img.shields.io/badge/Privy-6F3FF5?style=for-the-badge&logoColor=white" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
-  <img src="https://img.shields.io/badge/Foundry-FF6600?style=for-the-badge&logo=ethereum&logoColor=white" />
-  <img src="https://img.shields.io/badge/viem-3C8039?style=for-the-badge&logoColor=white" />
+    <img src="https://img.shields.io/badge/viem-3C8039?style=for-the-badge&logoColor=white" />
+  <img src="https://img.shields.io/badge/Foundry-FF6600?style=for-the-badge&logo=data:image/png;base64,YOUR_BASE64_LOGO_HERE&logoColor=white" />
 </p>
 
 ## Overview
@@ -127,8 +127,8 @@ Before you begin, ensure you have the following installed:
   - This combination provides a streamlined user experience while maintaining security.
 
 - **Testing the DApp**:
-  - Use testnet stablecoins (e.g., USDC on Sepolia) to simulate payments.
-  - Ensure your wallet is connected to the correct Ethereum network (e.g., Sepolia Testnet).
+  - Use testnet stablecoins (e.g., USDC on Goerli) to simulate payments.
+  - Ensure your wallet is connected to the correct Ethereum network (e.g., Goerli Testnet).
 
 ---
 
