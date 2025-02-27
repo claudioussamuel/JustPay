@@ -61,6 +61,8 @@ Before you begin, ensure you have the following installed:
      NEXT_PUBLIC_PRIVY_APP_ID=your_privy_app_id
      NEXT_PUBLIC_PRIVY_APP_SECRET=your_privy_secret_key
      NEXT_PUBLIC_SEPOLIA_ID=your_alchemy_api_key
+     NEXT_PUBLIC_PINATA_JWT=your_pinata_jwt
+     NEXT_PUBLIC_GATE_WAY=your_gate_way
      ```
      - Replace `your_privy_app_id` with your actual Privy App ID (get it from the [Privy Dashboard](https://privy.io/)).
      - Replace `your_alchemy_api_key` with your Alchemy API key (if you're using Alchemy for Ethereum node access).
