@@ -86,7 +86,7 @@ function RequestPaymentForm() {
   
       await contract.write.createRequest([
         receipientAddress,
-        BigInt(Number(amount)*1e18),
+        BigInt(Number(amount)*1e6),
         description,
         stableCoinAddress
       ]);

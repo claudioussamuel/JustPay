@@ -11,6 +11,8 @@ import ContainerAddContent from './ContainerAddContent'
 import ContactList from './ContactList'
 import ContactDynamism from './ContactDynamism';
 import useContactSearch from '@/hooks/useContactSearch'
+import { useSelectedContactContext } from '@/app/context/SelectContext'
+
 
 
 
@@ -18,8 +20,10 @@ import useContactSearch from '@/hooks/useContactSearch'
 function ContactContent() { 
 
   const {setSearchQuery,searchQuery,filteredContacts} = useContactSearch()
+  const {selectedContact} = useSelectedContactContext()
+
   return (
-    <div className='flex w-full h-auto font-dmMono bg-wineTexture overflow-x-hidden '>
+    <div className='flex flex-col lg:flex-row w-full h-auto font-dmMono bg-wineTexture overflow-x-hidden '>
 
         <div className='flex-[20%] border-r border-black bg-wineTexture p-3'>
             <div className='text-zinc-800 mb-5'>
@@ -67,10 +71,10 @@ function ContactContent() {
         </div>
 
         <div className='flex-[80%]'>
-            <div className='flex flex-row gap-5'>
+            <div className='flex flex-col md:flex-row gap-5'>
 
                 <div className='flex-[50%]'>
-                <ContactDynamism/>
+                <ContactDynamism id={filteredContacts.indexOf(selectedContact!).toString()}/>
                 </div>
 
 

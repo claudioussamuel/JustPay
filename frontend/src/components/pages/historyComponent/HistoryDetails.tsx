@@ -29,13 +29,14 @@ function HistoryDetails({ items }: Props) {
     <Link
       ref={ref}
       href={items.href}
-      className="font-dmMono text-zinc-800 my-8 first:mt-0 last:mb-0 w-[60%] mx-auto flex flex-col items-center justify-between"
+      className="font-dmMono text-zinc-800 my-8 first:mt-0 last:mb-0 md:w-[60%] mx-auto flex flex-col items-center justify-between"
     >
       <LiIcon reference={ref} />
       <motion.div
-        initial={{ y: 50 }}
+        initial={{ y:50 }}
         whileInView={{ y: 0 }}
         transition={{ duration: 0.5, type: "spring" }}
+      
       >
         <div>
           {items.deliveryType === "send" && (

@@ -21,14 +21,14 @@ function SendPayment() {
 
   return (
     <div className="h-[100vh]">
-      <h3 className="font-dmMono capitalize text-3xl text-zinc-800">
+      <h3 className="font-dmMono capitalize lg:text-3xl text-zinc-800">
         Send payment To the address below
       </h3>
       <div className="max-w-2xl flex items-center gap-5 mt-5 border p-2 bg-brand-gray rounded-full">
         <CiSearch className="text-zinc-800 text-3xl" />
         <input
           type="text"
-          className="w-full placeholder:text-[20px] placeholder:text-zinc-800 placeholder:font-dmMono text-zinc-800 outline-none border-none placeholder:items-center shadow-none bg-transparent font-dmMono"
+          className="w-full lg:placeholder:text-[20px] placeholder:text-zinc-800 placeholder:font-dmMono text-zinc-800 outline-none border-none placeholder:items-center shadow-none bg-transparent font-dmMono"
           placeholder="place in recipient address"
           value={receipientAddress}
           onChange={(e) => setRecipientAddress(e.target.value)}

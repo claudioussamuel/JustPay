@@ -1,8 +1,13 @@
 import History from '@/components/pages/historyComponent'
+import ProtectedRoute from '@/hooks/ProtectedRoute'
 
 
 function Page() {
-  return <History/>
+  return (
+    <ProtectedRoute>
+      <History/>
+    </ProtectedRoute>
+  )
 }
 
 export default Page
