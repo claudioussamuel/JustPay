@@ -176,8 +176,8 @@ By leveraging Privy, this project delivers a **unified authentication and wallet
   - This combination provides a streamlined user experience while maintaining security.
 
 - **Testing the DApp**:
-  - Use testnet stablecoins (e.g., USDC on Goerli) to simulate payments.
-  - Ensure your wallet is connected to the correct Ethereum network (e.g., Goerli Testnet).
+  - Use testnet stablecoins (e.g., USDC on Sepolia) to simulate payments.
+  - Ensure your wallet is connected to the correct Ethereum network (e.g., Sepolia Testnet).
 
 ---
 
