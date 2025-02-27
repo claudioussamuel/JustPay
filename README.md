@@ -124,7 +124,7 @@ This integration ensures a **smooth, secure, and user-friendly experience** for 
 
    - Click the **Connect Wallet** button on the homepage.
    - Use **Privy** to authenticate and link your Ethereum wallet (e.g., MetaMask).
-
+  
 2. **Add Friends to Your Contact List**
 
    - Navigate to the **Contacts** section.
@@ -145,6 +145,10 @@ This integration ensures a **smooth, secure, and user-friendly experience** for 
 5. **View Transaction History**
    - Check the **Transaction History** section to view all sent and received payments.
 
+![renew brand](frontend/public/images/aa1.png)
+![renew brand](frontend/public/images/aa2.png)
+![renew brand](frontend/public/images/aa3.png)
+![renew brand](frontend/public/images/aa4.png)
 ---
 
 ### Additional Notes
