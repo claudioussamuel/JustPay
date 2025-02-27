@@ -237,6 +237,42 @@ The `frontend` folder contains the code for the user interface and application l
 
 ---
 
+### **Wow Factor: Schedule Payments with Smart Contracts**
+
+This feature allows users to **schedule payments** to be sent to someone at a specific date and time. The smart contract will automatically execute the payment at the scheduled time **without requiring further interaction** from the user or the application.
+
+---
+
+#### **How It Works**
+1. **User Input**:
+   - The user specifies:
+     - The recipient's address.
+     - The amount to send.
+     - The date and time for the payment.
+
+2. **Smart Contract**:
+   - A smart contract is deployed to handle scheduled payments.
+   - The contract stores:
+     - The payment details (recipient, amount, timestamp).
+     - The sender's address and funds.
+
+3. **Automated Execution**:
+   - The smart contract uses a **time-based trigger** (e.g., block timestamp) to execute the payment at the specified time.
+   - Once the scheduled time is reached, the contract automatically sends the funds to the recipient.
+
+4. **No Code Interaction**:
+   - After the payment is scheduled, no further interaction with the application or code is required.
+   - The smart contract handles everything autonomously.
+
+---
+
+#### **Key Features**
+- **Time-Based Execution**: Payments are executed automatically at the specified time.
+- **Trustless**: No need to trust a third party; the smart contract ensures the payment is sent as scheduled.
+- **Gas Efficiency**: Optimized to minimize gas costs for scheduling and executing payments.
+- **User-Friendly**: Simple interface for users to schedule payments.
+
+---
 ### **Key Features of the App**
 
 1. **Send Transaction / Request Transaction**  
@@ -365,6 +401,7 @@ export async function GET() {
     );
   }
 }
+---
 
 
 
