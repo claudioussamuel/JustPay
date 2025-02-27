@@ -200,12 +200,13 @@ The `contracts` folder contains all the code related to the blockchain and smart
 - **`test/`**: 
   - Contains unit tests and integration tests for the smart contracts.
   - Ensures the contracts function as expected before deployment.
-- **`deployed/`**:
-  - **`scripts/`**: Houses deployment scripts (e.g., using Hardhat or Foundry) to deploy contracts to various networks (mainnet, testnet, etc.).
+    
+- **`scripts/`**: Houses deployment scripts (e.g., using Foundry) to deploy contracts to various networks (mainnet, testnet, etc.).
   - Stores deployed contract artifacts (ABIs, addresses, etc.) for easy access by the frontend.
+    
 - **`src/`**:
   - Contains the main Solidity smart contract files.
-  - Organized into logical modules (e.g., `Token.sol`, `Marketplace.sol`).
+  - Organized into logical modules (e.g., `JustPay.sol`).
 
 ---
 
