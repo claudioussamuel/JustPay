@@ -107,9 +107,8 @@ By leveraging Privy, this project delivers a **unified authentication and wallet
 - **Transaction signing** and **on-chain interactions**.
 - **Easy wallet funding** through Coinbase and other on-ramp providers.
 
-This integration ensures a **smooth, secure, and user-friendly experience** for both web2 and web3 users. 🚀
 
-      
+   
 
 ### Usage
 
@@ -188,3 +187,82 @@ This integration ensures a **smooth, secure, and user-friendly experience** for 
 - **Wallet Connection**: If the wallet fails to connect, ensure your wallet (e.g., MetaMask) is installed and unlocked.
 - **Transaction Issues**: If transactions fail, check your wallet balance and network connection.
 - **Foundry Issues**: Make sure Foundry is properly installed and updated to the latest version.
+
+
+### Project Structure
+
+---
+
+## **1. Smart Contracts (`/contracts`)**
+The `contracts` folder contains all the code related to the blockchain and smart contracts.
+
+### **Key Subfolders:**
+- **`test/`**: 
+  - Contains unit tests and integration tests for the smart contracts.
+  - Ensures the contracts function as expected before deployment.
+- **`deployed/`**:
+  - **`scripts/`**: Houses deployment scripts (e.g., using Hardhat or Foundry) to deploy contracts to various networks (mainnet, testnet, etc.).
+  - Stores deployed contract artifacts (ABIs, addresses, etc.) for easy access by the frontend.
+- **`src/`**:
+  - Contains the main Solidity smart contract files.
+  - Organized into logical modules (e.g., `Token.sol`, `Marketplace.sol`).
+
+---
+
+## **2. Frontend (`/frontend`)**
+The `frontend` folder contains the code for the user interface and application logic.
+
+### **Key Subfolders:**
+- **`src/`**:
+  - **`app/`**:
+    - Contains the main application logic and routing configuration (`appRoutes`).
+    - Handles navigation and page rendering based on routes.
+  - **`components/`**:
+    - Houses reusable UI components (e.g., buttons, modals, cards).
+    - Promotes code reusability and maintainability.
+  - **Other Files**:
+    - Includes utility functions, hooks, and context providers.
+- **`.env.local`**:
+  - Stores environment-specific variables (e.g., API keys, contract addresses).
+  - Ensures sensitive data is not hardcoded into the application.
+
+---
+
+## **3. Benefits of This Structure**
+- **Centralized Codebase**: Both frontend and smart contracts are in one place, making it easier to manage dependencies and workflows.
+- **Modular Design**: Separates concerns (e.g., contracts, frontend, tests) for better organization.
+- **Ease of Deployment**: Deployment scripts and artifacts are stored alongside the contracts, simplifying the deployment process.
+- **Reusable Components**: Frontend components are modular and reusable, reducing duplication of code.
+- **Environment Management**: `.env.local` ensures sensitive data is securely managed and not exposed in the codebase.
+
+---
+
+### **Key Features of the App**
+
+1. **Send Transaction / Request Transaction**  
+   - Users can send funds or request payments from other users.  
+   - Supports seamless blockchain transactions with clear confirmation steps.
+
+2. **Accept and Decline Request**  
+   - Users can review incoming payment requests and choose to accept or decline them.  
+   - Provides a clear and intuitive interface for managing requests.
+
+3. **Funding Wallet**  
+   - Users can fund their wallets using on-ramp services like Coinbase.  
+   - Simplifies the process of adding crypto to the wallet.
+
+4. **History Page**  
+   - Displays a detailed transaction history for all incoming and outgoing payments.  
+   - Helps users track their financial activities.
+
+5. **Add Contacts**  
+   - Users can add other wallet addresses as contacts for easy transactions.  
+   - Streamlines the process of sending or requesting funds.
+
+6. **Search for Contacts**  
+   - Allows users to search through their contacts list quickly.  
+   - Makes it easy to find specific contacts for transactions.
+
+7. **Pagination**  
+   - Implements pagination for transaction history and contacts list.  
+   - Ensures smooth navigation and better performance for large datasets.
